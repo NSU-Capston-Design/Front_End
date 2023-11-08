@@ -14,7 +14,9 @@ export default function Header(){
 
     const MovetoRegister = e => {   // 회원가입 페이지로 이동
         navigate('/register')       // 페이지 내부 주소
+        navigate('/donation')
     }
+    
 
     return(
         <div className="header-all">  
@@ -47,7 +49,7 @@ export default function Header(){
                         <li>카테고리3</li>
                         <li>카테고리4</li>
                     </ul>
-                    <div className="donate">    
+                    <div className="donate" onClick={MovetoRegister}>    
                         <button className="donate_btn">기부하기</button>
                     </div>
                 </div>
