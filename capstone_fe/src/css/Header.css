@@ -1,36 +1,52 @@
-.header-all{
+
+.header-all{    /* 전체 */
     width: 100%;
     font-family: Inter;
     font-style: normal;
     font-weight: 700;
 }
-header{
+header{ /* 헤더 */
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-.logo_box img{
+.logo_box img{  /* 이미지 */
     width: 200px;
     height: 100px;
 }
-.search input{
+.logo_box img:hover{
+    cursor: pointer;
+}
+.search img{
+    position: relative;
+    left: 120px;
+    top: 17px;
+    z-index: 1;
+    padding-right: 4px;
+    border-right: 2px solid #a3a3a3;
+}
+.search input{  /* 서치 입력부 */
     width: 500px;
     height: 50px;
     position: relative;
-    left: 20%;
+    left: 15%;
     top: 7px;
     border-radius: 30px;
-    
 }
-.sign{
+.sign{  /* 회원가입, 로그인 글자 부분 */
     position: relative;
     left: 5%;
+    width: 135px;
 }
-.sign:hover{
+.sign .login:hover{    /* 회원가입, 로그인 부분에 올리면 */
     cursor: pointer;
     transform: scale(1.2);
 }
-.sign button{
+.sign .register:hover{    /* 회원가입, 로그인 부분에 올리면 */
+    cursor: pointer;
+    transform: scale(1.2);
+}
+.sign button{   /* 회원가입, 로그인 버튼 */
     border: none;
     background-color: #ffffff;
     font-family: Inter;
@@ -38,57 +54,70 @@ header{
     font-weight: 700;
 }
 
-.icons{
+.icons{ /* 아이콘들 (카트, 마이) */
     display: flex;
     justify-content: space-around;
     line-height: 15px;
     height: 80px;
 }
-.icons div{
+.icons div{ /* 아이콘에 있는 div */
     margin: 5px;
 }
-.icons span{
+.icons span{    /* 아이콘에 있는 span */
     display: block;
     font-size: 10px;
 }
-.icons .cart:hover{
+.icons .cart:hover{ /* 카트에 마우스를 올리면 */
     cursor: pointer;
     transform: scale(1.2);
 }
 
-.icons .mypage:hover{
+.icons .mypage:hover{   /* 마이페이지에 마우스를 올리면 */
     cursor: pointer;
     transform: scale(1.2);
 }
-.category ul{
+.category ul{   /* 카테고리 ul */
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     background-color: #617CC2;
     justify-content: center;
     color: #FFF;
-    
 }
-
-.category ul li{
-    
+.category ul li{    /* 카테고리 ul li */
     list-style: none;
     margin: 15px 40px;
     line-height: 31px;
     align-items: center;
     text-align: center;
-   
 }
 
-.category ul li span{
+.category ul li span{   /* 카테고리 메뉴 글자 구역 */
     position: relative;
     bottom: 4.5px;
 }
-.category ul li img{
+.category ul li img{    /* 카테고리 메뉴바(---겹쳐있는거) */
     position: relative;
     top: 3px;
 }
-.category ul li:hover{
+.category ul li:hover{  /* 카테고리 메뉴 리스트에 마우스를 올리면 */
     cursor: pointer;
     transform: scale(1.2);
 }
+.category .donate{  /* 기부구역 */
+    position: relative;
+    top: 18px;
+    left: 30px;
+}
+.category .donate_btn{  /* 기부버튼 */
+    font-size: 12px;
+    padding: 5px 15px;
+    background-color: #FFC700;
+    border: none;
+    font-weight: bold;
+}
+@media (max-width: 1100px) { /* 화면이 768px 이하일 때 적용될 스타일 */
+    .sign {
+        font-size: 10px; /* 상단 여백 추가 */
+    }
 
+}
