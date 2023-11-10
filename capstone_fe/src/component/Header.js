@@ -32,7 +32,9 @@ export default function Header(){
                 </div>    
                 <div className="search">
                     <img src={menu_black}></img>
-                    <input type="search" size={50} placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;검색"></input>
+                    <div className="search-box">
+                        <input type="search" size={50} placeholder="검색"></input>
+                    </div>
                 </div>
                 <div className="sign"><div className="login" onClick={MovetoLogin}>로그인</div> / <div className="register" onClick={MovetoRegister}>회원가입</div></div>
                 <div className="icons"> {/* 장바구니, 계정 버튼*/}
