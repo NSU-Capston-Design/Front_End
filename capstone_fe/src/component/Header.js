@@ -23,6 +23,10 @@ export default function Header(){
     const MovetoRegister = e => {   // 회원가입 페이지로 이동
         navigate('/register')       // 페이지 내부 주소
     }
+    
+    const MovetoDonation = e => {   // 기부 페이지로 이동
+        navigate('/donation')       // 페이지 내부 주소
+    }
 
     return(
         <div className="header-all">  
@@ -50,20 +54,18 @@ export default function Header(){
             </header>
             <div className="categorybar">   {/* 카테고리바 */}
                 <div className="category">  
-                    <div className="tab">
-                        <ul>
-                            <li className="all-menu"><img src={menu}></img><span>전체메뉴</span></li>
-                            <li>카테고리1</li>
-                            <li>카테고리2</li>
-                            <li>카테고리3</li>
-                            <li>카테고리4</li>
-                           
-                            <div className="donate">    
-                                <button className="donate_btn">기부하기</button>
-                            </div>
-                        </ul>
-                        
-                    </div>
+                    <div className="tab"></div>
+                    <ul>
+                        <li className="all-menu"><img src={menu}></img><span>전체메뉴</span></li>
+                        <li>카테고리1</li>
+                        <li>카테고리2</li>
+                        <li>카테고리3</li>
+                        <li>카테고리4</li>
+                        <div className="donate">    
+                            <button className="donate_btn" onClick={MovetoDonation}>기부하기</button>
+                        </div>
+                    </ul>
+                    
                 </div>
             </div>
         </div>
