@@ -21,7 +21,7 @@ export default function Header(){
     }
 
     const MovetoRegister = e => {   // 회원가입 페이지로 이동
-        navigate('/register')       // 페이지 내부 주소
+        navigate('/agreepage')       // 페이지 내부 주소
     }
     
     const MovetoDonation = e => {   // 기부 페이지로 이동

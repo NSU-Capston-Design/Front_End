@@ -30,9 +30,9 @@ export default function FindId(){
         })
         .then(res => {  // 가져온 데이터 셋업
             window.localStorage.setItem('token', res.data.token)
-            window.localStorage.setItem('token', res.data.token)
-            window.localStorage.setItem('token', res.data.token)
-            window.localStorage.setItem('token', res.data.token)
+            window.localStorage.setItem('userId', res.data.userId)
+            // window.localStorage.setItem('token', res.data.token)
+            // window.localStorage.setItem('token', res.data.token)
             console.log(0)
             alert(`고객님의 아이디는 ${res.data.userId}입니다.` )
         })
@@ -64,7 +64,7 @@ export default function FindId(){
                     </div>
                 </div>
                 <div className="findid-check">
-                    <input type="submit" className="findid-check" onClick={Findid} value={'아이디 찾기'}/>
+                    <input type="submit" className="findid-check" onClick={Findid} value={'가입 여부 확인하기'}/>
                 </div>
             </div>
         </div>

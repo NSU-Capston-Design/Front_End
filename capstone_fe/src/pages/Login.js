@@ -11,6 +11,9 @@ export default function Login() {
     const [userPw, setUserPw] = useState('')    // pw state
     const navigate = useNavigate();
 
+    const MovetoFindId = e => { // 아이디 찾기
+        navigate('/findid')
+    }
     const InputId = e => {  // 아이디 입력시
         setUserId(e.target.value)
     }
@@ -63,7 +66,8 @@ export default function Login() {
                         </div>
                     </div>
                 </div>
-                <input type="submit" className="signinbtn" onClick={Signin} value={'로그인'}/>
+                <input type="submit" className="signin-btn" onClick={Signin} value={'로그인'}/>
+                <input type="button" className="findid-btn" onClick={MovetoFindId} value={'아이디 찾기'}/>
             </div>
         </div>
     )
