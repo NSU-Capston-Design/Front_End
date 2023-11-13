@@ -1,0 +1,41 @@
+.all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .donation {
+    width: 100%;
+    height: 85.60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10.60px;
+  }
+  
+
+  
+  .donation_list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .dontion_list1,
+  .dontion_list2,
+  .dontion_list3 {
+    width: 424px;
+    height: 511px;
+    padding: 50px;
+    background: white;
+    border-radius: 10px;
+    border: 1px #DEDEDE solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 35px;
+  }
+  
