@@ -12,7 +12,7 @@ export default function Rank(){
             <div className="rank_title">✨이번달 명예의 전당✨</div>
 
             <div className="rank_list">
-                <div className="rank_1st"
+                <div className="rank_1st"></div>
             </div>
         </div>
     )
