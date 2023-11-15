@@ -1,55 +1,103 @@
-.all {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-.rank_info{
-    display: flex;
-    height: 97px;
-    padding: 52px 547px 0px 547px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    align-self: stretch;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20px; /* 125% */
-    letter-spacing: 0.1px;
+.rank_all {
+  width: 100%;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 700;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 78px;
 }
 
-.rank_title{
-    display: flex;
-    width: 1437px;
-    height: 99px;
-    padding: 0px 316px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 20px; /* 55.556% */
-    letter-spacing: 0.1px;
+.rank_title {
+  text-align: center;
+  align-items: center;
+  color: black;
+  font-size: 36px;
+  font-family: 'Roboto';
+  
+  letter-spacing: 0.10;
+  word-wrap: break-word;
 }
 
-.rank_pro{
-    display: flex;
-    width: 1162px;
-    height: 918px;
-    padding: 0px var(--Medium, 4px) 97px var(--Medium, 4px);
-    justify-content: center;
-    align-items: flex-end;
-    align-content: flex-end;
-    gap: 32px 78px;
-    flex-shrink: 0;
-    flex-wrap: wrap;
+.container {
+  width: 100%;
+  height: 97px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+  text-align: center;
+  text-align: center;
+}
+
+.rank_list {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  display: inline-flex;
+}
+
+.avatar {
+  width: 195px;
+  height: 195px;
+  position: relative;
+}
+
+.avatar img.Subtract {
+  width: 195px;
+  height: 195px;
+  left: 0;
+  top: 0;
+  position: absolute;
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.25);
+}
+
+.presence-badge {
+  left: 140.83px;
+  top: 140.83px;
+  position: absolute;
+  background: white;
+  border-radius: 116.30px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: inline-flex;
+}
+
+.rank-badge {
+  width: 54.17px;
+  height: 54.17px;
+  position: relative;
+}
+
+.ellipse {
+  width: 54.17px;
+  height: 54.17px;
+  left: 0;
+  top: 0;
+  position: absolute;
+  border-radius: 9999px;
+}
+
+.rank-badge div {
+  width: 14.10px;
+  height: 30.54px;
+  left: 20.10px;
+  top: 11.88px;
+  position: absolute;
+  text-align: center;
+  color: white;
+  font-size: 23.49px;
+  font-family: 'Keania One';
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.nickname {
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  font-family: 'Segoe UI';
+  font-weight: 400;
+  word-wrap: break-word;
 }
