@@ -8,6 +8,7 @@ import Donation from './pages/Donation';
 import FindId from './pages/FindId';
 import Agreepage from './pages/Agreepage';
 import Rank from './pages/Rank';
+import Don_commu from './pages/Don_commu'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/findid' element={<FindId/>}/>
         <Route path='/agreepage' element={<Agreepage/>}/>
         <Route path='/rank' element={<Rank/>}/>
+        <Route path='/don_commu' element={<Don_commu/>}/>
       </Routes>
     </BrowserRouter>
   );
