@@ -6,7 +6,11 @@ import "../css/Donation.css"
 export default function Donation(){
 
     return(
+<<<<<<< HEAD
         <div className="donation_all">
+=======
+        <div className="don_all">
+>>>>>>> 12228e4d224793bb4ca8e60811b2977a08dd0378
            <Header/>
 
            <div className="donation" >
