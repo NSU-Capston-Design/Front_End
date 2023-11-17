@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Donation from './pages/Donation';
 import FindId from './pages/FindId';
 import Agreepage from './pages/Agreepage';
+import Test from './pages/Test';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/donation' element={<Donation/>}/> 
         <Route path='/findid' element={<FindId/>}/>
         <Route path='/agreepage' element={<Agreepage/>}/>
+        <Route path='/test' element={<Test/>}/>
       </Routes>
     </BrowserRouter>
   );

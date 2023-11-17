@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect, useState } from 'react';
 import Header from "../component/Header";
-import Rank from "../css/Rank.css"
+import "../css/Rank.css"
 
 export default function Rank(){
-    retrun(
-        <div className="all">
+    return(
+        <div className="rank_all">
             <Header/>
 
             <div className="rank_info">현재 회원님의 순위는 ?위 입니다</div>

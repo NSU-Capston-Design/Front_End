@@ -15,7 +15,7 @@ export default function Register(){
     const [userBirth, setUserBirth] = useState('')
     // const [roles, setRoles] = useState([])
     const [btnBackcolor, setBtnBackcolor] = useState('gray')
-    const userCheck = {}
+    const userCheck = {}    // 유저 정보 체크
 
     //유효성 검사
     const [IdCheck, setIdCheck] = useState()
@@ -87,7 +87,7 @@ export default function Register(){
         userCheck["userCheck"] = userId
         axios({
             method : 'post',    // (수정)
-            url : '//localhost:3000',   // url
+            url : '//localhost:8080',   // url
             data: userCheck
         })
         .then(res => {  // 받은 데이터는 res에 담김
@@ -124,7 +124,7 @@ export default function Register(){
         userCheck["userCheck"] = userEmail
         axios({
             method : 'post',
-            url : '//localhost:3000',
+            url : '//localhost:8080',
             data: userCheck
         })
         .then(res => { 
@@ -149,7 +149,7 @@ export default function Register(){
         userCheck["userCheck"] = userPhone
         axios({
             method : 'post',
-            url : '//localhost:3000',
+            url : '//localhost:8080',
             data : userCheck
         })
         .then(res => {
@@ -179,7 +179,7 @@ export default function Register(){
         // UserInfo['roles'] = roles
         console.log(UserInfo)
 
-        axios({
+        axios({ // 가입시 적은 유저정보들을 전달
             method : 'post',
             url : '//localhost:8080/user/join',
             data : UserInfo

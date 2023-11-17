@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect, useState } from 'react';
 import Header from "../component/Header";
-import Donation from "../css/Donation.css"
+import "../css/Donation.css"
 
 export default function Donation(){
 
     return(
-        <div className="all">
+        <div className="donation_all">
            <Header/>
 
            <div className="donation" >
