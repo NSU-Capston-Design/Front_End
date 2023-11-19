@@ -33,6 +33,7 @@
 
 
 .msg_board {
+    width: 100%;
     padding-left: 1px;
     padding-right: 1px;
     flex-direction: column;
@@ -40,4 +41,20 @@
     align-items: center;
     gap: 46px;
     display: inline-flex;
+}
+
+.post-table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+.post-table th, .post-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.post-table th {
+    background-color: #f2f2f2;
 }
