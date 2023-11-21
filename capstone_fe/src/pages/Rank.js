@@ -1,19 +1,11 @@
 import React from "react";
 import { useEffect, useState } from 'react';
 import Header from "../component/Header";
-<<<<<<< HEAD
 import "../css/Rank.css"
-
-export default function Rank(){
-    return(
-        <div className="rank_all">
-            <Header/>
-=======
 import Avatar from "../component/Rank";
 
->>>>>>> 12228e4d224793bb4ca8e60811b2977a08dd0378
-
-export default function Rank() {
+export default function Rank(){
+   
 
   const rankData = [
     { index: 2, imageSrc: "", badgeNumber: 2, nickname: "닉2🥈" },

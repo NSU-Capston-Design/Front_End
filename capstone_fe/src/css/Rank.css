@@ -1,9 +1,5 @@
 .rank_all {
-<<<<<<< HEAD
     display: flex;
-=======
-  display: flex;
->>>>>>> 12228e4d224793bb4ca8e60811b2977a08dd0378
     flex-direction: column;
     align-items: center;
 }
