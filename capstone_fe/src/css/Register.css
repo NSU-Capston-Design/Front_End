@@ -1,0 +1,23 @@
+.registeruser{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+.registeruserinfobox{ 
+    width: 750px;
+    background-color: rgb(206, 219, 253);
+    margin: 30px;
+}
+.registeruserinfobox .joinform-joinbody__joinbox{
+    margin: 15px;
+}
+.registeruserinfobox .joinform-joinbody__joinbox input{
+    width: 250px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+}
+.singupcompletebtn{
+    margin-bottom: 18px;
+}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'
 
-
+import "../css/Login.css";
 import Header from "../component/Header";
 
 export default function Login() {
@@ -45,9 +45,10 @@ export default function Login() {
         })
     }
     return (
+        <>
+        <Header/>
         <div className="Loginpage">
-            <Header/>
-             <div className="Loginpage-loginbox">
+            <div className="Loginpage-loginbox">
                 <h1 className="Loginpage-loginbox__title">login</h1>
             </div>
             <div className="Loginpage-loginform">
@@ -70,5 +71,6 @@ export default function Login() {
                 <input type="button" className="findid-btn" onClick={MovetoFindId} value={'아이디 찾기'}/>
             </div>
         </div>
+        </>
     )
 }

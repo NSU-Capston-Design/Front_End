@@ -6,6 +6,7 @@ import "../css/Donation.css"
 export default function Donation(){
 
     return(
+        <div className="donation_all">
         <div className="don_all">
            <Header/>
 
@@ -49,6 +50,6 @@ export default function Donation(){
            </div>
    
         </div>
-        
+        </div>
     )
 }

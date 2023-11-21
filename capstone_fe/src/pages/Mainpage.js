@@ -12,6 +12,8 @@ import right_arrow from '../img/right_arrow.png';
 
 export default function Mainpage(){
 
+    const [list, setList] = useState([]);
+    
     return(
         <div className="all">
             <Header/>  

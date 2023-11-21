@@ -61,6 +61,7 @@
     padding: 10px 40px;
     border: none;
     border-radius: 15px;
+    margin-bottom: 30px;
     cursor: pointer;
     &:hover{
         transform: scale(105%);

@@ -1,11 +1,32 @@
 import React from "react";
 import { useEffect, useState } from 'react';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import {KakaoLogin} from 'react-kakao-login';
 
+import kakao from "../img/kakao_login.png";
 import Header from "../component/Header";
+import "../css/Register.css";
 
 export default function Register(){
+    
+    const rest_kakao_key = '7e346965896ae39355ed0fe5c0d086dd'    // api 키값
+    const redirect_url = 'http://localhost:3000/register'    // redirect url
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${rest_kakao_key}&redirect_uri=${redirect_url}&response_type=code`
+
+    const kakaoLogin = () =>{
+        window.location.href = kakaoURL
+    }
+    // const Kakao = ({setUser}) => {
+    //     const onSuccess = (res) => {
+    //         setUser(res.profile);
+    //     };
+
+    //     const onFailure = (error) => {
+    //         // 로그인 실패 시 처리할 로직
+    //         console.error('카카오 로그인 실패', error);
+    //     };
+    // }
 
     const [userId, setUserId] = useState('')
     const [userPw, setUserPw] = useState('')
@@ -181,7 +202,7 @@ export default function Register(){
 
         axios({ // 가입시 적은 유저정보들을 전달
             method : 'post',
-            url : '//localhost:8080/user/join',
+            url : '//localhost:8080/member/save',
             data : UserInfo
         }).then(res => {
             console.log(res.data)
@@ -199,28 +220,13 @@ export default function Register(){
     return(
         <div className="Register-all">
             <Header/>
-            {/* <div className="register-logo"></div>
-            <div className="register-form">
-                <form>
-                    <div className="text">
-                        <span>회원 정보 입력</span>
-                    </div>
-                    <div className="name"></div>
-                    <div className="id"></div>
-                    <div className="pwd"></div>
-                    <div className="pwd-check"></div>
-                    <div className="birth_sex"></div>
-                    <div className="user-img"></div>
-                    <div className="address"></div>
-                    <div className="phone"></div>
-                    <div className="email"></div>
-                </form>
-            </div> */}
+            
             <div className="registeruser">
-            <div className="registeruserinfobox">
-                <div className="registeruserinfobox-titlebox">
+            <div className="registeruserinfobox-titlebox">
                     <h1 className="registeruserinfobox-titlebox__title">로고와 회원가입</h1>
                 </div>
+            <div className="registeruserinfobox">
+                
                 <div className="joinbox-countbox">
                     <h3 className="joinbox-countbox__countpage">회원 가입 정보</h3>
                 </div>
@@ -300,8 +306,12 @@ export default function Register(){
                     <input className="singupcompletebtn" type="submit" style={{backgroundColor : btnBackcolor}} value={'회원가입'} disabled={!CheckJoin} onClick={JoinComplete}/>
                 </form>
             </div>
+            <div className="kakao_login">
+                
+                    <img src={kakao} onClick={kakaoLogin} alt="카카오 로그인"></img>
+                
+            </div>
         </div>
-            
-        </div>
+    </div>
     )
 }

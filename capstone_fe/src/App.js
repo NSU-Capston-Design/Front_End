@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Donation from './pages/Donation';
 import FindId from './pages/FindId';
 import Agreepage from './pages/Agreepage';
+import Test from './pages/Test';
 import Rank from './pages/Rank';
 import Don_commu from './pages/Don_commu'
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/donation' element={<Donation/>}/> 
         <Route path='/findid' element={<FindId/>}/>
         <Route path='/agreepage' element={<Agreepage/>}/>
+        <Route path='/test' element={<Test/>}/>
         <Route path='/rank' element={<Rank/>}/>
         <Route path='/don_commu' element={<Don_commu/>}/>
       </Routes>
