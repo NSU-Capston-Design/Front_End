@@ -45,7 +45,7 @@ export default function Register(){
     const [EmailCheck, setEmailCheck] = useState()
     const [PhoneCheck, setPhoneCheck] = useState()
     const [CheckJoin, setCheckJoin] = useState(false)
-
+    const [fontcolor, setFontcolor] = useState('black')
 
     const [idmsgcolor, setIdMsgcolor] = useState('')
     const [pwmsgcolor, setPwmsgcolor] = useState('')
@@ -89,10 +89,12 @@ export default function Register(){
     useEffect(()=> {    // 이벤트 리스너를 통해 이벤트를 추가한다면, 이벤트 삭제가 필요함(cleanup 함수 사용)
         if(userId && userEmail && userBirth && userPhone && userPw && userPwchk && pwchkchk/*&& IdCheck  && EmailCheck && PhoneCheck*/){    // 모든게 입력(true)되었다면,
             setCheckJoin(true)  // 회원가입 버튼 활성화
-            setBtnBackcolor('#617CC2')
+            setBtnBackcolor('#077912')
+            setFontcolor('white')
         } else{
             setCheckJoin(false) // 회원가입 버튼 비활성화
             setBtnBackcolor('gray')
+            setFontcolor('black')
         }
     }, [userId, userEmail, userBirth, userName, userPhone, userPw, userPwchk, pwchkchk/*, IdCheck, EmailCheck, PhoneCheck*/])   // 이 값들이 변경될 때 마다 실행
     const InputEmail = e => {   // email
@@ -192,24 +194,27 @@ export default function Register(){
     const JoinComplete = e => {
         e.preventDefault() // 이벤트가 처리되지 않을 경우 시행하지 않음.
         UserInfo['userId'] = userId
-        UserInfo['name'] = userName
-        UserInfo['password'] = userPw
-        UserInfo['email'] = userEmail
-        UserInfo['phone'] = userPhone
-        UserInfo['birth'] = userBirth
+        UserInfo['userName'] = userName
+        UserInfo['userPassword'] = userPw
+        UserInfo['userEmail'] = userEmail
+        UserInfo['userPhone'] = userPhone
+        UserInfo['userBirth'] = userBirth
         // UserInfo['roles'] = roles
         console.log(UserInfo)
 
         axios({ // 가입시 적은 유저정보들을 전달
             method : 'post',
-            url : '//localhost:8080/member/save',
+            url : '//localhost:8080/user/register',
             data : UserInfo
         }).then(res => {
             console.log(res.data)
             alert('회원가입 완료!')
-            navigate('/loginpage')
+            navigate('/login')
         })
-          .catch(err => {console.log(err.data)})
+          .catch(err => {
+            console.log(err.data);
+            alert("중복된 값입니다.");
+        })
     }
 
     useEffect(()=>{ // id가 변할때 마다 실행
@@ -303,7 +308,7 @@ export default function Register(){
                             </div>
                         </div>
                     </div>   
-                    <input className="singupcompletebtn" type="submit" style={{backgroundColor : btnBackcolor}} value={'회원가입'} disabled={!CheckJoin} onClick={JoinComplete}/>
+                    <input className="singupcompletebtn" type="submit" style={{backgroundColor : btnBackcolor, color : fontcolor}} value={'회원가입'} disabled={!CheckJoin} onClick={JoinComplete}/>
                 </form>
             </div>
             <div className="kakao_login">

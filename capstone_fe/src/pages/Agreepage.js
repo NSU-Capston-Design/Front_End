@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import '../css/Agreepage.css'
 import { useLocation, useNavigate } from "react-router-dom";
+import '../css/Agreepage.css'
 
 import checked from '../img/checked.png'
 import nochecked from '../img/nochecked.png'

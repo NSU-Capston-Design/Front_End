@@ -26,7 +26,7 @@ export default function Login() {
         console.log(1)
         const UserInfo = {}
         UserInfo['userId'] = userId // 입력받은 아이디를 userinfo의 userid에 넣기
-        UserInfo['password'] = userPw   // 입력받은 아이디를 userinfo의 password에 넣기
+        UserInfo['userPassword'] = userPw   // 입력받은 아이디를 userinfo의 password에 넣기
         axios({
             method : 'post',    // post방식으로 통신
             url : '//localhost:8080/user/login',    
