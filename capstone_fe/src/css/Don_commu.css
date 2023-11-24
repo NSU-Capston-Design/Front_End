@@ -27,9 +27,19 @@
 }
 
 .posting {
+    width: 1440px;
     height: 58px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-left: 109px;
+    padding-right: 109px;
+    padding-top: 11px; 
+    padding-bottom: 11px; 
 }
+
 
 
 .msg_board {
@@ -49,7 +59,8 @@
     margin-top: 16px;
 }
 
-.post-table th, .post-table td {
+.post-table th,
+.post-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;

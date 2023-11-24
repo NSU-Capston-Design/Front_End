@@ -1,5 +1,9 @@
 import Header from "../component/Header";
+<<<<<<< HEAD
 import "../css/Event.css";
+=======
+import "../css/Event.css"
+>>>>>>> 1ae9656853f5065ff41b36781847635d2eb2ed17
 
 export default function Event() {
 

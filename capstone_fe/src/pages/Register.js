@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import {KakaoLogin} from 'react-kakao-login';
+//import {KakaoLogin} from 'react-kakao-login';
 
 import kakao from "../img/kakao_login.png";
 import Header from "../component/Header";
