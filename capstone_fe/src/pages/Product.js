@@ -28,8 +28,8 @@ export default function Product(){
     productList();  // 가져온 데이터 확인 절차
 }, []);
 
-const Moveto_ProductDetail = (e) =>{
-    navigate('/detail');
+const Moveto_ProductDetail = (e) =>{    // 상품 세부 페이지
+    navigate(`/detail/{productId}`);    // 나중에 &{productId}로 변경 예정
 }
     return(
         <>
@@ -39,7 +39,7 @@ const Moveto_ProductDetail = (e) =>{
                         <div key={item.userId} className= "product-list-box" >  {/* 리스트 목록 */}
                          
                             <div className="product-list-image">
-                                <img src=""/>    
+                                <img src={item.image}/>    
                             </div>    {/* 상품 이미지 */}
                             <div className="product-list-title" title={item.id} onClick={Moveto_ProductDetail}>{item.title}</div> {/* 상품 타이틀 */} 
                             <div className="MovetoNoticeDetail" title={item.id} onClick={Moveto_ProductDetail}>{item.price}</div>     {/* 상품 가격 */}

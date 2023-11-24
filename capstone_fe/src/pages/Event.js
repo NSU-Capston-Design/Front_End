@@ -1,5 +1,5 @@
 import Header from "../component/Header";
-import Event from "../css/Event.css"
+import "../css/Event.css";
 
 export default function Event() {
 

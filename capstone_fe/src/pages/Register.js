@@ -147,7 +147,7 @@ export default function Register(){
         userCheck["userCheck"] = userEmail
         axios({
             method : 'post',
-            url : '//localhost:8080',
+            url : '//localhost:8080/user/userid-check',
             data: userCheck
         })
         .then(res => { 
