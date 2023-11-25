@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'
 
-
+import "../css/Login.css";
 import Header from "../component/Header";
 
 export default function Login() {
@@ -26,7 +26,7 @@ export default function Login() {
         console.log(1)
         const UserInfo = {}
         UserInfo['userId'] = userId // 입력받은 아이디를 userinfo의 userid에 넣기
-        UserInfo['password'] = userPw   // 입력받은 아이디를 userinfo의 password에 넣기
+        UserInfo['userPassword'] = userPw   // 입력받은 아이디를 userinfo의 password에 넣기
         axios({
             method : 'post',    // post방식으로 통신
             url : '//localhost:8080/user/login',    
@@ -45,9 +45,10 @@ export default function Login() {
         })
     }
     return (
+        <>
+        <Header/>
         <div className="Loginpage">
-            <Header/>
-             <div className="Loginpage-loginbox">
+            <div className="Loginpage-loginbox">
                 <h1 className="Loginpage-loginbox__title">login</h1>
             </div>
             <div className="Loginpage-loginform">
@@ -70,5 +71,6 @@ export default function Login() {
                 <input type="button" className="findid-btn" onClick={MovetoFindId} value={'아이디 찾기'}/>
             </div>
         </div>
+        </>
     )
 }

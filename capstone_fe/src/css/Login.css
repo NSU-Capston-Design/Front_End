@@ -1,0 +1,28 @@
+.Loginpage{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Loginpage-loginform{
+    text-align: center;
+    width: 400px;
+    height: 300px;
+    background-color: rgb(206, 219, 253);
+}
+.Loginpage-loginform__body{
+    margin: 35px;
+}
+.Loginpage-loginform__body input{
+    width: 200px;
+    height: 20px;
+    border-radius: 5px;
+}
+.Loginpage .Loginpage-loginform input{
+    margin: 5px;
+    border: none;
+}
+
+.Loginpage .signin-btn, .findid-btn{
+
+}

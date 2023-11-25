@@ -1,11 +1,32 @@
 import React from "react";
 import { useEffect, useState } from 'react';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+//import {KakaoLogin} from 'react-kakao-login';
 
+import kakao from "../img/kakao_login.png";
 import Header from "../component/Header";
+import "../css/Register.css";
 
 export default function Register(){
+    
+    const rest_kakao_key = '7e346965896ae39355ed0fe5c0d086dd'    // api 키값
+    const redirect_url = 'http://localhost:3000/register'    // redirect url
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${rest_kakao_key}&redirect_uri=${redirect_url}&response_type=code`
+
+    const kakaoLogin = () =>{
+        window.location.href = kakaoURL
+    }
+    // const Kakao = ({setUser}) => {
+    //     const onSuccess = (res) => {
+    //         setUser(res.profile);
+    //     };
+
+    //     const onFailure = (error) => {
+    //         // 로그인 실패 시 처리할 로직
+    //         console.error('카카오 로그인 실패', error);
+    //     };
+    // }
 
     const [userId, setUserId] = useState('')
     const [userPw, setUserPw] = useState('')
@@ -15,7 +36,7 @@ export default function Register(){
     const [userBirth, setUserBirth] = useState('')
     // const [roles, setRoles] = useState([])
     const [btnBackcolor, setBtnBackcolor] = useState('gray')
-    const userCheck = {}
+    const userCheck = {}    // 유저 정보 체크
 
     //유효성 검사
     const [IdCheck, setIdCheck] = useState()
@@ -24,7 +45,7 @@ export default function Register(){
     const [EmailCheck, setEmailCheck] = useState()
     const [PhoneCheck, setPhoneCheck] = useState()
     const [CheckJoin, setCheckJoin] = useState(false)
-
+    const [fontcolor, setFontcolor] = useState('black')
 
     const [idmsgcolor, setIdMsgcolor] = useState('')
     const [pwmsgcolor, setPwmsgcolor] = useState('')
@@ -68,10 +89,12 @@ export default function Register(){
     useEffect(()=> {    // 이벤트 리스너를 통해 이벤트를 추가한다면, 이벤트 삭제가 필요함(cleanup 함수 사용)
         if(userId && userEmail && userBirth && userPhone && userPw && userPwchk && pwchkchk/*&& IdCheck  && EmailCheck && PhoneCheck*/){    // 모든게 입력(true)되었다면,
             setCheckJoin(true)  // 회원가입 버튼 활성화
-            setBtnBackcolor('#617CC2')
+            setBtnBackcolor('#077912')
+            setFontcolor('white')
         } else{
             setCheckJoin(false) // 회원가입 버튼 비활성화
             setBtnBackcolor('gray')
+            setFontcolor('black')
         }
     }, [userId, userEmail, userBirth, userName, userPhone, userPw, userPwchk, pwchkchk/*, IdCheck, EmailCheck, PhoneCheck*/])   // 이 값들이 변경될 때 마다 실행
     const InputEmail = e => {   // email
@@ -87,7 +110,7 @@ export default function Register(){
         userCheck["userCheck"] = userId
         axios({
             method : 'post',    // (수정)
-            url : '//localhost:3000',   // url
+            url : '//localhost:8080',   // url
             data: userCheck
         })
         .then(res => {  // 받은 데이터는 res에 담김
@@ -124,7 +147,7 @@ export default function Register(){
         userCheck["userCheck"] = userEmail
         axios({
             method : 'post',
-            url : '//localhost:3000',
+            url : '//localhost:8080/user/userid-check',
             data: userCheck
         })
         .then(res => { 
@@ -149,7 +172,7 @@ export default function Register(){
         userCheck["userCheck"] = userPhone
         axios({
             method : 'post',
-            url : '//localhost:3000',
+            url : '//localhost:8080',
             data : userCheck
         })
         .then(res => {
@@ -171,24 +194,27 @@ export default function Register(){
     const JoinComplete = e => {
         e.preventDefault() // 이벤트가 처리되지 않을 경우 시행하지 않음.
         UserInfo['userId'] = userId
-        UserInfo['name'] = userName
-        UserInfo['password'] = userPw
-        UserInfo['email'] = userEmail
-        UserInfo['phone'] = userPhone
-        UserInfo['birth'] = userBirth
+        UserInfo['userName'] = userName
+        UserInfo['userPassword'] = userPw
+        UserInfo['userEmail'] = userEmail
+        UserInfo['userPhone'] = userPhone
+        UserInfo['userBirth'] = userBirth
         // UserInfo['roles'] = roles
         console.log(UserInfo)
 
-        axios({
+        axios({ // 가입시 적은 유저정보들을 전달
             method : 'post',
-            url : '//localhost:8080/user/join',
+            url : '//localhost:8080/user/register',
             data : UserInfo
         }).then(res => {
             console.log(res.data)
             alert('회원가입 완료!')
-            navigate('/loginpage')
+            navigate('/login')
         })
-          .catch(err => {console.log(err.data)})
+          .catch(err => {
+            console.log(err.data);
+            alert("중복된 값입니다.");
+        })
     }
 
     useEffect(()=>{ // id가 변할때 마다 실행
@@ -199,28 +225,13 @@ export default function Register(){
     return(
         <div className="Register-all">
             <Header/>
-            {/* <div className="register-logo"></div>
-            <div className="register-form">
-                <form>
-                    <div className="text">
-                        <span>회원 정보 입력</span>
-                    </div>
-                    <div className="name"></div>
-                    <div className="id"></div>
-                    <div className="pwd"></div>
-                    <div className="pwd-check"></div>
-                    <div className="birth_sex"></div>
-                    <div className="user-img"></div>
-                    <div className="address"></div>
-                    <div className="phone"></div>
-                    <div className="email"></div>
-                </form>
-            </div> */}
+            
             <div className="registeruser">
-            <div className="registeruserinfobox">
-                <div className="registeruserinfobox-titlebox">
+            <div className="registeruserinfobox-titlebox">
                     <h1 className="registeruserinfobox-titlebox__title">로고와 회원가입</h1>
                 </div>
+            <div className="registeruserinfobox">
+                
                 <div className="joinbox-countbox">
                     <h3 className="joinbox-countbox__countpage">회원 가입 정보</h3>
                 </div>
@@ -297,11 +308,15 @@ export default function Register(){
                             </div>
                         </div>
                     </div>   
-                    <input className="singupcompletebtn" type="submit" style={{backgroundColor : btnBackcolor}} value={'회원가입'} disabled={!CheckJoin} onClick={JoinComplete}/>
+                    <input className="singupcompletebtn" type="submit" style={{backgroundColor : btnBackcolor, color : fontcolor}} value={'회원가입'} disabled={!CheckJoin} onClick={JoinComplete}/>
                 </form>
             </div>
+            <div className="kakao_login">
+                
+                    <img src={kakao} onClick={kakaoLogin} alt="카카오 로그인"></img>
+                
+            </div>
         </div>
-            
-        </div>
+    </div>
     )
 }

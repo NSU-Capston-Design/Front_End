@@ -1,0 +1,63 @@
+
+.Posting {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1153px;
+    height: 1000px;
+    position: relative;
+    background: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px rgba(96.70, 96.70, 96.70, 0.30) solid;
+  }
+
+  .Posting_header {
+    width: 1153px;
+    padding-top: 12px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 12px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: #78ABF9;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex;
+  }
+  
+  .Posting_title{
+    flex: 1 1 0;
+    height: 44px;
+    padding-top: 12px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+  }
+
+  .Posting_titleInput {
+    width: 907px;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex;
+  }
+
+  .Posting_contents {
+    align-self: stretch;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px #D1D1D1 solid;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+  }
+  

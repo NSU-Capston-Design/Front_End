@@ -7,9 +7,16 @@ import Login from './pages/Login';
 import Donation from './pages/Donation';
 import FindId from './pages/FindId';
 import Agreepage from './pages/Agreepage';
+import Test from './pages/Test';
 import Rank from './pages/Rank';
+<<<<<<< HEAD
 import Don_commu from './pages/Don_commu';
 import Mypage from './pages/Mypage';
+=======
+import Don_commu from './pages/Don_commu'
+import Event from './pages/Event';
+
+>>>>>>> 8a7d5fd602b37a4f7fbaa6b1ef034b5d060b9db8
 
 function App() {
   return (
@@ -21,9 +28,14 @@ function App() {
         <Route path='/donation' element={<Donation/>}/> 
         <Route path='/findid' element={<FindId/>}/>
         <Route path='/agreepage' element={<Agreepage/>}/>
+        <Route path='/test' element={<Test/>}/>
         <Route path='/rank' element={<Rank/>}/>
         <Route path='/don_commu' element={<Don_commu/>}/>
+<<<<<<< HEAD
         <Route path='/mypage' element={<Mypage/>}/>
+=======
+        <Route path='/event' element={<Event/>}/>
+>>>>>>> 8a7d5fd602b37a4f7fbaa6b1ef034b5d060b9db8
       </Routes>
     </BrowserRouter>
   );
