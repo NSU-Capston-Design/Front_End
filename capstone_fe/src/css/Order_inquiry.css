@@ -1,0 +1,41 @@
+.order_inquiry_txt {
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+  position: relative;
+  top: -30px; /* 음수 값으로 조절하여 텍스트를 상단으로 이동 */
+  vertical-align: top;
+}
+
+.order_inquiry_list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 30px;
+  flex-direction: column;
+}
+
+.order_inquiry_box {
+  position: relative;
+  width: 2100px;
+  height: 638px;
+  padding: 100px;
+  background: white;
+  border-radius: 10px;
+  border: 4px #DEDEDE solid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto; /* 수평 가운데 정렬을 위해 추가 */
+}
+
+.order_inquiry_row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px; /* 각 항목 사이의 공백을 조절합니다. */
+}
+
+

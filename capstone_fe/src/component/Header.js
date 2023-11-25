@@ -28,6 +28,11 @@ export default function Header(){
         navigate('/donation')       // 페이지 내부 주소
     }
 
+    const MovetoMypage = e => {   // 마이 페이지로 이동
+        navigate('/mypage')       // 페이지 내부 주소
+    }
+    
+
     return(
         <div className="header-all">  
             <header> {/* 헤더 */}
@@ -46,9 +51,12 @@ export default function Header(){
                         <img src={cart}></img>
                         <span>장바구니</span>
                     </div>
-                    <div className="mypage">
+                    <div className="mypage" onClick={MovetoMypage} >
+                        
                         <img src={mypage}></img>
-                        <span>&nbsp;마이페이지</span>
+                        <span> &nbsp;마이페이지</span>
+
+                        
                     </div>
                 </div>
             </header>
