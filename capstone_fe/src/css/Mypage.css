@@ -1,0 +1,277 @@
+.mypage_all {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mypage {
+  width: 100%;
+  height: 85.60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10.60px;
+}
+
+.mypage_list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.mypage_container {
+  position: relative;
+  display: flex;
+}
+
+.mypage_list1 {
+  width: 244px;
+  height: auto; /* 변경: 높이를 자동으로 조정 */
+  padding: 50px;
+  background: rgba(97, 124, 194, 0.6);
+  border-radius: 10px;
+  border: 1px #DEDEDE solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 35px;
+  margin-right: 20px;
+  position: relative;
+  left: -600px;
+  margin-top: 85px;
+}
+
+.mypage_list1 .mypage_image1 {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mypage_list1 .mypage_image1 img {
+  width: 240px;
+  height: auto;
+}
+
+.mypage_list1 .mypage_name1 {
+  font-weight: bold;
+  margin-top: 150px;
+  line-height: 20;
+}
+
+/* 추가: 회원정보 수정 버튼 스타일 */
+.mypage_list1 .mypage_name1_dl button {
+  background-color: #fff;
+  color: #617CC2;
+  border: 2px solid #808080;
+  padding: 10px 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.mypage_list2,
+.mypage_list3 {
+  font-weight: bold;
+  font-size: 32px;
+  width: 200px;
+  height: 200px;
+  padding: 50px;
+  background: #ECECEC;
+  border-radius: 10px;
+  border: 1px #DEDEDE solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  position: absolute;
+  top: 58%;
+  left: 37%;
+}
+
+.mypage_list3 {
+  left: 51%;
+  top: 58%;
+}
+
+.mypage_list3 span {
+  color: red;
+}
+
+.mypage_list4 {
+  width: 500px;
+  height: 300px;
+  border-radius: 10px;
+  background: #004EA2;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.mypage_name4 {
+  font-weight: bold;
+  font-size: 35px;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+
+.mypage_name4_dl {
+  font-weight: bold;
+  font-size: 60px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.mypage_name4_dl strong {
+  font-weight: bold;
+  color: white;
+}
+
+.mypage_image4 img {
+  width: 100px;
+  height: auto;
+  margin-top: 10px;
+}
+
+.mypage_inquiry_button {
+  background-color: #fff;
+  color: #617CC2;
+  border: 2px solid #808080;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 200px;
+  margin-left: 500px;
+  position: fixed;
+}
+
+.mypage_name5 {
+  font-weight: bold;
+}
+
+.mypage_withdraw_button {
+  background-color: #fff;
+  color: #FF0000;
+  border: 2px solid #808080;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 115px; /* 아래쪽 여백 조절 */
+  right: 2000px; /* 오른쪽 여백 조절 */
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 850px;
+  height: 100%;
+  max-height: 1700px;
+  overflow-y: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 변경: 왼쪽 정렬로 수정 */
+  padding-left: 20px; /* 변경: 왼쪽 여백 추가 */
+}
+
+.modal-content form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 변경: 왼쪽 정렬로 수정 */
+  gap: 15px;
+}
+
+.modal-content label {
+  font-weight: bold;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #DEDEDE;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.modal-content button {
+  background-color: #617CC2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.postal-code {
+  display: flex;
+  flex-direction: column; /* 변경: 세로로 나열되도록 수정 */
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.postal-code input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #DEDEDE;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.postal-code button {
+  background-color: #617CC2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-content input::placeholder {
+  color: #808080; /* 회색으로 설정 */
+}
+
+
+.modal-content {
+  
+ 
+  color: black; /* 검은색으로 설정 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  }
+
+.withdraw-prompt {
+  color: #FF0000; /* 빨간색으로 설정 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 20px;
+}

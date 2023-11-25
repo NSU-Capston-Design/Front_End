@@ -8,7 +8,8 @@ import Donation from './pages/Donation';
 import FindId from './pages/FindId';
 import Agreepage from './pages/Agreepage';
 import Rank from './pages/Rank';
-import Don_commu from './pages/Don_commu'
+import Don_commu from './pages/Don_commu';
+import Mypage from './pages/Mypage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/agreepage' element={<Agreepage/>}/>
         <Route path='/rank' element={<Rank/>}/>
         <Route path='/don_commu' element={<Don_commu/>}/>
+        <Route path='/mypage' element={<Mypage/>}/>
       </Routes>
     </BrowserRouter>
   );

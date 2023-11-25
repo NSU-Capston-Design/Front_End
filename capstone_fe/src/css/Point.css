@@ -1,0 +1,78 @@
+/* Point_details.css */
+
+.Point-details-all {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 70px;
+}
+
+.Point-details-box {
+  border: 4px solid #DEDEDE;
+  border-radius: 30px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1800px;
+  margin-top: 20px;
+  margin-left: auto; /* 왼쪽 여백 제거 */
+  margin-right: 2%;
+  overflow: hidden; /* 자식 요소가 넘치면 감추기 */
+  height: 800px;
+}
+
+.Point-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.Point-details-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  margin-right: 15px;
+}
+
+.Point-details-label {
+  flex: 1;  
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: 10px;
+  letter-spacing: -1px;
+  margin-right: -15px; /* 예시로 5px로 설정, 필요한 만큼 조절하세요 */
+}
+
+.Point-line {
+  width: calc(100% + 30px); /* 수정: 100% + 좌우 간격(30px)로 설정 */
+  height: 5px;
+  background-color: #ccc;
+  margin-bottom: 20px;
+  overflow: hidden;
+  margin-left: -15px; /* 수정: 좌우 간격을 반으로 나눈 값으로 설정 */
+  margin-right: -15px; /* 수정: 좌우 간격을 반으로 나눈 값으로 설정 */
+}
+
+
+.Point-box-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.Point-box {
+  width: 400px;
+  height: 400px;
+  background: #DEDEDE;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  left: -970px;
+}
+
+.Point-box-container {
+  display: flex;
+  justify-content: center; /* 수정: 중앙 정렬로 변경 */
+  margin-top: -700px;
+}
