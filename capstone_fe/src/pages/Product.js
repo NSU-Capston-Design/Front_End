@@ -9,7 +9,7 @@ export default function Product(){
     const navigate = useNavigate();
 
     useEffect(() => {
-    const productList = async () =>{
+    const productList = async () =>{    // 비동기로 받아오기
         try{
             const response = await axios.get(`//localhost:8080`);    // get 내부에 url 넣기 
             const data = response.data;                 // 받아온 데이터 data에 저장    

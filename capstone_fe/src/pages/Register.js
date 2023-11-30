@@ -59,9 +59,6 @@ export default function Register(){
     const [emailmsg, setEmailmsg] = useState('')
     const [phonemsg, setPhonemsg] = useState('')
 
-    // useEffect(()=>{
-    //     setRoles([...roles, "USER"])
-    // },[])
 
     const UserInfo = {} // 배열형식으로 받는 user정보
     const navigate = useNavigate()  // 페이지 이동 및 param(값)를 주고 받기 위함 
