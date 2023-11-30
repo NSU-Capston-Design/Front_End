@@ -1,16 +1,12 @@
 import Header from "../component/Header";
-<<<<<<< HEAD
 import "../css/Event.css";
-=======
-import "../css/Event.css"
->>>>>>> 1ae9656853f5065ff41b36781847635d2eb2ed17
 
 export default function Event() {
 
     return (
 
         <div className="event_all">
-            <Header />
+            <Header/>
             <div className="event_title">이벤트</div>
             <div className="event_list">{/*이벤트목록 */}
                 <div className="event_1">
