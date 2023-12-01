@@ -2,9 +2,11 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import axios from "axios";
 
+import "../css/Mainpage.css";
 import Header from "../component/Header";
 import left_arrow from '../img/left_arrow.png';
 import right_arrow from '../img/right_arrow.png';
+import item_img from '../img/item.png';
 
 export default function Mainpage(){
 
@@ -54,17 +56,40 @@ export default function Mainpage(){
     }, [])
     return(
 
-        <div className="all">
+        <div className="mainpage-all">
             <Header/>  
             
             <div className="content">   {/* 추천상품, 이벤트(컨텐츠칸) */}
                 <div className="best">  
-                    <div className="best_text">장성군몰 베스트 상품!</div>  {/* 베스트 상품 목록 */}
+                    <div className="best_text">
+                        <span className="big-text">장성군몰</span> 베스트 상품! </div>  {/* 베스트 상품 목록 */}
 
+                    {/* 테스트용으로 집어넣기 */}
+                    
                     <div className="best_product">
-                        <div className="best_image"></div>
-                        <div className="best_review"></div>
-                        <div className="best_title"></div>
+                        <div className="best_product_item">  
+                            <div className="best_image"><img src={item_img} alt="item"/></div>
+                            <div className="best_product_text">장성군 베스트 특산품</div><br/>
+                            <div className="best_title">단감</div>
+                            <div className="best_detail">구매하러 가기</div>
+                            <div className="best_review"></div>
+                        </div>
+
+                        <div className="best_product_item">  
+                            <div className="best_image"><img src={item_img} alt="item"/></div>
+                            <div className="best_product_text">장성군 베스트 특산품</div><br/>
+                            <div className="best_title">민물 장어</div>
+                            <div className="best_detail">구매하러 가기</div>
+                            <div className="best_review"></div>
+                        </div>
+
+                        <div className="best_product_item">  
+                            <div className="best_image"><img src={item_img} alt="item"/></div>
+                            <div className="best_product_text">장성군 베스트 특산품</div><br/>
+                            <div className="best_title">샤인 머스켓</div>
+                            <div className="best_detail">구매하러 가기</div>
+                            <div className="best_review"></div>
+                        </div>
                     </div>
                     {/* {list.map((item) => (<div key={item.productId} className="best_product">              
                         <div className="best_image">{item.image}</div>

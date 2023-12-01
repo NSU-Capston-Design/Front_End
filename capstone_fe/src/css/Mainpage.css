@@ -1,0 +1,44 @@
+.mainpage-all .content{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.content .best_text .big-text{
+    font-size: xx-large;
+    color: #617CC2;
+}
+.mainpage-all .best_product{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.mainpage-all .best_product .best_product_item{
+
+    margin: 20px;
+    display: table;
+    border:2px solid #617CC2;
+    border-radius: 10px;
+    width:310px;
+    height:300px;
+}
+.best_product_item .best_image{
+    margin-top: 15px;
+    vertical-align:middle;
+}
+.best_product_item .best_image img{
+    max-width:180px;
+    max-height:180px;
+}
+.best_product_item .best_product_text{
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffd12c;
+    margin-left: 5px;
+}
+.best_product_item .best_title{
+   float: left;
+   font-weight: bold;
+   margin-left: 5px;
+   margin-top: -10px;
+}

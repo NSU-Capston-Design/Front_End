@@ -61,8 +61,9 @@ export default function Mypage() {
 
   return (
     <>
+      <Header/>
       <div className="mypage_all">
-        <Header />
+        
 
         <div className="mypage_list1">
           <div className="mypage_image1">
@@ -171,7 +172,7 @@ export default function Mypage() {
         )}
 
         {isSuccessMessageOpen && (
-          <div className="modal" style={{ zIndex: 9999 }}>
+          <div className="modal" style={{ zIndex: 9 }}>
             <div className="modal-content" style={{ width: 500, height: 200 }}>
               <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>
                 회원 정보 수정이 완료되었습니다.
