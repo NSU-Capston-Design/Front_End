@@ -120,7 +120,7 @@ export default function Mainpage(){
                         </div>
                         ))} */}
                         <div className="right_arrow">
-                            <img src={right_arrow}></img>
+                            <img src={right_arrow} alt="right arrow"></img>
                         </div>
                     </div>
                 </div>
