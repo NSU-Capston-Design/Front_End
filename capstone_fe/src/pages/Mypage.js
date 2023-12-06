@@ -193,20 +193,6 @@ export default function Mypage() {
           </div>
         )}
 
-<<<<<<< HEAD
-{isEditSuccessMessageOpen && (
-  <div className="modal" style={{ zIndex: 9999 }}>
-    <div className="modal-content" style={{ width: 500, height: 200 }}>
-      <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>
-        회원 정보 수정이 완료되었습니다.
-      </div>
-      <button type="button" onClick={handleCloseEditSuccessMessage}>
-        X
-      </button>
-    </div>
-  </div>
-)}
-=======
         {isSuccessMessageOpen && (
           <div className="modal" style={{ zIndex: 9 }}>
             <div className="modal-content" style={{ width: 500, height: 200 }}>
@@ -219,7 +205,6 @@ export default function Mypage() {
             </div>
           </div>
         )}
->>>>>>> ec1fd51d7cf4c1c1c4374a763920fe83f6ef8eb9
 
 {isWithdrawModalOpen && (
   <div className="modal" style={{ zIndex: 9999 }}>

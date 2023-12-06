@@ -2,20 +2,11 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import Header from "../component/Header";
 import "../css/Rank.css"
-import Avatar from "../component/Rank";
+import {Element} from "../component/Rank";
 
-export default function Rank(){
-   
+export default function Rank() {
 
-  const rankData = [
-    { index: 2, imageSrc: "", badgeNumber: 2, nickname: "닉2🥈" },
-    { index: 1, imageSrc: "", badgeNumber: 1, nickname: "닉1🥇" },
-    { index: 3, img: "", badgeNumber: 3, nickname: "닉3🥉" },
-    // 나머지 순위 데이터도 추가
-    // { index: 4, img: "", badgeNumber: 4, nickname: "닉4" },
-    // ...
-    // { index: 10, img: "", badgeNumber: 10, nickname: "닉10" },
-  ];
+
 
   return (
     <div className="rank_all">
@@ -35,16 +26,59 @@ export default function Rank(){
 
 
       <div className="rank_list">
-        {rankData.map((data) => (
-          // 각 순위 생성
-          <div key={data.index} className={`rank_${data.index}`}>
-            {/* Avatar 컴포넌트 순위, 이미지, 뱃지 번호 등을 표시. */}
-            <Avatar {...data} />
 
-            {/* 닉네임 */}
-            <div className={`rank${data.index}_name`}>{data.nickname}</div>
+        <div className="rank2"> {/*2위 */}
+          <div className="avatar-2">
+            <div className="overlap-group-2">{/*프로필 사진 */}
+              <div className="rank-badge-2"> {/*순위 뱃지 */}
+                <div className="badge-frame-2">
+                  <div className="rank-num-2">2</div> {/*순위 */}
+                </div>
+              </div>
+            </div>
           </div>
-        ))}
+          <div className="rank-name-2">닉네임2</div>
+        </div>
+
+        <div className="rank1"> {/*1위 */}
+          <div className="avatar-1">
+            <div className="overlap-group-1">{/*프로필 사진 */}
+              <div className="rank-badge-1"> {/*순위 뱃지 */}
+                <div className="badge-frame-1">
+                  <div className="rank-num-1">1</div> {/*순위 */}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="rank-name-1">닉네임1</div>
+        </div>
+
+        <div className="rank3"> {/*3위 */}
+          <div className="avatar-3">
+            <div className="overlap-group-3">{/*프로필 사진 */}
+              <div className="rank-badge-3"> {/*순위 뱃지 */}
+                <div className="badge-frame-3">
+                  <div className="rank-num-3">3</div> {/*순위 */}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="rank-name3">닉네임3</div>
+        </div>
+
+        <div className="other-ranks">
+          <Element className="four" rankNum='4' rankName='닉4'/>
+          <Element className="four" rankNum = '5' rankName='닉5'/>
+          <Element className="four"  rankNum = '6' rankName='닉6'/>
+          <Element className="four" rankNum = '7' rankName='닉7'/>
+          <Element className="four"  rankNum = '8' rankName='닉8'/>
+          <Element className="four" rankNum = '9' rankName='닉9'/>
+          <Element className="four" rankNum = '10' rankName='닉10'/>
+        </div>
+
+
+
+
       </div>
     </div>
   );

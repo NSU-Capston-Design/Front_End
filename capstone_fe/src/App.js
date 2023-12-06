@@ -11,7 +11,6 @@ import Test from './pages/Test';
 import Rank from './pages/Rank';
 import Don_commu from './pages/Don_commu';
 import Mypage from './pages/Mypage';
-import Don_commu from './pages/Don_commu'
 import Event from './pages/Event';
 
 
