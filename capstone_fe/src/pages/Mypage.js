@@ -5,24 +5,34 @@ import direction_SwitchImage from '../img/direction_switch.png';
 import logoImage from '../img/logo.png';
 import warningImage from '../img/warning.png';
 
-
 export default function Mypage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSuccessMessageOpen, setIsSuccessMessageOpen] = useState(false);
   const [isWithdrawModalOpen, setWithdrawModalOpen] = useState(false);
+  const [isWithdrawSuccessMessageOpen, setIsWithdrawSuccessMessageOpen] = useState(false);
+  const [isEditSuccessMessageOpen, setIsEditSuccessMessageOpen] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const handleCloseWithdrawSuccessMessage = () => {
+    setIsWithdrawSuccessMessageOpen(false);
+  };
+
+  const initialFormData = {
     name: "",
     username: "",
     password: "",
     passwordConfirm: "",
     zipCode: "",
     refundAccount: "",
-    // 추가 필드들에 대한 초기 상태도 추가하세요
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleEditButtonClick = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const handleCloseEditSuccessMessage = () => {
+    setIsEditSuccessMessageOpen(false);
   };
 
   const handleInputChange = (e) => {
@@ -37,7 +47,8 @@ export default function Mypage() {
     console.log("저장 버튼이 클릭되었습니다.");
     console.log("수정된 정보:", formData);
     setIsModalOpen(false);
-    setIsSuccessMessageOpen(true);
+    setIsEditSuccessMessageOpen(true); // 수정 완료 메시지 띄우기
+    resetForm(); // 저장 후에 상태 초기화
   };
 
   const handleCloseSuccessMessage = () => {
@@ -55,8 +66,15 @@ export default function Mypage() {
   const handleWithdrawConfirm = () => {
     // 실제 탈퇴 처리 로직을 여기에 추가해야 합니다.
     // 탈퇴가 성공하면 모달을 닫거나 다른 처리를 수행할 수 있습니다.
+    // 이 부분에서는 탈퇴 완료 메시지 모달을 열도록 변경합니다.
+    // 여기서는 단순히 메시지를 출력하도록 했습니다.
     setWithdrawModalOpen(false);
-    setIsSuccessMessageOpen(true); // 탈퇴 성공 시 메시지 띄우기
+    alert("회원 탈퇴가 완료되었습니다.");
+  };
+
+
+  const resetForm = () => {
+    setFormData(initialFormData);
   };
 
   return (
@@ -163,25 +181,29 @@ export default function Mypage() {
                 </div>
               </form>
               <div style={{ marginTop: 20 }}>
-                <button type="button" onClick={handleSaveButtonClick}>저장</button>
-                <button type="button" onClick={handleEditButtonClick}>취소</button>
+  <button type="button" onClick={handleSaveButtonClick}>
+    저장
+  </button>
+  <button type="button" onClick={() => { handleEditButtonClick(); resetForm(); }}>
+    취소
+  </button>
               </div>
             </div>
           </div>
         )}
 
-        {isSuccessMessageOpen && (
-          <div className="modal" style={{ zIndex: 9999 }}>
-            <div className="modal-content" style={{ width: 500, height: 200 }}>
-              <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>
-                회원 정보 수정이 완료되었습니다.
-              </div>
-              <button type="button" onClick={handleCloseSuccessMessage}>
-                X
-              </button>
-            </div>
-          </div>
-        )}
+{isEditSuccessMessageOpen && (
+  <div className="modal" style={{ zIndex: 9999 }}>
+    <div className="modal-content" style={{ width: 500, height: 200 }}>
+      <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>
+        회원 정보 수정이 완료되었습니다.
+      </div>
+      <button type="button" onClick={handleCloseEditSuccessMessage}>
+        X
+      </button>
+    </div>
+  </div>
+)}
 
 {isWithdrawModalOpen && (
   <div className="modal" style={{ zIndex: 9999 }}>
@@ -204,13 +226,13 @@ export default function Mypage() {
   </div>
 )}
 
-{isSuccessMessageOpen && (
+{isWithdrawSuccessMessageOpen && isWithdrawModalOpen && (
   <div className="modal" style={{ zIndex: 9999 }}>
     <div className="modal-content" style={{ width: 500, height: 200, textAlign: 'center' }}>
       <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20, color: 'black' }}>
         회원 탈퇴가 완료되었습니다.
       </div>
-      <button type="button" onClick={handleCloseSuccessMessage}>
+      <button type="button" onClick={handleCloseWithdrawSuccessMessage}>
         확인
       </button>
     </div>

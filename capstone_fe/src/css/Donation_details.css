@@ -1,94 +1,73 @@
-/* Donation_details.css */
+/* DonationDetails.css */
 
-.donation-details-all {
+/* 기부내역 전체 컨테이너 스타일 */
+.donation_details_container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 70px;
+  position: relative; /* 추가: .donation_details_container에 position: relative; 적용 */
 }
 
-.donation-details-box {
+/* 기부내역 상자 스타일 */
+.donation_details_box {
+  position: relative;
   border: 4px solid #DEDEDE;
   border-radius: 30px;
-  padding: 20px;
-  width: 100%;
-  max-width: 1800px;
-  margin-top: 20px;
-  margin-left: auto; /* 왼쪽 여백 제거 */
-  margin-right: 2%;
-  overflow: hidden; /* 자식 요소가 넘치면 감추기 */
-  height: 800px;
+  padding: 200px;
+  width: 1850px;
+  height: 450px;
+  margin-top: 0px;
+  
 }
 
+/* 타이틀 컨테이너 스타일 */
 .title-container {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
+  gap: 350px;
 }
 
-.donation-details-row {
+/* 각 행의 스타일 */
+.row-style {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-  margin-right: 15px;
+  margin-top: -100px;
 }
 
-.donation-details-label {
-  flex: 1;  
+/* 각 라벨(텍스트) 스타일 */
+.donation_details_label {
+  flex: 1;
   text-align: center;
-  font-size: 10px;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 10px;
-  letter-spacing: -1px;
-  margin-right: -15px; /* 예시로 5px로 설정, 필요한 만큼 조절하세요 */
 }
 
-.horizontal-line {
-  width: calc(100% + 30px); /* 수정: 100% + 좌우 간격(30px)로 설정 */
-  height: 5px;
-  background-color: #ccc;
-  margin-bottom: 20px;
-  overflow: hidden;
-  margin-left: -15px; /* 수정: 좌우 간격을 반으로 나눈 값으로 설정 */
-  margin-right: -15px; /* 수정: 좌우 간격을 반으로 나눈 값으로 설정 */
-  margin-top: -200px;
+/* 수평 가로선 스타일 */
+.donation_details_line {
+  position: absolute;
+  width: 80%;
+  height: 3px;
+  background-color: #DEDEDE;
+  bottom: 81%;
+  left: 8%;
+  transform: translateY(50%);
 }
 
-
-.gray-box-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-
-.gray-box {
-  width: 400px;
-  height: 400px;
-  background: #DEDEDE;
-  border-radius: 10px;
-  padding: 10px;
+.donation_details_txt {
   text-align: center;
-  position: relative;
-  left: -970px;
+  font-size: 45px; /* 원하는 크기로 조절 */
+  /* 다른 원하는 스타일 속성도 추가 가능 */
 }
 
-.gray-box-container {
-  display: flex;
-  justify-content: center; /* 수정: 중앙 정렬로 변경 */
-  margin-top: -700px;
+.pagination_button {
+  padding: 10px 15px;
+  font-size: 16px;
+  margin: 0 5px;
+  background-color: #617CC2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 330px;
 }
-
-
-.title-container .donation-details-label {
-  margin-bottom: 150px;
-}
-
-.gray-box-container hr {
-  margin-top: -20px; /* 음수값으로 위로 올림 */
-}
-
-.title-container .donation-details-label {
-  margin-bottom: 100px;
-}
-
