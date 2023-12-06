@@ -33,15 +33,14 @@ export default function Login() {
             data : UserInfo 
         })
         .then(res => {  // 가져온 데이터들 셋업
-            window.localStorage.setItem('token', res.data.token)
-            window.localStorage.setItem('id', res.data.id)
-            window.localStorage.setItem('userid', res.data.userId)
-            window.localStorage.setItem('name', res.data.name)
-            navigate('/')
+            window.localStorage.setItem('sessionId', res.data.sessionId);
+            window.localStorage.setItem('userid', res.data.userId);
+            window.localStorage.setItem('username', res.data.name);
+            navigate('/');
         })
         .catch(err => {
-            console.log(err)
-            alert('로그인 실패')
+            console.log(err);
+            alert('로그인 실패');
         })
     }
     return (

@@ -34,7 +34,6 @@ export default function Register(){
     const [userEmail, setUserEamil] = useState('')
     const [userPhone, setUserPhone] = useState('')
     const [userBirth, setUserBirth] = useState('')
-    // const [roles, setRoles] = useState([])
     const [btnBackcolor, setBtnBackcolor] = useState('gray')
     const userCheck = {}    // 유저 정보 체크
 
@@ -196,7 +195,6 @@ export default function Register(){
         UserInfo['userEmail'] = userEmail
         UserInfo['userPhone'] = userPhone
         UserInfo['userBirth'] = userBirth
-        // UserInfo['roles'] = roles
         console.log(UserInfo)
 
         axios({ // 가입시 적은 유저정보들을 전달

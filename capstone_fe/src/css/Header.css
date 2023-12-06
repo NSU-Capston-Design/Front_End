@@ -59,6 +59,10 @@ header{ /* 헤더 */
     cursor: pointer;
     transform: scale(1.2);
 }
+.sign .logout:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
 .sign button{   /* 회원가입, 로그인 버튼 */
     border: none;
     background-color: #ffffff;
@@ -79,6 +83,10 @@ header{ /* 헤더 */
 .icons span{    /* 아이콘에 있는 span */
     display: block;
     font-size: 10px;
+}
+.icons .cart span{
+    margin-top: 9.3px;
+    margin-left: 3px;
 }
 .icons .cart:hover{ /* 카트에 마우스를 올리면 */
     cursor: pointer;
