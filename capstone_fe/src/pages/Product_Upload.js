@@ -5,9 +5,10 @@ import Select from 'react-select';
 
 import '../css/Product_Upload.css';
 export default function Product_Upload(){
-    const [ labelList, setLabelList] = useState([]);
+    const [labelList, setLabelList] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState([]); 
-       
+    const [selectedFile, setSelectedFile] = useState(null);
+
     const categoryData = [  // 카테고리 데이터
         { value: 'electronics', label: '전자기기' },
         { value: 'appliances', label: '가전제품'},
@@ -22,9 +23,26 @@ export default function Product_Upload(){
         }
         setSelectedCategory(selectedOptions);
     };
+    const onFile = (e) =>{
+        setSelectedFile(e.target.files[0]);
+    }
     const onSubmit = async (event) => { // 보냈을 때의 이벤트
         event.preventDefault(); // 입력이 빈 칸일 때, 이벤트 막기
         
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+
+        try{
+            const response = await axios.post("http://localhost:8080/upload", formData, {
+                headers: {
+                    "Content-Type": 'multipart/form-data',
+                },
+            });
+
+            console.log('File Uploaded!', response);
+        } catch(error){
+            console.log("파일 업로드 실패!", error);
+        }
     };
 
     return(
@@ -35,7 +53,7 @@ export default function Product_Upload(){
                     <div className="product_upload_box">
                         <div className="upload_img_box">
                             <span>상품 사진</span>
-                            <input type="file" className="file"/>
+                            <input type="file" className="file" onChange={onFile}/>
                         </div>
                         <div className="upload_title_box">
                             <span>상품 제목</span>
