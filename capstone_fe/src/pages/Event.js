@@ -6,7 +6,7 @@ export default function Event() {
     return (
 
         <div className="event_all">
-            <Header />
+            <Header/>
             <div className="event_title">이벤트</div>
             <div className="event_list">{/*이벤트목록 */}
                 <div className="event_1">

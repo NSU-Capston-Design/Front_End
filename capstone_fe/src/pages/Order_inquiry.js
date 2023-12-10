@@ -1,58 +1,90 @@
-/* Donation_details.css */
+import React from "react";
+import Header from "../component/Header";
+import '../css/Order_inquiry.css';
 
-.donation-details-all {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 70px;
-}
+export default function Order_inquiry() {
 
-.donation-details-box {
-  border: 4px solid #DEDEDE;
-  border-radius: 30px;
-  padding: 20px;
-  width: 60%;
-  margin-top: 0;
-}
+  return (
+    <div className="order_inquiry_all">
+      <Header />
 
-.title-container {
-  display: flex;
-  justify-content: space-between;
-}
+      <div className="order_inquiry">
+        <div className="order_inquiry_txt" style={{ textAlign: "center" }}>
+          <p>
+            <strong>
+              <font color="#617CC2">기부내역</font>
+            </strong>
+          </p>
+        </div>
+      </div>
 
-.row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  margin-top: -100px;
-}
+      <div className="section-separator"></div>
 
-.label {
-  flex: 1;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-}
+      <div className="order_inquiry_container">
+        <div className="order_inquiry_box">
+          <div className="row-style">
+            <div className="title-container">
+              <div className="order_inquiry_label">
+                <strong>구매일</strong>
+              </div>
 
-.horizontal-line {
-  position: absolute;
-  width: 70%;
-  height: 5px;
-  background-color: #ccc;
-  bottom: 800px;
-}
+              <div className="order_inquiry_label">
+                <strong>구매내역</strong>
+              </div>
+            </div>
 
-.gray-box-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
+            <div className="order_inquiry_label">
+              <strong>배송상태</strong>
+            </div>
 
-.gray-box {
-  width: 150px;
-  height: 150px;
-  background: #DEDEDE;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
+            <div className="order_inquiry_label">
+              <strong>송장번호</strong>
+            </div>
+            
+            <div className="order_inquiry_label">
+              <strong>금액</strong>
+          </div>
+          </div>
+          
+          <hr className="order_inquiry_line" />
+
+          <div className="row-style">
+            <div className="title-container">
+              <div className="order_inquiry_label" style={{ marginTop: "200px" }}>
+                12월 12일
+              </div>
+
+              <div className="order_inquiry_label" style={{ marginTop: "200px" }}>
+                인천
+              </div>
+            </div>
+
+            <div className="order_inquiry_label" style={{ marginTop: "200px" }}>
+              배송완료
+            </div>
+
+            <div className="order_inquiry_label" style={{ marginTop: "200px" }}>
+              213141
+            </div>
+
+            <div className="order_inquiry_label" style={{ marginTop: "200px" }}>
+              5,000원
+            </div>
+          </div>
+          
+          
+          <div className="order_inquiry_container" style={{ textAlign: "center", marginTop: "20px" }}>
+              <button className="order_inquiry_button">&lt;</button>
+              <button className="order_inquiry_button">1</button>
+              <button className="order_inquiry_button">2</button>
+              <button className="order_inquiry_button">3</button>
+              <button className="order_inquiry_button">4</button>
+              <button className="order_inquiry_button">5</button>
+              <button className="order_inquiry_button">&gt;</button>
+            
+          </div>      
+        </div>
+      </div>
+    </div>
+  );
 }

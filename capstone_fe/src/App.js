@@ -12,8 +12,6 @@ import Rank from './pages/Rank';
 import Don_commu from './pages/Don_commu';
 import Mypage from './pages/Mypage';
 import Event from './pages/Event';
-import Product from './pages/Product';
-import Product_Upload from './pages/Product_Upload';
 
 
 function App() {
@@ -31,8 +29,6 @@ function App() {
         <Route path='/don_commu' element={<Don_commu/>}/>
         <Route path='/mypage' element={<Mypage/>}/>
         <Route path='/event' element={<Event/>}/>
-        <Route path='/product' element={<Product/>}/>
-        <Route path='/product/upload' element={<Product_Upload/>}/>
       </Routes>
     </BrowserRouter>
   );

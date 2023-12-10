@@ -73,7 +73,25 @@
   margin-top: 20px;
 }
 
-.mypage_list2,
+.mypage_list2 {
+  font-weight: bold;
+  font-size: 32px;
+  width: 200px;
+  height: 200px;
+  padding: 50px;
+  background: #ECECEC;
+  border-radius: 10px;
+  border: 1px #DEDEDE solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  position: absolute;
+  transform: translate(-50%, -50%) translateX(-10%);
+  margin-top: 951px;
+}
+
 .mypage_list3 {
   font-weight: bold;
   font-size: 32px;
@@ -89,33 +107,31 @@
   align-items: center;
   gap: 35px;
   position: absolute;
-  top: 58%;
-  left: 37%;
+  margin-top: 800px;
+  left: 51%;
+
 }
 
-.mypage_list3 {
-  left: 51%;
-  top: 58%;
-}
+
 
 .mypage_list3 span {
   color: red;
 }
 
 .mypage_list4 {
-  width: 500px;
+  width: 424px;
   height: 300px;
-  border-radius: 10px;
+  padding: 50px;
   background: #004EA2;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: 1px #DEDEDE solid;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  color: white;
+  gap: 15px;
+  margin-top: -680px;       
+
 }
 
 .mypage_name4 {
@@ -150,14 +166,12 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 200px;
-  margin-left: 500px;
+  margin-top: 500px;
+  margin-left: 600px;
   position: fixed;
-}
-
-.mypage_name5 {
   font-weight: bold;
 }
+
 
 .mypage_withdraw_button {
   background-color: #fff;
@@ -166,9 +180,10 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 500px;
+  margin-left: -900px;
   position: fixed;
-  bottom: 115px; /* 아래쪽 여백 조절 */
-  right: 2000px; /* 오른쪽 여백 조절 */
+  font-weight: bold;
 }
 
 .modal {
