@@ -1,9 +1,11 @@
+/* 전체 마이페이지 영역 스타일 */
 .mypage_all {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* 마이페이지 영역 스타일 */
 .mypage {
   width: 100%;
   height: 85.60px;
@@ -13,6 +15,7 @@
   gap: 10.60px;
 }
 
+/* 마이페이지 리스트 스타일 */
 .mypage_list {
   width: 100%;
   display: flex;
@@ -21,14 +24,16 @@
   gap: 30px;
 }
 
+/* 마이페이지 컨테이너 스타일 */
 .mypage_container {
   position: relative;
   display: flex;
 }
 
+/* 첫 번째 마이페이지 리스트 스타일 */
 .mypage_list1 {
   width: 244px;
-  height: auto; /* 변경: 높이를 자동으로 조정 */
+  height: auto;
   padding: 50px;
   background: rgba(97, 124, 194, 0.6);
   border-radius: 10px;
@@ -44,6 +49,7 @@
   margin-top: 85px;
 }
 
+/* 첫 번째 마이페이지 리스트 이미지 스타일 */
 .mypage_list1 .mypage_image1 {
   position: absolute;
   top: 100px;
@@ -56,6 +62,7 @@
   height: auto;
 }
 
+/* 첫 번째 마이페이지 리스트 이름 스타일 */
 .mypage_list1 .mypage_name1 {
   font-weight: bold;
   margin-top: 150px;
@@ -71,8 +78,10 @@
   border-radius: 15px;
   cursor: pointer;
   margin-top: 20px;
+  font-weight: bold;
 }
 
+/* 두 번째 마이페이지 리스트 스타일 */
 .mypage_list2 {
   font-weight: bold;
   font-size: 32px;
@@ -89,9 +98,10 @@
   gap: 35px;
   position: absolute;
   transform: translate(-50%, -50%) translateX(-10%);
-  margin-top: 951px;
+  margin-top: 750px;
 }
 
+/* 세 번째 마이페이지 리스트 스타일 */
 .mypage_list3 {
   font-weight: bold;
   font-size: 32px;
@@ -107,17 +117,16 @@
   align-items: center;
   gap: 35px;
   position: absolute;
-  margin-top: 800px;
+  margin-top: 600px;
   left: 51%;
-
 }
 
-
-
+/* 세 번째 마이페이지 리스트 스타일 */
 .mypage_list3 span {
   color: red;
 }
 
+/* 네 번째 마이페이지 리스트 스타일 */
 .mypage_list4 {
   width: 424px;
   height: 300px;
@@ -130,10 +139,10 @@
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
-  margin-top: -680px;       
-
+  margin-top: -680px;
 }
 
+/* 네 번째 마이페이지 리스트 이름 스타일 */
 .mypage_name4 {
   font-weight: bold;
   font-size: 35px;
@@ -141,6 +150,7 @@
   margin-top: -10px;
 }
 
+/* 네 번째 마이페이지 리스트 이름 스타일 */
 .mypage_name4_dl {
   font-weight: bold;
   font-size: 60px;
@@ -148,17 +158,20 @@
   margin-top: 20px;
 }
 
+/* 네 번째 마이페이지 리스트 강조 스타일 */
 .mypage_name4_dl strong {
   font-weight: bold;
   color: white;
 }
 
+/* 네 번째 마이페이지 리스트 이미지 스타일 */
 .mypage_image4 img {
   width: 100px;
   height: auto;
   margin-top: 10px;
 }
 
+/* 마이페이지 문의 버튼 스타일 */
 .mypage_inquiry_button {
   background-color: #fff;
   color: #617CC2;
@@ -172,7 +185,7 @@
   font-weight: bold;
 }
 
-
+/* 마이페이지 탈퇴 버튼 스타일 */
 .mypage_withdraw_button {
   background-color: #fff;
   color: #FF0000;
@@ -186,18 +199,7 @@
   font-weight: bold;
 }
 
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
-}
-
+/* 모달 내용 스타일 */
 .modal-content {
   width: 100%;
   max-width: 850px;
@@ -207,24 +209,16 @@
   margin: auto;
   display: flex;
   flex-direction: column;
+  margin-top: -700px;
   align-items: flex-start; /* 변경: 왼쪽 정렬로 수정 */
   padding-left: 20px; /* 변경: 왼쪽 여백 추가 */
+  border: 2px solid #808080; /* 회색 테두리 추가 */
+  border-radius: 10px; /* 테두리의 모서리를 둥글게 만듭니다. */
+  padding: 15px; /* 테두리 내부 여백 추가 */
+  background-color: #fff;
 }
 
-.modal-content form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* 변경: 왼쪽 정렬로 수정 */
-  gap: 15px;
-}
-
-.modal-content label {
-  font-weight: bold;
-  width: 100%;
-  box-sizing: border-box;
-}
-
+/* 모달 내용의 입력 요소 스타일 */
 .modal-content input {
   width: 100%;
   padding: 10px;
@@ -233,6 +227,7 @@
   box-sizing: border-box;
 }
 
+/* 모달 내용의 버튼 스타일 */
 .modal-content button {
   background-color: #617CC2;
   color: white;
@@ -245,13 +240,15 @@
   box-sizing: border-box;
 }
 
+/* 우편번호 입력 영역 스타일 */
 .postal-code {
   display: flex;
-  flex-direction: column; /* 변경: 세로로 나열되도록 수정 */
+  flex-direction: column;
   align-items: flex-start;
   gap: 10px;
 }
 
+/* 우편번호 입력창 스타일 */
 .postal-code input {
   width: 100%;
   padding: 10px;
@@ -260,6 +257,7 @@
   box-sizing: border-box;
 }
 
+/* 우편번호 버튼 스타일 */
 .postal-code button {
   background-color: #617CC2;
   color: white;
@@ -271,20 +269,28 @@
   box-sizing: border-box;
 }
 
-.modal-content input::placeholder {
-  color: #808080; /* 회색으로 설정 */
-}
-
-
-.modal-content {
-  color: black; /* 검은색으로 설정 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-  }
-
+/* 회원탈퇴 안내 메시지 스타일 */
 .withdraw-prompt {
-  color: #FF0000; /* 빨간색으로 설정 */
-  text-align: center; /* 텍스트 가운데 정렬 */
+  color: #FF0000;
+  text-align: center;
   font-weight: bold;
   font-size: 24px;
   margin-bottom: 20px;
+}
+
+/* 편집 모달 스타일 */
+.edit-modal {
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+/* 커스텀 모달 스타일 */
+.custom-modal {
+  background-color: #fff;
 }

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../component/Header";
 import '../css/Donation_details.css';
 
 export default function Donation_details() {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setModalOpen(!isModalOpen);
+  };
 
   return (
     <div className="donation_details_all">
@@ -85,6 +90,8 @@ export default function Donation_details() {
               5,000원
             </div>
           </div> 
+          
+
           
           <div className="pagination_container" style={{ textAlign: "center", marginTop: "20px" }}>
               <button className="pagination_button">&lt;</button>
