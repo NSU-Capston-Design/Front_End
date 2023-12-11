@@ -8,9 +8,13 @@ import cart from '../img/cart.png';
 import mypage from '../img/mypage.png';
 import menu from '../img/menu_bar.png';
 import menu_black from '../img/menu_black.png';
-import axios from "axios";
 
 export default function Header(){
+<<<<<<< HEAD
+
+    const navigate = useNavigate()  // 이동 라이브러리 저장
+
+=======
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
     const sessionId = window.localStorage.getItem('sessionId');
@@ -23,37 +27,31 @@ export default function Header(){
             setIsLogined(false);
         }
     }, [sessionId]);
+>>>>>>> 08da3e88044e0e006b5880725008334aed44b4b5
     const MovetoMain = e => {   // 메인페이지로 이동
         navigate('/')
     }
     const MovetoLogin = e => {   // 로그인 페이지로 이동
         navigate('/login')       // 페이지 내부 주소
     }
+
     const MovetoRegister = e => {   // 회원가입 페이지로 이동
         navigate('/agreepage')       // 페이지 내부 주소
     }
+    
     const MovetoDonation = e => {   // 기부 페이지로 이동
         navigate('/donation')       // 페이지 내부 주소
     }
+
     const MovetoMypage = e => {   // 마이 페이지로 이동
         navigate('/mypage')       // 페이지 내부 주소
     }
-    const MovetoProduct = e => {    // 전체메뉴로 이동
-        navigate('/product')    
+
+    const MovetoCart = e => {   // 장바구니로 이동
+        navigate('/cart')       // 페이지 내부 주소
     }
-    const MovetoLogout = (e) => {
-        e.preventDefault();
-        window.localStorage.clear();
-        setIsLogined(false);
-        axios({
-            method: "post",
-            url: "//localhost:8080/user/logout",
-        })
-        .then(res => {
-            alert('로그아웃 성공');
-        })
-        .catch(error => (console.log(error)))}
-     
+    
+
     return(
         <div className="header-all">  
             <header> {/* 헤더 */}
@@ -66,26 +64,13 @@ export default function Header(){
                         <input type="search" size={50} placeholder="검색"></input>
                     </div>
                 </div>
-                {isLogined ?
-                <> 
-                <div className="sign">
-                    <div className="logout" onClick={MovetoLogout}>로그아웃</div>
-                </div> 
-                </>
-                :
-
-                <div className="sign">
-                    <div className="login" onClick={MovetoLogin}>로그인</div>
-                     / <div className="register" onClick={MovetoRegister}>회원가입</div>
-                    </div>
-    }
-                    <div className="icons"> {/* 장바구니, 계정 버튼*/}
-                    <div className="cart">
+                <div className="sign"><div className="login" onClick={MovetoLogin}>로그인</div> / <div className="register" onClick={MovetoRegister}>회원가입</div></div>
+                <div className="icons"> {/* 장바구니, 계정 버튼*/}
+                    <div className="cart" onClick={MovetoCart}>
                         <img src={cart}></img>
                         <span>장바구니</span>
                     </div>
                     <div className="mypage" onClick={MovetoMypage} >
-                        
                         <img src={mypage}></img>
                         <span> &nbsp;마이페이지</span>
 
@@ -97,7 +82,7 @@ export default function Header(){
                 <div className="category">  
                     <div className="tab"></div>
                     <ul>
-                        <li className="all-menu" onClick={MovetoProduct}><img src={menu}></img><span>전체메뉴</span></li>
+                        <li className="all-menu"><img src={menu}></img><span>전체메뉴</span></li>
                         <li>카테고리1</li>
                         <li>카테고리2</li>
                         <li>카테고리3</li>

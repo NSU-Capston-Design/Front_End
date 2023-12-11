@@ -16,6 +16,8 @@ export default function Mypage() {
     setIsWithdrawSuccessMessageOpen(false);
   };
 
+
+  
   const initialFormData = {
     name: "",
     username: "",
@@ -43,11 +45,12 @@ export default function Mypage() {
     });
   };
 
+  
   const handleSaveButtonClick = () => {
     console.log("저장 버튼이 클릭되었습니다.");
     console.log("수정된 정보:", formData);
     setIsModalOpen(false);
-    setIsEditSuccessMessageOpen(true); // 수정 완료 메시지 띄우기
+    setIsSuccessMessageOpen(true); // 수정 완료 메시지 띄우기
     resetForm(); // 저장 후에 상태 초기화
   };
 
@@ -96,103 +99,117 @@ export default function Mypage() {
         </div>
 
         {isModalOpen && (
-          <div className="modal" style={{ zIndex: 9999 }}>
-            <div className="modal-content" style={{ width: 1700, height: 850 }}>
-              <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>정보 수정</div>
-              <form>
-                <div>
-                  <label>이름</label>
-                  <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="이름을 입력하세요." />
-                </div>
+  <div className="edit-modal" style={{ zIndex: 9999 }}>
+    <div className="modal-content" style={{ width: 1700, height: 850 }}>
+      <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>정보 수정</div>
+      <form>
+        <div>
+          <label>이름</label>
+          <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="이름을 입력하세요." />
+        </div>
 
-                <div>
-                  <label>아이디</label>
-                  <input type="text" name="username" value={formData.username} onChange={handleInputChange} placeholder="아이디를 입력하세요." />
-                </div>
+        <div>
+          <label>아이디</label>
+          <input type="text" name="username" value={formData.username} onChange={handleInputChange} placeholder="아이디를 입력하세요." />
+        </div>
 
-                <div>
-                  <label>비밀번호</label>
-                  <input type="password" name="password" value={formData.password} onChange={handleInputChange} placeholder="비밀번호를 입력하세요." />
-                </div>
+        <div>
+          <label>비밀번호</label>
+          <input type="password" name="password" value={formData.password} onChange={handleInputChange} placeholder="비밀번호를 입력하세요." />
+        </div>
 
-                <div>
-                  <label>비밀번호 확인</label>
-                  <input type="password" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleInputChange} placeholder="비밀번호를 다시 입력하세요."/>
-                </div>
+        <div>
+          <label>비밀번호 확인</label>
+          <input type="password" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleInputChange} placeholder="비밀번호를 다시 입력하세요."/>
+        </div>
 
-                <div className="postal-code">
-                  <label>우편번호</label>
-                  <input
-                    type="text"
-                    name="zipCode"
-                    value={formData.zipCode}
-                    onChange={handleInputChange}
-                    placeholder="우편번호를 입력하세요."
-                  />
-                  <button type="button">검색</button>
-                </div>
+        <div className="postal-code">
+          <label>우편번호</label>
+          <input
+            type="text"
+            name="zipCode"
+            value={formData.zipCode}
+            onChange={handleInputChange}
+            placeholder="우편번호를 입력하세요."
+          />
+          <button type="button">검색</button>
+        </div>
 
-                <div className="address">
-                  <label>주소</label>
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleInputChange}
-                    placeholder="주소를 입력하세요."
-                  />
-                  <label>상세주소</label>
-                  <input
-                    type="text"
-                    name="detailAddress"
-                    value={formData.detailAddress}
-                    onChange={handleInputChange}
-                    placeholder="상세주소를 입력하세요."
-                  />
-                </div>
+        <div className="address">
+          <label>주소</label>
+          <input
+            type="text"
+            name="address"
+            value={formData.address}
+            onChange={handleInputChange}
+            placeholder="주소를 입력하세요."
+          />
+          <label>상세주소</label>
+          <input
+            type="text"
+            name="detailAddress"
+            value={formData.detailAddress}
+            onChange={handleInputChange}
+            placeholder="상세주소를 입력하세요."
+          />
+        </div>
 
-                <div className="contact-info">
-                  <label>이메일</label>
-                  <input
-                    type="text"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="이메일을 입력하세요."
-                  />
-                  <label>휴대폰</label>
-                  <input
-                    type="text"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    placeholder="휴대폰 번호를 입력하세요."
-                  />
-                </div>
+        <div className="contact-info">
+          <label>이메일</label>
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="이메일을 입력하세요."
+          />
+          <label>휴대폰</label>
+          <input
+            type="text"
+            name="phone"
+            value={formData.phone}
+            onChange={handleInputChange}
+            placeholder="휴대폰 번호를 입력하세요."
+          />
+        </div>
 
-                <div>
-                  <label>환불계좌</label>
-                  <input
-                    type="text"
-                    name="refundAccount"
-                    value={formData.refundAccount}
-                    onChange={handleInputChange}
-                    placeholder="환불계좌를 입력하세요."
-                  />
-                </div>
-              </form>
-              <div style={{ marginTop: 20 }}>
-  <button type="button" onClick={handleSaveButtonClick}>
-    저장
-  </button>
-  <button type="button" onClick={() => { handleEditButtonClick(); resetForm(); }}>
-    취소
-  </button>
-              </div>
-            </div>
-          </div>
-        )}
+        <div>
+          <label>환불계좌</label>
+          <input
+            type="text"
+            name="refundAccount"
+            value={formData.refundAccount}
+            onChange={handleInputChange}
+            placeholder="환불계좌를 입력하세요."
+          />
+        </div>
+      </form>
+      <div style={{ marginTop: 20 }}>
+        <button type="button" onClick={handleSaveButtonClick}>
+          저장
+        </button>
+        <button type="button" onClick={() => { handleEditButtonClick(); resetForm(); }}>
+          취소
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
+<<<<<<< HEAD
+{isSuccessMessageOpen && (
+  <div className="your-updated-class-name" style={{ zIndex: 9 }}>
+    <div className="modal-content" style={{ width: 500, height: 200 }}>
+      <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>
+        회원 정보 수정이 완료되었습니다.
+      </div>
+      <button type="button" onClick={handleCloseSuccessMessage}>
+        X
+      </button>
+    </div>
+  </div>
+)}
+=======
         {isSuccessMessageOpen && (
           <div className="modal" style={{ zIndex: 9 }}>
             <div className="modal-content" style={{ width: 500, height: 200 }}>
@@ -205,17 +222,18 @@ export default function Mypage() {
             </div>
           </div>
         )}
+>>>>>>> 08da3e88044e0e006b5880725008334aed44b4b5
 
 {isWithdrawModalOpen && (
-  <div className="modal" style={{ zIndex: 9999 }}>
+  <div className="withdraw-modal" style={{ zIndex: 9999 }}>
     <div className="modal-content" style={{ width: 500, height: 560, textAlign: 'center' }}>
       <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정말 탈퇴하시겠습니까?
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;정말 탈퇴하시겠습니까?
       </div>
       <img src={warningImage} alt="warning" style={{ width: 300, height: 300, marginBottom: 20, marginLeft: 'auto', marginRight: 'auto' }} />
       <p style={{ marginBottom: 20, color: 'red' }}>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아래에 회원님의 모든 정보가 삭제되고 <br />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공백 사이트를 더 이상 이용할 수 없게 됩니다.
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아래에 회원님의 모든 정보가 삭제되고 <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공백 사이트를 더 이상 이용할 수 없게 됩니다.
       </p>
       <button type="button" onClick={handleWithdrawCancel}>
         아니오
