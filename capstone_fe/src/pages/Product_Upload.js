@@ -8,6 +8,7 @@ export default function Product_Upload(){
     const [labelList, setLabelList] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState([]); 
     const [selectedFile, setSelectedFile] = useState(null);
+    const sessionId = window.localStorage.getItem('sessionId');
 
     const categoryData = [  // 카테고리 데이터
         { value: 'electronics', label: '전자기기' },
@@ -31,14 +32,16 @@ export default function Product_Upload(){
         
         const formData = new FormData();
         formData.append('file', selectedFile);
+        
+        const config = {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${sessionId}` // 세션 ID를 헤더에 포함하여 전송
+            }
+          };
 
         try{
-            const response = await axios.post("http://localhost:8080/upload", formData, {
-                headers: {
-                    "Content-Type": 'multipart/form-data',
-                },
-            });
-
+            const response = await axios.post("http://localhost:8080/upload", formData, config);
             console.log('File Uploaded!', response);
         } catch(error){
             console.log("파일 업로드 실패!", error);
