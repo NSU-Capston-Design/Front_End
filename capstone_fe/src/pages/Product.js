@@ -11,14 +11,24 @@ export default function Product(){
     useEffect(() => {
     const productList = async () =>{    // 비동기로 받아오기
         try{
-            const response = await axios.get(`//localhost:8080`);    // get 내부에 url 넣기 
+            const response = await axios.get(`//localhost:8080/product/list`);    // get 내부에 url 넣기 
             const data = response.data;                 // 받아온 데이터 data에 저장    
-            console.log(data);                  // 데이터 확인
+            console.log(data); // 데이터 확인
+            if (Array.isArray(data)) {
+            setList(data); // 받아온 데이터가 배열이라면 list 상태 업데이트
+            } else {
+            console.error('배열이 아닌 데이터입니다:', data);
+            }
+               // 데이터 확인
             setList(data);              // list에 데이터 저장
 
             const extractedData = data.map((item) => ({ // 받아온 데이터들을 map을 사용해 관여
                 // 받아온 데이터들 넣기
                 // ex) id : item.id 
+                id: item.id,                        
+                productTitle: item.productName,
+                date: item.uploadTime, 
+                price: item.productPrice
             }));
             console.log(extractedData); // 추출 데이터 확인
         } catch(error){
@@ -38,14 +48,14 @@ const Moveto_ProductUpload = (e) => {
             <Header/>
             <div className="product-all">
             {list.map((item) => (
-                        <div key={item.productId} className= "product-list-box" >  {/* 리스트 목록 */}
+                        <div key={item.id} className= "product-list-box" >  {/* 리스트 목록 */}
                          
                             <div className="product-list-image">
-                                <img src={item.image}/>    
+                            <img src={`http://localhost:8080${item.productURL}`} alt="Product" style={{width: 250, height: 400}}/>    
                             </div>    {/* 상품 이미지 */}
-                            <div className="product-list-title" title={item.title} onClick={Moveto_ProductDetail}>{item.title}</div> {/* 상품 타이틀 */} 
-                            <div className="product-list-price" title={item.detail} onClick={Moveto_ProductDetail}>{item.price}</div>     {/* 상품 가격 */}
-                            <div className="product-list-review" title={item.review} onClick={Moveto_ProductDetail}>{item.review}</div>  {/* 상품 리뷰 */}
+                            <div className="product-list-title" title={item.productName} onClick={Moveto_ProductDetail}>{item.productName}</div> {/* 상품 타이틀 */} 
+                            <div className="product-list-price" title={item.uploadTime} onClick={Moveto_ProductDetail}>{item.uploadTime}</div>     {/* 상품 가격 */}
+                            <div className="product-list-review" title={item.productPrice} onClick={Moveto_ProductDetail}>{item.productPrice}</div>  {/* 상품 리뷰 */}
                         </ div >
                     ))
                 }

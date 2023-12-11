@@ -196,6 +196,7 @@ export default function Mypage() {
   </div>
 )}
 
+<<<<<<< HEAD
 {isSuccessMessageOpen && (
   <div className="your-updated-class-name" style={{ zIndex: 9 }}>
     <div className="modal-content" style={{ width: 500, height: 200 }}>
@@ -208,6 +209,20 @@ export default function Mypage() {
     </div>
   </div>
 )}
+=======
+        {isSuccessMessageOpen && (
+          <div className="modal" style={{ zIndex: 9 }}>
+            <div className="modal-content" style={{ width: 500, height: 200 }}>
+              <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>
+                회원 정보 수정이 완료되었습니다.
+              </div>
+              <button type="button" onClick={handleCloseSuccessMessage}>
+                X
+              </button>
+            </div>
+          </div>
+        )}
+>>>>>>> 08da3e88044e0e006b5880725008334aed44b4b5
 
 {isWithdrawModalOpen && (
   <div className="withdraw-modal" style={{ zIndex: 9999 }}>

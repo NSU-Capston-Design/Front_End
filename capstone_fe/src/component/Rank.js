@@ -1,23 +1,22 @@
 import React from 'react';
-import '../css/Rank.css';
+import '../css/rank_profile.css';
 
-const Avatar = ({ index, imageSrc, badgeNumber, nickname }) => {
-  const badgeColor = index <= 3 ? ['#CAC4D0', '#FFCD1A', '#9E7147'][index - 1] : '#867B54';
+export const Element = ( {rankNum ,rankName}) => {
+  
 
   return (
-    <div className={`rank_list ${index}`}>
-      <div className="Avatar">
-        <img className="Subtract" src={imageSrc}  /> {/*프로필사진*/}
-        <div className="PresenceBadge">{/*순위 뱃지*/}
-          <div className="rank-badge">
-            <div className="ellipse" style={{ background: badgeColor }} />{/**/}
-            <div>{badgeNumber}</div>
+    <div className="element">
+    <div className="avatar">
+      <div className="overlap-group">{/*프로필 사진 */} 
+        <div className="rank-badge"> {/*순위 뱃지 */}
+          <div className="badge-frame">
+            <div className="rank-num">{rankNum}</div> {/*순위 */}
           </div>
         </div>
       </div>
-      <div className="nickname"></div>{/*닉네임*/}
     </div>
+    <div className="rank-name">{rankName}</div>
+  </div>
   );
 };
 
-export default Avatar;

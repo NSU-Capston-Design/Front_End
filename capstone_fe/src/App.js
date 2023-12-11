@@ -13,11 +13,14 @@ import Don_commu from './pages/Don_commu';
 import Mypage from './pages/Mypage';
 import Cart from './pages/Cart';
 import Event from './pages/Event';
+<<<<<<< HEAD
 import Point from './pages/Point';
 import Order_inquiry from './pages/Order_inquiry';
 import Donation_details from './pages/Donation_details';
 import Product from './pages/Product';
 import Product_Upload from './pages/Product_Upload';
+=======
+>>>>>>> 08da3e88044e0e006b5880725008334aed44b4b5
 
 
 function App() {
@@ -36,11 +39,14 @@ function App() {
         <Route path='/mypage' element={<Mypage/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/event' element={<Event/>}/>
+<<<<<<< HEAD
         <Route path='/point' element={<Point/>}/>
         <Route path='/order_inquiry' element={<Order_inquiry/>}/>
         <Route path='/donation_details' element={<Donation_details/>}/>
         <Route path='/product' element={<Product/>}/>
         <Route path='/product/upload' element={<Product_Upload/>}/>
+=======
+>>>>>>> 08da3e88044e0e006b5880725008334aed44b4b5
       </Routes>
     </BrowserRouter>
   );

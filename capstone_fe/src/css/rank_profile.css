@@ -1,0 +1,83 @@
+/*Rank컴포넌트*/
+
+.element{
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: center;
+    position: relative;
+
+}
+
+ .avatar{
+    height: 148.5px;
+    position: relative;
+    width: 148.5px;
+}
+
+.overlap-group{
+    background-image: url(../img/rank_profile_eample.jpg);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 156px;
+    left: -3px;
+    border-radius: 88.56px;
+    position: relative;
+    width: 155px;
+}
+
+ .rank-badge{
+    align-items: flex-start;
+    background-color: var(--color-neutral-background-1-rest);
+    border-radius: 88.56px;
+    display: inline-flex;
+    left: 110px;
+    position: relative;
+    top: 107px;
+}
+
+ .badge-frame{
+    background-color: #857a54;
+    border-radius: 20.62px;
+    height: 41.25px;
+    position: relative;
+    width: 41.25px;
+
+}
+
+.rank-num {
+    -webkit-text-stroke: 0.89px #cac4d0;
+    font-family: "Keenia One-Regular", Helvetica;
+    color: #ffffff;
+    font-size: 17.9px;
+    font-weight: 400;
+    height: 23px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0.89px 0.89px 2.68px #00000040;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 11px;
+    margin: 0; /* 추가: 기본 마진 제거 */
+    padding: 0; /* 추가: 기본 패딩 제거 */
+    display: flex; /* 추가: 텍스트 가운데 정렬을 위한 flexbox 설정 */
+    align-items: center; /* 추가: 세로 중앙 정렬을 위한 flexbox 설정 */
+    justify-content: center; /* 추가: 가로 중앙 정렬을 위한 flexbox 설정 */
+}
+
+
+ .rank-name{
+    color: #000000;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0;
+    position: relative;
+    text-align: center;
+    width: fit-content;
+    
+}

@@ -109,7 +109,7 @@ export default function Mainpage(){
                     <div className="event_text">이달의 이벤트 !</div>
                     <div className="event_contents">
                         <div className="left_arrow">
-                            <img src={left_arrow}></img>
+                            <img src={left_arrow} alt="left_arrow"></img>
                         </div>
                                 {/* 이벤트 목록 */}
                         {/* {eventList.map((item) => (
