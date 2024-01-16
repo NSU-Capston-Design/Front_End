@@ -20,7 +20,7 @@ import Product from './pages/Product';
 import Product_Upload from './pages/Product_upload';
 
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -46,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+
