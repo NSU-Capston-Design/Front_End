@@ -1,19 +1,19 @@
 import React from 'react';
 import Header from '../component/Header';
 import "../css/ProductDetail.css";
-
+import Button from '../component/Button';
 
 export default function ProductDetail() {
     return (
         <div className='all'>
             <Header />
-             <div className='product'>
+            <div className='product'>
 
                 <div className='productImg'>
                     <div className='image' />{/* 상품 이미지 */}
                     <p className='description'>{/* 상품 이미지 밑 설명글 */}
                         <span className='descripText'>
-                            상품 설명글입니다.{" "}
+                            상품 설명글입니다.
                         </span>
                     </p>
                 </div>
@@ -57,7 +57,7 @@ export default function ProductDetail() {
                                         <div className='groupName'>추가스펙설명</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>몇kg / 길이..?같은거</div>
+                                        <div className='infoTxt'>몇kg / 길이 etc</div>
                                     </div>
                                 </div>
 
@@ -66,7 +66,7 @@ export default function ProductDetail() {
                                         <div className='groupName'>추가스펙설명</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>몇kg / 길이..?같은거</div>
+                                        <div className='infoTxt'>몇kg / 길이 etc</div>
                                     </div>
                                 </div>
 
@@ -75,7 +75,7 @@ export default function ProductDetail() {
                                         <div className='groupName'>추가스펙설명</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>몇kg / 길이..?같은거</div>
+                                        <div className='infoTxt'>몇kg / 길이 etc</div>
                                     </div>
                                 </div>
 
@@ -84,26 +84,47 @@ export default function ProductDetail() {
                                         <div className='groupName'>추가스펙설명</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>몇kg / 길이..?같은거</div>
+                                        <div className='infoTxt'>몇kg / 길이 etc</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className='priceSection'>
-                    <div className='price'>
-                        <div className='currentPrice'>$123</div>
-                        <div className='discountAmount'>12%</div>{/* 할인율 */}
+
+                <div className='buy'>
+
+                    <div className='priceSection'>
+                        <div className='price'>
+                            <div className='currentPrice'>$123</div>
+                            <div className='discount'>
+                                <div className='discountAmount'>-12%</div>{/* 할인율 */}
+                            </div>
+                        </div>
                         <div className='lastPrice'>
-                            <div className='lastPriceTxt'>최근거래가격</div>
-                            <div className='lastPeiceTxt'>$456</div>
+                            <div className='lastPriceTxt'>할인 전 가격</div>
+                            <div className='lastPriceTxt'>$456</div>
                         </div>
                     </div>
-                </div>
 
-                <div className='productBtn'> {/*구매/장바구니 버튼 */}
+                    <div className='productBtn'> {/*구매/장바구니 버튼 */}
+                        <Button className="buy"
+                            clolor="rgba(12, 104, 244, 1)"
+                            stateProp="active"
+                            text="구매"
+                            textColor='rgba(255,255,255,1)'
+                            border='none'
+                        />
 
+                        <Button className="cart"
+                        clolor='rgba(255,255,255,1)'
+                        stateProp="active"
+                        text='장바구니'
+                        textColor='primary'
+                        outlineColor='rgba(12, 104, 244, 1)'
+                        textColor='rgba(12, 104, 244, 1)'
+                       />
+                    </div>
                 </div>
             </div>
             <div className='reviewArea'>
