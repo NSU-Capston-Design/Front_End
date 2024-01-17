@@ -22,6 +22,8 @@ import ProductDetail from './pages/ProductDetail';
 
 
 export default function App() {
+  const domain = "http://localhost:8080";
+  
   return (
     <BrowserRouter>
       <Routes>

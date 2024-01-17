@@ -32,9 +32,6 @@ export default function Product(){
     productList();  // 초기 데이터 가져오기
 }, []);
 
-const Moveto_ProductDetail = (e) =>{    // 상품 세부 페이지
-    navigate(`/product/detail/{productId}`);    // 나중에 &{productId}로 변경 예정
-};
 const Moveto_ProductUpload = (e) => {
     navigate('/product/upload');
 };
@@ -48,7 +45,7 @@ const Moveto_ProductUpload = (e) => {
                             <div key={item.productId} className= "product-list-box" >  {/* 리스트 목록 */}
                             
                                 <div className="product-list-image">
-                                <img src={`http://localhost:8080${item.productURL.replace(/\s/g, "_")}`} alt="Product" style={{width: 250, height: 200}}/>    
+                                <img src={`${item.productURL.replace(/\s/g, "_")}`} alt="Product" style={{width: 250, height: 200}}/>    
                                 </div>    {/* 상품 이미지 */}
                                 <div key={item.productId} className="product-list-title" title={item.productName}><Link to ={`/product/detail/${item.productId}`}>{item.productName}</Link></div> {/* 상품 타이틀 */} 
                                 <div className="product-list-price" title={item.uploadTime}>{item.uploadTime}</div>     {/* 상품 가격 */}
