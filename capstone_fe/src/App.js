@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, useParams} from 'react-router-dom';
 import './App.css';
 import Mainpage from './pages/Mainpage';
 import Register from './pages/Register';
@@ -17,11 +17,13 @@ import Point from './pages/Point';
 import Order_inquiry from './pages/Order_inquiry';
 import Donation_details from './pages/Donation_details';
 import Product from './pages/Product';
-import Product_Upload from './pages/Product_Upload';
+import Product_Upload from './pages/Product_upload';
 import ProductDetail from './pages/ProductDetail';
 
 
-function App() {
+export default function App() {
+  const domain = "http://localhost:8080";
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -41,11 +43,11 @@ function App() {
         <Route path='/order_inquiry' element={<Order_inquiry/>}/>
         <Route path='/donation_details' element={<Donation_details/>}/>
         <Route path='/product' element={<Product/>}/>
-        <Route path='/product_upload' element={<Product_Upload/>}/>
-        <Route path='/product_detail' element={<ProductDetail/>}/>
+        <Route path='/product/upload' element={<Product_Upload/>}/>
+        <Route path='/product/detail/:productId' element={<ProductDetail/>}/>
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App;
+

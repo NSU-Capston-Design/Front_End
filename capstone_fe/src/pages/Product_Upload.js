@@ -4,11 +4,28 @@ import Header from "../component/Header";
 import Select from 'react-select';
 
 import '../css/Product_Upload.css';
-export default function Product_Upload(){
+import { json } from "react-router-dom";
+export default function Product_upload(){
+    const [sessionId, setSessionId] = useState("");
+    const [userName, setUserName] = useState("");
     const [labelList, setLabelList] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState([]); 
     const [selectedFile, setSelectedFile] = useState(null);
-    const sessionId = window.localStorage.getItem('sessionId');
+    const [productName, setProductName] = useState("");
+    const [productPrice, setProductPrice] = useState(0);
+    const [productInven, setProductInven] = useState(0);
+    
+
+    useEffect(() => {       // 컴포넌트가 마운트될 때 (실행될 때)
+        const storageSessionId = window.localStorage.getItem('sessionId');
+        const storageUserName = window.localStorage.getItem('username');
+        
+        setSessionId(storageSessionId || "");   // 값이 없으면 "" 공백 표기
+        setUserName(storageUserName || "");
+
+        console.log(userName);
+
+    }, []);
 
     const categoryData = [  // 카테고리 데이터
         { value: 'electronics', label: '전자기기' },
@@ -24,15 +41,45 @@ export default function Product_Upload(){
         }
         setSelectedCategory(selectedOptions);
     };
-    const onFile = (e) =>{
+    const onFile = (e) =>{                      // 파일이 올라갈 때, 발생하는 이벤트
         setSelectedFile(e.target.files[0]);
     }
+
+    const onFileName = (e) => {                 // 인풋창에서 포커스가 떨어지면, 발생하는 이벤트(파일 이름입력)
+        setProductName(e.target.value);
+    }
+
+    const onPrice = (e) => {                    // 상품의 가격정보
+        setProductPrice(e.target.value);
+    }
+
+    const onInven = (e) => {
+        setProductInven(e.target.value);
+    }
+
     const onSubmit = async (event) => { // 보냈을 때의 이벤트
         event.preventDefault(); // 입력이 빈 칸일 때, 이벤트 막기
         
+        const data = {
+            productName: productName,
+            productPrice: productPrice,
+            userName: userName,
+            productInven: productInven
+        };
+
         const formData = new FormData();
         formData.append('file', selectedFile);
+        formData.append('data', new Blob([JSON.stringify(data)], {
+            type: "application/json"
+        }));
+        // formData.append('productName', productName);
+        // formData.append('productPrice', productPrice);
+        // formData.append('userName', userName);
         
+        for(const entry of formData.entries()){
+            console.log(entry);
+        }
+
         const config = {
             headers: {
               'Content-Type': 'multipart/form-data',
@@ -59,8 +106,16 @@ export default function Product_Upload(){
                             <input type="file" className="file" onChange={onFile}/>
                         </div>
                         <div className="upload_title_box">
-                            <span>상품 제목</span>
-                            <input type="text" className="upload_title"/>
+                            <span>상품 이름</span>
+                            <input type="text" className="upload_title" onBlur={onFileName}/>
+                        </div>
+                        <div className="upload_price_box">
+                            <span>상품 가격</span>
+                            <input type="number" className="upload_price" onBlur={onPrice}/>
+                        </div>
+                        <div className="upload_inventory_box">
+                            <span>재고 수량</span>
+                            <input type="number" className="upload_inventory" onBlur={onInven}/>
                         </div>
                         <div className="Select-box">
                             <Select
