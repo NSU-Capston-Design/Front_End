@@ -108,7 +108,7 @@ export default function ProductDetail() {
                     </div>
 
                     <div className='productBtn'> {/*구매/장바구니 버튼 */}
-                        <Button className="buy"
+                        <Button className="buybtn"
                             clolor="rgba(12, 104, 244, 1)"
                             stateProp="active"
                             text="구매"
