@@ -10,11 +10,8 @@ import menu from '../img/menu_bar.png';
 import menu_black from '../img/menu_black.png';
 
 export default function Header(){
-<<<<<<< HEAD
 
-    const navigate = useNavigate()  // 이동 라이브러리 저장
 
-=======
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
     const sessionId = window.localStorage.getItem('sessionId');
@@ -27,7 +24,6 @@ export default function Header(){
             setIsLogined(false);
         }
     }, [sessionId]);
->>>>>>> 08da3e88044e0e006b5880725008334aed44b4b5
     const MovetoMain = e => {   // 메인페이지로 이동
         navigate('/')
     }
