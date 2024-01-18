@@ -70,7 +70,7 @@ export default function Mainpage(){
                         <div className="best_product_item">  
                             <div className="best_image"><img src={item_img} alt="item"/></div>
                             <div className="best_product_text">장성군 베스트 특산품</div><br/>
-                            <div className="best_title">단감</div>
+                            <div className="best_title">추억의 도시락A</div>
                             <div className="best_detail">구매하러 가기</div>
                             <div className="best_review"></div>
                         </div>
@@ -78,7 +78,7 @@ export default function Mainpage(){
                         <div className="best_product_item">  
                             <div className="best_image"><img src={item_img} alt="item"/></div>
                             <div className="best_product_text">장성군 베스트 특산품</div><br/>
-                            <div className="best_title">민물 장어</div>
+                            <div className="best_title">추억의 도시락B</div>
                             <div className="best_detail">구매하러 가기</div>
                             <div className="best_review"></div>
                         </div>
@@ -86,7 +86,7 @@ export default function Mainpage(){
                         <div className="best_product_item">  
                             <div className="best_image"><img src={item_img} alt="item"/></div>
                             <div className="best_product_text">장성군 베스트 특산품</div><br/>
-                            <div className="best_title">샤인 머스켓</div>
+                            <div className="best_title">추억의 도시락C</div>
                             <div className="best_detail">구매하러 가기</div>
                             <div className="best_review"></div>
                         </div>
