@@ -1,14 +1,41 @@
-import React from 'react';
 import Header from '../component/Header';
 import "../css/ProductDetail.css";
 import Button from '../component/Button';
 import React, { useState, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../component/Header';
-import "../css/ProductDetail.css";
 import axios from 'axios';
 
 export default function ProductDetail() {
+    const { productId } = useParams();
+    console.log(productId);
+    const id = parseInt(productId, 10);
+    const [productData, setProductData] = useState({
+        productName: '',
+        uploadTime: '',
+        productPrice: 0,
+        productURL: '',
+        productInven: 0,
+        productView: 0
+    })
+
+    useEffect(() => {
+
+        const ProductDetail = async () =>{
+            try{
+                    axios.get(`/product/detail`, {
+                    params: { productId: productId }
+                    })
+                    .then(response => {
+                        setProductData(response.data);
+                    });
+                                    
+            } catch(error){
+                console.log("오류발생", error);
+            }
+        } 
+
+     }, [])
+
     return (
         <div className='all'>
             <Header />
@@ -138,52 +165,12 @@ export default function ProductDetail() {
         </div>
     );
 }
-// {/*export default function ProductDetail(){
+// export default function ProductDetail(){
 
-//     const { productId } = useParams();
-//     console.log(productId);
-//     const id = parseInt(productId, 10);
-//     const [productData, setProductData] = useState({
-//         productName: '',
-//         uploadTime: '',
-//         productPrice: 0,
-//         productURL: '',
-//         productInven: 0,
-//         productView: 0
-//     })
+    
 
 
-//     useEffect(() => {
 
-//         const ProductDetail = async () =>{
-//             try{
-//                 const response = await axios.get(`/product/detail`, {
-//                     params: { productId: productId }
-//                     });
-
-//                 const data = response.data;
-             
-//                 setProductData(data);
-                    
-//             } catch(error){
-//                 console.log("오류발생", error);
-//             }
-//         } 
-//         ProductDetail();
-
-//         // const ProductViews =  () =>{
-//         //     try{
-//         //          axios.get(`/product/views`, {
-//         //             params: { productId: productId }
-//         //         });
-                    
-//         //     } catch(error){
-//         //         console.log("오류발생", error);
-//         //     }
-//         // }
-//         // ProductViews();
-
-//      }, [])
 
 
 //     return(

@@ -17,13 +17,10 @@ import Point from './pages/Point';
 import Order_inquiry from './pages/Order_inquiry';
 import Donation_details from './pages/Donation_details';
 import Product from './pages/Product';
-import Product_Upload from './pages/Product_upload';
+import ProductUpload from './pages/ProductUpload';
 import ProductDetail from './pages/ProductDetail';
 
-
-export default function App() {
-  const domain = "http://localhost:8080";
-  
+export default function App() {  
   return (
     <BrowserRouter>
       <Routes>
@@ -43,7 +40,7 @@ export default function App() {
         <Route path='/order_inquiry' element={<Order_inquiry/>}/>
         <Route path='/donation_details' element={<Donation_details/>}/>
         <Route path='/product' element={<Product/>}/>
-        <Route path='/product/upload' element={<Product_Upload/>}/>
+        <Route path='/product/upload' element={<ProductUpload/>}/>
         <Route path='/product/detail/:productId' element={<ProductDetail/>}/>
       </Routes>
     </BrowserRouter>
