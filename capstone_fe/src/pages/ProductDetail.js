@@ -20,7 +20,7 @@ export default function ProductDetail(props) {
         productName: "테스트 상품",
         uploadTime: "2022-01-20",
         productPrice: 10000,
-        productURL: "../img/rank_profile_example.jpg",
+        productURL: "https://i.pinimg.com/564x/ce/50/6f/ce506fa7dfd2e9900643f588ee4f2cad.jpg",
         productInven: 10,
         productView: 50
     })
@@ -97,19 +97,19 @@ export default function ProductDetail(props) {
 
     return (
         <div className='all'>
-
+            <div className="modalCloseBtn" onClick={props.closeModal}>
+                닫기
+            </div>
             <div className='product'>
 
                 <div className='productImg'>
-                <img src={productData.productURL} alt={productData.productName} />
+                    <img src={productData.productURL} alt={productData.productName} />
                     <p className='description'>{/* 상품 이미지 밑 설명글 */}
                         <span className='descripText'>
                             상품 설명글입니다.
                         </span>
                     </p>
-                    <div className="modalCloseBtn" onClick={props.closeModal}>
-                        닫기
-                    </div>
+
                 </div>
 
                 <div className='productInfo'>
@@ -229,23 +229,7 @@ export default function ProductDetail(props) {
                         value={reviewText}
                         onChange={handleReviewChange}
                         placeholder="리뷰를 작성해주세요."
-                    />
-                    <Button
-                        className="submitReviewBtn"
-                        color="rgba(12, 104, 244, 1)"
-                        stateProp="active"
-                        text="리뷰 작성"
-                        textColor="rgba(255,255,255,1)"
-                        onClick={submitReview}
-                    />
-                </div>
-                {/* 리뷰목록 */}
-                <div className="reviewList">
-                    {reviews.map((review, index) => (
-                        <div key={index} className="reviewItem">
-                            <strong>{review.username}:</strong> {review.reviewText}
-                        </div>
-                    ))}
+               git 
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@
     align-items: center;
     padding: 20px; /* 적절한 여백 설정 */
     position: relative;
+    background-color: #ffffff; /* 배경색을 흰색으로 설정 */
 }
 
 .product {
@@ -14,10 +15,8 @@
     display: inline-flex;
     position: relative;
     justify-content: center;
-    width: 100%; /* 너비 100%로 설정 */
-    background-color: #ffffff; /* 배경색을 흰색으로 설정 */
-    border-radius: 8px; /* 모서리를 둥글게 만듭니다. */
-    overflow: hidden; /* 자식 요소가 모서리를 넘어가지 않도록 설정 */
+   
+    overflow: visible;
 }
 
 .productImg {
@@ -27,6 +26,17 @@
     gap: 17px;
     display: inline-flex;
     position: relative;
+    
+    max-width: 433px;
+    max-height: 433px;
+   
+
+}
+.productImg img{
+    width: 100%;
+    height: auto; /* 높이를 자동으로 조절하여 비율 유지 */
+    max-width: 433px; 
+    max-height: 433px; 
 }
 
 .description {
@@ -39,7 +49,7 @@
     font-weight: 500;
     text-align: center;
     line-height: 25.6px;
-    position: absolute;
+    position: center;
     font-size: 12px;
 
 }
@@ -54,16 +64,16 @@
     align-items: flex-start;
     display: inline-flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 16px;
     position: relative;
 }
 
 .productInfo1 {
     align-items: flex-start;
     display: inline-flex;
-    flex: 0 0 auto;
+
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
     position: relative;
 }
 
@@ -123,7 +133,7 @@
 .stock_deliver {
 
     align-items: flex-start;
-    gap: 600px;
+    gap: 20px;
     display: inline-flex;
     position: relative;
 }
@@ -287,10 +297,59 @@
 
 .modalCloseBtn {
     cursor: pointer;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    position: absolute; 
-    right: 10px; /* 오른쪽 10px 간격으로 위치하도록 수정 */
-    top: 10px; /* 상단에 10px 간격으로 위치하도록 수정 */
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #D1D1D1;
+    font-size: 15px;
+    font-family: 'Roboto';
+    font-weight: 700;
+    line-height: 20px;
+    
   }
+
+  .reviewArea {
+    margin-top: 30px;
+    width: 100%;;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.reviewForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; /* 수직 리사이징 허용 */
+}
+
+.submitReviewBtn {
+    width: 150px;
+    align-self: flex-end; /* 버튼을 우측으로 정렬 */
+}
+
+.reviewList {
+    margin-top: 20px;
+}
+
+.reviewItem {
+    background-color: #f7f7f7;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.reviewItem strong {
+    color: #333;
+    margin-right: 5px;
+}
