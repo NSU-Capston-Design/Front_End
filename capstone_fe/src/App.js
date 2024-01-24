@@ -17,7 +17,7 @@ import Point from './pages/Point';
 import Order_inquiry from './pages/Order_inquiry';
 import Donation_details from './pages/Donation_details';
 import Product from './pages/Product';
-import Product_Upload from './pages/Product_upload';
+import Product_Upload from './pages/Product_Upload';
 import ProductDetail from './pages/ProductDetail';
 
 

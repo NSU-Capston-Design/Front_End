@@ -1,22 +1,26 @@
+
 .all {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    padding: 20px; /* 적절한 여백 설정 */
+    position: relative;
 }
 
 .product {
-    padding: 59px;
+    padding: 20px; /* 적절한 여백 설정 */
     align-items: center;
-    gap: 100px;
+    gap: 20px; /* 적절한 간격 설정 */
     display: inline-flex;
     position: relative;
     justify-content: center;
-    width: 100vw;
+    width: 100%; /* 너비 100%로 설정 */
+    background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+    border-radius: 8px; /* 모서리를 둥글게 만듭니다. */
+    overflow: hidden; /* 자식 요소가 모서리를 넘어가지 않도록 설정 */
 }
 
 .productImg {
-
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -280,3 +284,13 @@
     position: relative;
     width: 264px;
 }
+
+.modalCloseBtn {
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    position: absolute; 
+    right: 10px; /* 오른쪽 10px 간격으로 위치하도록 수정 */
+    top: 10px; /* 상단에 10px 간격으로 위치하도록 수정 */
+  }

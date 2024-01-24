@@ -11,24 +11,22 @@ import menu_black from '../img/menu_black.png';
 import axios from "axios";
 
 export default function Header(){
-
-
+    const [sessionId, setSessionId] = useState("");
+    const [userName, setUserName] = useState("");
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
-    const sessionId = window.localStorage.getItem('sessionId');
-    const userName = window.localStorage.getItem('username');
-    
+
     useEffect(() => {
         const stroageUserName = window.localStorage.getItem('username');
-        setUserName(stroageUserName || "");
+        setUserName(stroageUserName   ||"");
         const stroageSessionId = window.localStorage.getItem('sessionId');
-        setSessionId(stroageSessionId || "");
-        
+        setSessionId(stroageSessionId  || "");
+
         console.log(userName);
         console.log(sessionId);
         if(sessionId){
             setIsLogined(true);
-            
+
         } else{
             setIsLogined(false);
         }
