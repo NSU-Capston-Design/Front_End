@@ -16,10 +16,13 @@ export default function Header(){
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     const sessionId = window.localStorage.getItem('sessionId');
     const userName = window.localStorage.getItem('username');
 >>>>>>> parent of aad443a (문의하기)
+=======
+>>>>>>> parent of dcea328 (문의하기)
     
     useEffect(() => {
         const stroageUserName = window.localStorage.getItem('username');
