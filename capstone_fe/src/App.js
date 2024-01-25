@@ -20,7 +20,10 @@ import Product from './pages/Product';
 import Product_Upload from './pages/Product_upload';
 import ProductDetail from './pages/ProductDetail';
 
-export default function App() {  
+
+export default function App() {
+  const domain = "http://localhost:8080";
+  
   return (
     <BrowserRouter>
       <Routes>

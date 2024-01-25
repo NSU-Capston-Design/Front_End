@@ -2,22 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../component/Header";
 import Select from 'react-select';
-
-<<<<<<< HEAD:capstone_fe/src/pages/Product_Upload.js
-<<<<<<< HEAD:capstone_fe/src/pages/ProductUpload.js
-import '../css/ProductUpload.css';
-export default function ProductUpload(){
-=======
 import '../css/Product_Upload.css';
-import { json } from "react-router-dom";
-export default function Product_upload(){
->>>>>>> parent of aad443a (문의하기):capstone_fe/src/pages/Product_Upload.js
-=======
 import '../css/ProductUpload.css';
+import { json } from "react-router-dom";
 export default function ProductUpload(){
->>>>>>> parent of dcea328 (문의하기):capstone_fe/src/pages/ProductUpload.js
     const [sessionId, setSessionId] = useState("");
-    const [memberId, setMemberId] = useState(0);
+    const [userName, setUserName] = useState("");
     const [labelList, setLabelList] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState([]); 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -28,12 +18,12 @@ export default function ProductUpload(){
 
     useEffect(() => {       // 컴포넌트가 마운트될 때 (실행될 때)
         const storageSessionId = window.localStorage.getItem('sessionId');
-        const storageMemberId = window.localStorage.getItem('memberId');
+        const storageUserName = window.localStorage.getItem('username');
         
         setSessionId(storageSessionId || "");   // 값이 없으면 "" 공백 표기
-        setMemberId(storageMemberId || 0);
+        setUserName(storageUserName || "");
 
-        console.log(memberId);
+        console.log(userName);
 
     }, []);
 
@@ -73,7 +63,7 @@ export default function ProductUpload(){
         const data = {
             productName: productName,
             productPrice: productPrice,
-            memberId: memberId,
+            userName: userName,
             productInven: productInven
         };
 

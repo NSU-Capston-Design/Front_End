@@ -15,8 +15,10 @@ export default function Product(){
         try{
             const response = await axios.get(`//localhost:8080/product/list`);    // await: 데이터를 가져오고나서부터 다음줄 실행get 내부에 url 넣기 
             const data = response.data;                 // 받아온 데이터 data에 저장    
-            console.log(data);
-            
+            // const data = response.data.map((item) => ({
+            //     productName: item.productName,
+                
+            // }))
             if (Array.isArray(data)) {
             setList(data); // 받아온 데이터가 배열이라면 list 상태 업데이트
             } else {
@@ -28,7 +30,6 @@ export default function Product(){
         }
     };
     productList();  // 초기 데이터 가져오기
-    console.log(list);
 }, []);
 
 const Moveto_ProductUpload = (e) => {
@@ -44,7 +45,7 @@ const Moveto_ProductUpload = (e) => {
                             <div key={item.productId} className= "product-list-box" >  {/* 리스트 목록 */}
                             
                                 <div className="product-list-image">
-                                <img src={`http://localhost:8080${item.productURL.replace(/\s/g, "_")}`} alt="Product" style={{width: 250, height: 200}}/>    
+                                <img src={`${item.productURL.replace(/\s/g, "_")}`} alt="Product" style={{width: 250, height: 200}}/>    
                                 </div>    {/* 상품 이미지 */}
                                 <div key={item.productId} className="product-list-title" title={item.productName}><Link to ={`/product/detail/${item.productId}`}>{item.productName}</Link></div> {/* 상품 타이틀 */} 
                                 <div className="product-list-price" title={item.uploadTime}>{item.uploadTime}</div>     {/* 상품 가격 */}

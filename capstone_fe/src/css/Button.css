@@ -1,9 +1,0 @@
-.button {
-    background-color: var(--color);
-    color: var(--textColor);
-    border: 1px solid var(--outlineColor);
-  }
-  
-  .button .btn_text {
-    color: var(--textColor);
-  }
