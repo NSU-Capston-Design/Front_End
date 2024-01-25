@@ -202,22 +202,10 @@ export default function ProductDetail(props) {
                     </div>
 
                     <div className='productBtn'> {/*구매/장바구니 버튼 */}
-                        <Button className="buybtn"
-                            color="rgba(12, 104, 244, 1)"
-                            stateProp="active"
-                            text="구매"
-                            textColor='rgba(255,255,255,1)'
-                            border='none'
-                        />
+                        <Button size="sm">구매</Button>
+                        
 
-                        <Button className="cart"
-                            color='rgba(255,255,255,1)'
-                            stateProp="active"
-                            text='장바구니'
-                            textColor='primary'
-                            outlineColor='rgba(12, 104, 244, 1)'
-                            textColor='rgba(12, 104, 244, 1)'
-                        />
+                        <Button size="sm">장바구니</Button>
                     </div>
                 </div>
             </div>
@@ -229,7 +217,16 @@ export default function ProductDetail(props) {
                         value={reviewText}
                         onChange={handleReviewChange}
                         placeholder="리뷰를 작성해주세요."
-               git 
+                    />
+                    <Button size="sm">리뷰작성</Button>
+                </div>
+                {/* 리뷰목록 */}
+                <div className="reviewList">
+                    {reviews.map((review, index) => (
+                        <div key={index} className="reviewItem">
+                            <strong>{review.username}:</strong> {review.reviewText}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
