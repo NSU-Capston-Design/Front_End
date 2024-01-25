@@ -15,7 +15,11 @@ export default function Header(){
     const [userName, setUserName] = useState("");
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 2b6b4f37111d1416bba19a16b08a84e2dc26c9b6
     useEffect(() => {
         const stroageUserName = window.localStorage.getItem('username');
         setUserName(stroageUserName  ||"");

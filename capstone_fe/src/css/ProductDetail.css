@@ -1,0 +1,282 @@
+.all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.product {
+    padding: 59px;
+    align-items: center;
+    gap: 100px;
+    display: inline-flex;
+    position: relative;
+    justify-content: center;
+    width: 100vw;
+}
+
+.productImg {
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 17px;
+    display: inline-flex;
+    position: relative;
+}
+
+.description {
+    position: center;
+
+}
+
+.descripText {
+    color: #272727;
+    font-weight: 500;
+    text-align: center;
+    line-height: 25.6px;
+    position: absolute;
+    font-size: 12px;
+
+}
+
+.image {
+    background-color: #f7f8fa;
+    height: 433px;
+    width: 506px;
+}
+
+.productInfo {
+    align-items: flex-start;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 32px;
+    position: relative;
+}
+
+.productInfo1 {
+    align-items: flex-start;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+}
+
+.productInfo2 {
+
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    display: inline-flex;
+}
+
+.productName {
+    color: #000000;
+    font-family: var(--web-h5-font-family);
+    font-size: var(--web-h5-font-size);
+    font-style: var(--web-h5-font-style);
+    font-weight: var(--web-h5-font-weight);
+    letter-spacing: var(--web-h5-letter-spacing);
+    line-height: var(--web-h5-line-height);
+    margin-top: -1px;
+    position: relative;
+    width: 343px;
+}
+
+.rate {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 16px;
+    position: relative;
+}
+
+.rate_start {
+    width: 43px;
+    height: 24px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background: #063A88;
+    border-radius: 4px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+.rate_num {
+    color: white;
+    font-size: 12px;
+    font-family: 'Inter';
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.stock_deliver {
+
+    align-items: flex-start;
+    gap: 600px;
+    display: inline-flex;
+    position: relative;
+}
+
+.stock,
+.delivery {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 4px;
+    position: relative;
+}
+
+.stock_txt,
+.delivery_txt {
+    color: #717171;
+    font-size: 12px;
+    font-family: 'Inter';
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+
+
+.infoDetails {
+    align-items: flex-start;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 32px;
+    position: relative;
+}
+
+.info {
+    align-items: flex-start;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+}
+
+.infoGN {
+    width: 288px;
+    height: 32px;
+    justify-content: flex-start;
+    align-items: center;
+    display: inline-flex;
+
+}
+
+.infoGroup {
+    width: 184px;
+    height: 32px;
+    padding-left: 8px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
+
+.groupName {
+    color: #717171;
+    font-size: 14px;
+    font-family: Inter;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.infoName {
+    height: 32px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
+
+.infoTxt {
+    color: #0C0C0C;
+    font-size: 14px;
+    font-family: Inter;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.buy {
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 31px;
+    padding: 28px 17px;
+    position: relative;
+}
+
+.priceSection {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+    position: relative;
+    width: 264px;
+    
+}
+
+.price {
+    align-items: center;
+    display: flex;
+    gap: 40px;
+    position: relative;
+}
+
+.currentPrice {
+    color: #0C0C0C;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.discount {
+    align-items: center;
+    display: inline-flex;
+    gap: 2px;
+    position: relative;
+}
+
+.discountAmount {
+    color: #f45e0c;
+    font-size: 16px;
+    font-family: Inter;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.lastPrice {
+
+    align-items: center;
+    gap: 8px;
+    display: flex;
+    position: relative;
+
+}
+
+.lastPriceTxt {
+    color: #717171;
+    font-size: 14px;
+    font-family: Inter;
+    font-weight: 300;
+    word-wrap: break-word;
+}
+
+.productBtn {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    position: relative;
+    width: 264px;
+}
