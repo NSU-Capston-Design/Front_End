@@ -3,8 +3,14 @@ import axios from "axios";
 import Header from "../component/Header";
 import Select from 'react-select';
 
+<<<<<<< HEAD:capstone_fe/src/pages/ProductUpload.js
 import '../css/ProductUpload.css';
 export default function ProductUpload(){
+=======
+import '../css/Product_Upload.css';
+import { json } from "react-router-dom";
+export default function Product_upload(){
+>>>>>>> parent of aad443a (문의하기):capstone_fe/src/pages/Product_Upload.js
     const [sessionId, setSessionId] = useState("");
     const [memberId, setMemberId] = useState(0);
     const [labelList, setLabelList] = useState([]);
