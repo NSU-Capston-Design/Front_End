@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../component/Header";
 import Select from 'react-select';
+<<<<<<< HEAD:capstone_fe/src/pages/Product_Upload.js
 import '../css/Product_Upload.css';
 import '../css/ProductUpload.css';
 import { json } from "react-router-dom";
+=======
+
+import '../css/ProductUpload.css';
+>>>>>>> parent of dcea328 (문의하기):capstone_fe/src/pages/ProductUpload.js
 export default function ProductUpload(){
     const [sessionId, setSessionId] = useState("");
     const [userName, setUserName] = useState("");
