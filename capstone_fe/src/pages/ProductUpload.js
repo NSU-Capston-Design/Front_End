@@ -3,12 +3,7 @@ import axios from "axios";
 import Header from "../component/Header";
 import Select from 'react-select';
 
-<<<<<<< HEAD
-import '../css/Product_Upload.css';
-import { json } from "react-router-dom";
-=======
 import '../css/ProductUpload.css';
->>>>>>> 2b6b4f37111d1416bba19a16b08a84e2dc26c9b6
 export default function ProductUpload(){
     const [sessionId, setSessionId] = useState("");
     const [memberId, setMemberId] = useState(0);

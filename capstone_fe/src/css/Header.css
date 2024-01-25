@@ -136,22 +136,6 @@ header{ /* 헤더 */
     border: none;
     font-weight: bold;
 }
-
-.category .inquiry{  /* 문의 하기 구역 */
-    position: relative;
-    top: 18px;
-    left: 50px;
-}
-
-.category .inquiry_btn{  /* 문의 하기 버튼 */
-    font-size: 12px;
-    padding: 5px 15px;
-    background-color: #FFC700;
-    border: none;
-    font-weight: bold;
-    
-}
-
 @media (max-width: 1100px) { /* 화면이 768px 이하일 때 적용될 스타일 */
     .sign {
         font-size: 10px; 

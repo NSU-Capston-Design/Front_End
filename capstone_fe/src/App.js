@@ -14,7 +14,6 @@ import Mypage from './pages/Mypage';
 import Cart from './pages/Cart';
 import Event from './pages/Event';
 import Point from './pages/Point';
-import Inquiry from './pages/Inquiry';
 import Order_inquiry from './pages/Order_inquiry';
 import Donation_details from './pages/Donation_details';
 import Product from './pages/Product';
@@ -38,7 +37,6 @@ export default function App() {
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/event' element={<Event/>}/>
         <Route path='/point' element={<Point/>}/>
-        <Route path='/inquiry' element={<Inquiry/>}/>
         <Route path='/order_inquiry' element={<Order_inquiry/>}/>
         <Route path='/donation_details' element={<Donation_details/>}/>
         <Route path='/product' element={<Product/>}/>

@@ -15,22 +15,18 @@ export default function Header(){
     const [userName, setUserName] = useState("");
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
-<<<<<<< HEAD
-
-=======
     
->>>>>>> 2b6b4f37111d1416bba19a16b08a84e2dc26c9b6
     useEffect(() => {
         const stroageUserName = window.localStorage.getItem('username');
-        setUserName(stroageUserName  ||"");
+        setUserName(stroageUserName || "");
         const stroageSessionId = window.localStorage.getItem('sessionId');
-        setSessionId(stroageSessionId  ||"");
-
+        setSessionId(stroageSessionId || "");
+        
         console.log(userName);
         console.log(sessionId);
         if(sessionId){
             setIsLogined(true);
-
+            
         } else{
             setIsLogined(false);
         }
@@ -57,10 +53,6 @@ export default function Header(){
 
     const MovetoCart = e => {   // 장바구니로 이동
         navigate('/cart')       // 페이지 내부 주소
-    }
-
-    const MovetoInquiry = e => {   // 문의하기로 이동
-        navigate('/inquiry')       // 페이지 내부 주소
     }
     
     const MovetoProduct = e => {
@@ -119,10 +111,6 @@ export default function Header(){
                         <div className="donate">    
                             <button className="donate_btn" onClick={MovetoDonation}>기부하기</button>
                         </div>
-
-                        <div className="inquiry">    
-                            <button className="inquiry_btn" onClick={MovetoInquiry}>문의하기</button>
-                            </div>
                     </ul>
                     
                 </div>

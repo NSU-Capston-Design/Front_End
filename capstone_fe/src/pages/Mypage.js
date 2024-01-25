@@ -4,7 +4,6 @@ import "../css/Mypage.css";
 import direction_SwitchImage from '../img/direction_switch.png';
 import logoImage from '../img/logo.png';
 import warningImage from '../img/warning.png';
-import { useNavigate } from "react-router-dom";
 
 export default function Mypage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,15 +11,12 @@ export default function Mypage() {
   const [isWithdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const [isWithdrawSuccessMessageOpen, setIsWithdrawSuccessMessageOpen] = useState(false);
   const [isEditSuccessMessageOpen, setIsEditSuccessMessageOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleCloseWithdrawSuccessMessage = () => {
     setIsWithdrawSuccessMessageOpen(false);
   };
 
-  const MovetoInquiry = () => {
-    navigate('/inquiry');
-  };
+
   
   const initialFormData = {
     name: "",
@@ -267,12 +263,11 @@ export default function Mypage() {
           <div className="mypage_image4"><img src={direction_SwitchImage} alt="버튼" /></div>
         </div>
 
+        <div className="mypage_list5"></div>
         <div className="mypage_list5">
-        <div className="mypage_image5"></div>
-        <button className="mypage_inquiry_button" onClick={MovetoInquiry}>
-          문의하기
-        </button>
-      </div>
+          <div className="mypage_image5"></div>
+          <button className="mypage_inquiry_button">문의하기</button>
+        </div>
 
         <div className="mypage_list6">
           <div className="mypage_image6"></div>
