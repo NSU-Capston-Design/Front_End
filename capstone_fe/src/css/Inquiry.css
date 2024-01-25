@@ -1,0 +1,86 @@
+.inq_all {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inquiry_list {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /* 열 방향으로 배치하도록 설정 */
+  align-items: center;
+  gap: 30px;
+}
+
+.inquiry_txt {
+  font-size: 36px;
+  color: #617CC2; /* 글자 색을 추가 */
+  margin-bottom: 100px;
+}
+
+.inquiry_txt2 {
+  font-size: 36px;
+  color: #617CC2;
+  margin-bottom: 50px;
+  margin-right: 1000px;
+}
+
+.inquiry_btn1{
+  color: #fff;
+  background-color: #617CC2;
+  padding: 30px 200px;
+  cursor: pointer;
+  font-size: 25px;
+  width: 900px; /* 원하는 너비 설정 */
+}
+
+/* 마우스를 올렸을 때의 텍스트에 밑줄 오게하는 것 */
+.inquiry_btn1:hover {
+  text-decoration: underline;
+}
+
+.inquiry_btn1 span {
+  font-size: 70px; /* Q. 부분의 크기를 조절, 필요에 따라 조절 가능 */
+  font-weight: bold; /* 필요에 따라 굵게 설정 */
+  margin-right: 5px; /* Q.와 텍스트 사이 여백을 주기 위해 */
+}
+
+/* 박스 누를때 */
+.inquiry_btn_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inquiry_content1 {
+  background-color: #9EB6D2; /* 배경색 설정 */
+  padding: 30px 200px; /* 내용과 박스 사이 여백 설정, 필요에 따라 조절 가능 */
+  border-top-left-radius: 0; /* 위쪽 좌측 모서리를 둥글게 만듭니다. */
+    border-top-right-radius: 0; /* 위쪽 우측 모서리를 둥글게 만듭니다. */
+    border-bottom-left-radius: 10px; /* 아래쪽 좌측 모서리를 직각으로 설정합니다. */
+    border-bottom-right-radius: 10px; /* 아래쪽 우측 모서리를 직각으로 설정합니다. */
+  color: #ffffff; /* 글자 색상 설정 */
+  font-size: 18px; /* 글자 크기 설정, 필요에 따라 조절 가능 */
+  width: 900px;
+  height: 150px; /* 원하는 높이 설정 */
+  font-size: 30px;
+}
+
+.inquiry_content2 {
+  background-color: #9EB6D2; /* 배경색 설정 */
+  padding: 30px 200px; /* 내용과 박스 사이 여백 설정, 필요에 따라 조절 가능 */
+  border-top-left-radius: 0; /* 위쪽 좌측 모서리를 둥글게 만듭니다. */
+    border-top-right-radius: 0; /* 위쪽 우측 모서리를 둥글게 만듭니다. */
+    border-bottom-left-radius: 10px; /* 아래쪽 좌측 모서리를 직각으로 설정합니다. */
+    border-bottom-right-radius: 10px; /* 아래쪽 우측 모서리를 직각으로 설정합니다. */
+  color: #ffffff; /* 글자 색상 설정 */
+  font-size: 18px; /* 글자 크기 설정, 필요에 따라 조절 가능 */
+  width: 900px;
+  height: 500px; /* 원하는 높이 설정 */
+  font-size: 30px;
+}
+
+
+
+

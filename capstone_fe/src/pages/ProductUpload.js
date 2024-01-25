@@ -5,7 +5,7 @@ import Select from 'react-select';
 
 import '../css/Product_Upload.css';
 import { json } from "react-router-dom";
-export default function Product_upload(){
+export default function ProductUpload(){
     const [sessionId, setSessionId] = useState("");
     const [userName, setUserName] = useState("");
     const [labelList, setLabelList] = useState([]);
