@@ -31,12 +31,14 @@
     display: flex;
     align-items: center;
     justify-content: center
+   
 }
-.producct-modal{
+.product-modal{
     position: relative;
     background-color: #fff; /* 모달 배경색 */
     padding: 20px;
     border-radius: 8px;
     max-width: 80%; /* 최대 너비 설정 */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    z-index: 10000; /* 모달이 가장 위에 나타나도록 설정 */
 }

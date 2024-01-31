@@ -1,11 +1,13 @@
 import "../css/ProductDetail.css";
 import Button from '../component/Button';
 import React, { useState, useCallback, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 
 export default function ProductDetail(props) {
 
+    const navigate = useNavigate();
     const { productId } = useParams();
     console.log(productId);
     const id = parseInt(productId, 10);
@@ -22,78 +24,95 @@ export default function ProductDetail(props) {
         productPrice: 10000,
         productURL: "https://i.pinimg.com/564x/ce/50/6f/ce506fa7dfd2e9900643f588ee4f2cad.jpg",
         productInven: 10,
-        productView: 50
+        productView: 50,
+        productCategory: "테스트 카테고리",
+        productBrand: "테스트 브랜드",
+        productDescription: "테스트 상품 설명입니다."
     })
 
 
-    const [reviewText, setReviewText] = useState("");
-    const [reviews, setReviews] = useState([]);
-
+    // const [reviewText, setReviewText] = useState("");
+    // const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-
-        const ProductDetail = async () => {
+        const fetchProductDetail = async () => {
             try {
                 const response = await axios.get(`/product/detail`, {
                     params: { productId: productId }
                 });
 
                 const data = response.data;
-
                 setProductData(data);
-
-            } catch (error) {
-                console.log("오류발생", error);
-            }
-        }
-        ProductDetail();
-
-        const ProductViews = () => {
-            try {
-                axios.get(`/product/views`, {
-                    params: { productId: productId }
-                });
-
-            } catch (error) {
-                console.log("오류발생", error);
-            }
-        }
-        ProductViews();
-
-    }, [])
-
-
-    useEffect(() => {
-        const updateProductViews = async () => {
-            try {
-                await axios.get(`/product/views`, {
-                    params: { productId: productId }
-                });
-
             } catch (error) {
                 console.log("오류발생", error);
             }
         };
 
+        fetchProductDetail();
+    }, [productId]);
+
+    const updateProductViews = async () => {
+        try {
+            await axios.get(`/product/views`, {
+                params: { productId: productId }
+            });
+        } catch (error) {
+            console.log("오류발생", error);
+        }
+    };
+
+    useEffect(() => {
         updateProductViews();
     }, [productId]);
 
-    const handleReviewChange = (event) => {
-        setReviewText(event.target.value);
+    // const handleReviewChange = (event) => {
+    //     setReviewText(event.target.value);
+    // };
+
+    // const submitReview = () => {
+    //     const newReview = {
+    //         username: "사용자", // 리뷰를 작성한 사용자의 이름 또는 아이디
+    //         reviewText: reviewText
+    //     };
+
+    //     setReviews([...reviews, newReview]);
+    //     setReviewText(""); // 리뷰 작성 후 폼 초기화
+    // };
+
+
+    const Purchase = () => {
+        // 구매 로직
+        const isConfirmed=window.confirm(`상품(${productId})을 구매하시겠습니까?.`);
+
+        if(isConfirmed){
+            console.log(`상품(${productId}) 결제페이지로 이동합니다.`);
+            navigate('/')//결제모달로 수정예정
+           
+        }else{
+            console.log(`상품(${productId}) 구매가 취소되었습니다.`);
+        }
     };
 
-    const submitReview = () => {
-        // 여기에 리뷰를 서버에 전송하는 코드 추가
-        // 성공적으로 리뷰가 등록되면 해당 리뷰를 상태에 추가
-        const newReview = {
-            username: "사용자", // 리뷰를 작성한 사용자의 이름 또는 아이디
-            reviewText: reviewText
+    const addToCart = () => {
+        console.log('addToCart 함수가 호출되었습니다.');
+        // 장바구니 추가 로직
+        const cartItem = {
+            productId: productData.productId,
+            productName: productData.productName,
+            productPrice: productData.productPrice
         };
-
-        setReviews([...reviews, newReview]);
-        setReviewText(""); // 리뷰 작성 후 폼 초기화
+    
+        try {
+            const isConfirmed = window.confirm(`상품(${productId})을 장바구니에 추가했습니다. 장바구니로 이동하시겠습니까?`);
+    
+            if (isConfirmed) {
+                navigate('/cart');
+            }
+        } catch (error) {
+            console.error('장바구니로 이동 중 오류:', error);
+        }
     };
-
+    
 
     return (
         <div className='all'>
@@ -139,46 +158,37 @@ export default function ProductDetail(props) {
 
                                 <div className='infoGN'>
                                     <div className='infoGroup'>
-                                        <div className='groupName'>브랜드</div>
+                                        <div className='groupName'>가격</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>지역브랜드명</div>
+                                        <div className='infoTxt'>{productData.productPrice}원</div>
                                     </div>
                                 </div>
 
                                 <div className='infoGN'>
                                     <div className='infoGroup'>
-                                        <div className='groupName'>추가스펙설명</div>
+                                        <div className='groupName'>재고수량</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>몇kg / 길이 etc</div>
+                                        <div className='infoTxt'>{productData.productInven}개</div>
                                     </div>
                                 </div>
 
                                 <div className='infoGN'>
                                     <div className='infoGroup'>
-                                        <div className='groupName'>추가스펙설명</div>
+                                        <div className='groupName'>상품 조회수</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>몇kg / 길이 etc</div>
+                                        <div className='infoTxt'>{productData.productView}회</div>
                                     </div>
                                 </div>
 
                                 <div className='infoGN'>
                                     <div className='infoGroup'>
-                                        <div className='groupName'>추가스펙설명</div>
+                                        <div className='groupName'>업로드 시간</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>몇kg / 길이 etc</div>
-                                    </div>
-                                </div>
-
-                                <div className='infoGN'>
-                                    <div className='infoGroup'>
-                                        <div className='groupName'>추가스펙설명</div>
-                                    </div>
-                                    <div className='infoName'>
-                                        <div className='infoTxt'>몇kg / 길이 etc</div>
+                                        <div className='infoTxt'>{productData.uploadTime}</div>
                                     </div>
                                 </div>
                             </div>
@@ -202,16 +212,16 @@ export default function ProductDetail(props) {
                     </div>
 
                     <div className='productBtn'> {/*구매/장바구니 버튼 */}
-                        <Button size="sm">구매</Button>
-                        
+                        <Button size="sm" onClick={Purchase}>구매</Button>
 
-                        <Button size="sm">장바구니</Button>
+
+                        <Button size="sm" onClick={addToCart}>장바구니</Button>
                     </div>
                 </div>
             </div>
-            <div className="reviewArea">
+            {/* <div className="reviewArea">
                 <h2>상품 리뷰</h2>
-                {/* 리뷰 작성 폼 */}
+                
                 <div className="reviewForm">
                     <textarea
                         value={reviewText}
@@ -220,7 +230,7 @@ export default function ProductDetail(props) {
                     />
                     <Button size="sm">리뷰작성</Button>
                 </div>
-                {/* 리뷰목록 */}
+               
                 <div className="reviewList">
                     {reviews.map((review, index) => (
                         <div key={index} className="reviewItem">
@@ -228,7 +238,7 @@ export default function ProductDetail(props) {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

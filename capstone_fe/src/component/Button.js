@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/Button.css";
 
-function Button({ disabled, size, variant, children }) {
+function Button({ disabled, size, variant, onClick, children }) {
   const sizeClass = `button-${size || "md"}`;
   const variantClass = `button-${variant || "default"}`;
 
@@ -9,6 +9,7 @@ function Button({ disabled, size, variant, children }) {
     <button
       className={`button ${sizeClass} ${variantClass}`}
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </button>
