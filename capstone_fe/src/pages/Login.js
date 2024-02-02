@@ -23,7 +23,7 @@ export default function Login() {
 
     const Signin = e => {   // 로그인 
         e.preventDefault()
-        console.log(1)
+       
         const UserInfo = {}
         UserInfo['userId'] = userId // 입력받은 아이디를 userinfo의 userid에 넣기
         UserInfo['userPassword'] = userPw   // 입력받은 아이디를 userinfo의 password에 넣기
@@ -33,9 +33,10 @@ export default function Login() {
             data : UserInfo 
         })
         .then(res => {  // 가져온 데이터들 셋업
-            window.localStorage.setItem('sessionId', res.data.sessionId);
-            window.localStorage.setItem('userid', res.data.userId);
-            window.localStorage.setItem('username', res.data.name);
+            console.log(res.data);
+            window.localStorage.setItem('sessionId', true);
+            window.localStorage.setItem('memberId', res.data);
+            console.log(res.data);
             navigate('/');
         })
         .catch(err => {

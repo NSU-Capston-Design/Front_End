@@ -10,7 +10,7 @@ const Posting = ({ onClose }) => {
                         <textarea className="Posting_titleInput">
                             글 제목
                         </textarea>
-                        <button type="button" className="Posting_closeBtn" onClick={onClose}>
+                        <button type="button" className="Posting_closeBtn" onClick={() => onClose()}>
                             닫기
                         </button>
                     </div>

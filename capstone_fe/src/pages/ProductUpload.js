@@ -3,11 +3,10 @@ import axios from "axios";
 import Header from "../component/Header";
 import Select from 'react-select';
 
-import '../css/Product_Upload.css';
-import { json } from "react-router-dom";
+import '../css/ProductUpload.css';
 export default function ProductUpload(){
     const [sessionId, setSessionId] = useState("");
-    const [userName, setUserName] = useState("");
+    const [memberId, setMemberId] = useState(0);
     const [labelList, setLabelList] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState([]); 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -18,12 +17,12 @@ export default function ProductUpload(){
 
     useEffect(() => {       // 컴포넌트가 마운트될 때 (실행될 때)
         const storageSessionId = window.localStorage.getItem('sessionId');
-        const storageUserName = window.localStorage.getItem('username');
+        const storageMemberId = window.localStorage.getItem('memberId');
         
         setSessionId(storageSessionId || "");   // 값이 없으면 "" 공백 표기
-        setUserName(storageUserName || "");
+        setMemberId(storageMemberId || 0);
 
-        console.log(userName);
+        console.log(memberId);
 
     }, []);
 
@@ -63,7 +62,7 @@ export default function ProductUpload(){
         const data = {
             productName: productName,
             productPrice: productPrice,
-            userName: userName,
+            memberId: memberId,
             productInven: productInven
         };
 
