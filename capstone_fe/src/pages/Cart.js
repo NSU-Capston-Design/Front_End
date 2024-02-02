@@ -5,6 +5,7 @@ import "../css/Cart.css"
 import item_img from '../img/item.png';
 import successful_paymentImage from '../img/successful_payment.png';
 import warningImage from '../img/warning.png';
+import axios from 'axios';
 
 
 export default function Cart(){
@@ -46,6 +47,63 @@ export default function Cart(){
       setShowSuccessModal(false);
       setShowNewModal(true);
     };
+
+    const submitOrder = async () => {
+      try {
+        const userName = "khk"; // 실제 사용자 정보로 교체
+  
+        const productInfo = {
+          productName: "추억의 도시락A",
+          productPrice: 5000,
+          productInven: cart,
+        };
+  
+        // 선택한 파일을 시뮬레이션
+        const selectedFile = new File(['더미 컨텐츠'], '더미.jpg', {
+          type: 'image/jpeg',
+        });
+  
+        const data = {
+          productName: productInfo.productName,
+          productPrice: productInfo.productPrice,
+          userName: userName,
+          productInven: productInfo.productInven,
+        };
+  
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append(
+          'data',
+          new Blob([JSON.stringify(data)], {
+            type: 'application/json',
+          })
+        );
+  
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            // 세션 ID를 가져오는 로직을 추가하세요.
+          },
+        };
+  
+        const response = await axios.post(
+          'http://localhost:8080/upload', // 실제 백엔드 API URL로 교체하세요.
+          formData,
+          config
+        );
+  
+        console.log('파일 업로드 성공!', response);
+  
+        // 응답이 성공을 나타내면 성공 모달을 표시합니다.
+        setShowSuccessModal(true);
+      } catch (error) {
+        console.error('파일 업로드 실패!', error);
+  
+        // 응답이 실패를 나타내면 실패 모달을 표시합니다.
+        setShowNewModal(true);
+      }
+    };
+
 
     return(
         <div className="cart_all">
