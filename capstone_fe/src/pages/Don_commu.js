@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import Header from '../component/Header';
 import '../css/Don_commu.css';
 import Posting from '../component/Posting';
-
+import PostDetails from './commu-post';
 const postsArray = [
   { id: 1, title: '제목 1', content: '내용 1' },
   { id: 2, title: '제목 2', content: '내용 2' },
@@ -14,6 +14,7 @@ const pageSize = 5; // 페이지당 보여질 게시글 수
 export default function Don_commu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   const openModal = useCallback(() => {
     setIsModalOpen(true);
@@ -29,6 +30,12 @@ export default function Don_commu() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const handlePostClick = (post) => {
+    setSelectedPost(post);
+    openModal();
+  };
+  console.log("isModalOpen:", isModalOpen);
+  console.log("selectedPost:", selectedPost);
   return (
     <div className="don_commu_all">
       <Header />
@@ -50,7 +57,7 @@ export default function Don_commu() {
           </thead>
           <tbody>
             {currentPosts.map((post) => (
-              <tr key={post.id}>
+              <tr key={post.id} onClick={() => handlePostClick(post)}>
                 <td>{post.title}</td>
                 <td>{post.content}</td>
               </tr>
@@ -65,7 +72,8 @@ export default function Don_commu() {
           </button>
         ))}
       </div>
-      {isModalOpen && <Posting onClose={closeModal} />}
+      {isModalOpen && !selectedPost && <Posting onClose={closeModal} />} {/* 글쓰기*/}
+      {selectedPost && <PostDetails post={selectedPost} onClose={closeModal} />} {/*게시글 */}
     </div>
   );
 }
