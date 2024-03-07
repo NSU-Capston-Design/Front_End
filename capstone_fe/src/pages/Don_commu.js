@@ -42,10 +42,6 @@ export default function Don_commu() {
     }
   }
 
-
-
-
-  
   const openModal = useCallback(() => {
     setIsModalOpen(true);
   }, []);
