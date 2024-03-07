@@ -39,6 +39,8 @@
     padding: 20px;
     border-radius: 8px;
     max-width: 80%; /* 최대 너비 설정 */
+    max-height: 80%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     z-index: 10000; /* 모달이 가장 위에 나타나도록 설정 */
+    overflow-y: auto;
 }

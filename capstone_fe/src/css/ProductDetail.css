@@ -9,7 +9,7 @@
     padding: 59px;
     align-items: center;
     gap: 100px;
-    display: inline-flex;
+    display: flex;
     position: relative;
     justify-content: center;
     width: 100vw;
@@ -150,6 +150,7 @@
     flex-direction: column;
     gap: 32px;
     position: relative;
+    
 }
 
 .info {

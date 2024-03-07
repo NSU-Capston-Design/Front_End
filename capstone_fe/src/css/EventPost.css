@@ -1,4 +1,4 @@
-.Posting {
+.EventPost {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -15,35 +15,36 @@
   flex-direction: column;
 }
 
-.Posting_header {
+.EventPostheader {
   width: 100%;
-  padding-top: 12px;
-  padding-bottom: 16px;
-  padding-left: 24px;
-  padding-right: 12px;
+  padding: 12px 24px 16px;
   background: #78ABF9;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-.Posting_title {
-  flex: 1 1 0;
-  height: 44px;
-  padding-top: 12px;
-  justify-content: flex-start;
-  align-items: flex-start;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.Posting_titleInput {
+.EventPosting_title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.EventPosting_titleInput {
   width: 40%;
+  height: 44px;
+  padding: 6px;
   border-radius: 4px;
-  overflow: hidden;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: inline-flex;
-  margin-right: 50%;
+  border: 1px solid #ccc;
+  margin-right: 16px;
+}
+
+.Posting_closeBtn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .content {
@@ -55,12 +56,11 @@
   flex-grow: 1;
 }
 
-.Posting_content {
+.Event_content {
   width: 90%;
   height: 90%;
-  background: white;
+  padding: 12px;
   border-radius: 4px;
-  overflow: hidden;
-  border: 1px #D1D1D1 solid;
-  
+  border: 1px solid #ccc;
+  resize: none;
 }

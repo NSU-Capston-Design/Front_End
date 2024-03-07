@@ -1,11 +1,16 @@
 import "../css/ProductDetail.css";
 import Button from '../component/Button';
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
 export default function ProductDetail(props) {
+
+    useEffect(()=>{ //관리자/사용자 권한 로컬 설정
+        const isAdmin = localStorage.getItem('isAdmin') === 'true';
+        setIsAdmin(true);
+      },[]);
 
     const navigate = useNavigate();
     const { productId } = useParams();
@@ -30,14 +35,29 @@ export default function ProductDetail(props) {
         productDescription: "테스트 상품 설명입니다."
     })
 
+    const [isAdmin, setIsAdmin]=useState(false); //관리자 여부
+    const [reviewText, setReviewText] = useState("");
+    const [satisfaction, setSatisfaction] = useState(""); // 만족도 
+    const [reviews, setReviews] = useState([]);
 
-    // const [reviewText, setReviewText] = useState("");
-    // const [reviews, setReviews] = useState([]);
+
+    const delteProduct = async()=>{//상품삭제
+        try{
+            await axios.delete('${productId}');
+            navigate('/');
+        }catch(error){
+            console.log("상품 삭제 오류", error);
+        }
+    }
+
+    const editProduct=()=>{//상품상세 수정
+
+    }
 
     useEffect(() => {
         const fetchProductDetail = async () => {
             try {
-                const response = await axios.get(`/product/detail`, {
+                const response = await axios.get('/product/detail', {
                     params: { productId: productId }
                 });
 
@@ -65,19 +85,25 @@ export default function ProductDetail(props) {
         updateProductViews();
     }, [productId]);
 
-    // const handleReviewChange = (event) => {
-    //     setReviewText(event.target.value);
-    // };
+    const handleReviewChange = (event) => {
+        setReviewText(event.target.value);
+    };
 
-    // const submitReview = () => {
-    //     const newReview = {
-    //         username: "사용자", // 리뷰를 작성한 사용자의 이름 또는 아이디
-    //         reviewText: reviewText
-    //     };
+    const handleSatisfactionChange = (event) => { // 만족도 변경 처리
+        setSatisfaction(event.target.value);
+    };
 
-    //     setReviews([...reviews, newReview]);
-    //     setReviewText(""); // 리뷰 작성 후 폼 초기화
-    // };
+    const submitReview = () => {
+        const newReview = {
+            username: "사용자", // 리뷰 작성자
+            reviewText: reviewText,
+            satisfaction: satisfaction // 만족도 추가
+        };
+
+        setReviews([...reviews, newReview]);
+        setReviewText(""); // 리뷰 작성 후 폼 초기화
+        setSatisfaction(""); // 만족도 초기화
+    };
 
 
     const Purchase = () => {
@@ -93,7 +119,7 @@ export default function ProductDetail(props) {
         }
     };
 
-    const addToCart = () => {
+    const addToCart = async() => {
        
         // 장바구니 추가 로직
         const cartItem = {
@@ -103,6 +129,8 @@ export default function ProductDetail(props) {
         };
     
         try {
+            // const response = await axios.post('url', cartItem);
+            // console.log('장바구니 추가됨:', response.data);
             const isConfirmed = window.confirm(`상품(${productId})을 장바구니에 추가했습니다. 장바구니로 이동하시겠습니까?`);
     
             if (isConfirmed) {
@@ -118,7 +146,14 @@ export default function ProductDetail(props) {
         <div className='all'>
             <div className="modalCloseBtn" onClick={props.closeModal}>
                 닫기
-            </div>
+            </div>  
+            {isAdmin && (
+                    <div>
+                        <button onClick={editProduct}>제품정보 수정</button>
+                        <button  onClick={delteProduct}>삭제</button>
+                        </div>
+
+                )}
             <div className='product'>
 
                 <div className='productImg'>
@@ -195,6 +230,7 @@ export default function ProductDetail(props) {
                         </div>
                     </div>
                 </div>
+              
 
                 <div className='buy'>
 
@@ -219,26 +255,33 @@ export default function ProductDetail(props) {
                     </div>
                 </div>
             </div>
-            {/* <div className="reviewArea">
+            <div className="reviewArea">
                 <h2>상품 리뷰</h2>
                 
                 <div className="reviewForm">
-                    <textarea
+                    <input
                         value={reviewText}
                         onChange={handleReviewChange}
                         placeholder="리뷰를 작성해주세요."
                     />
-                    <Button size="sm">리뷰작성</Button>
+         <select value={satisfaction} onChange={handleSatisfactionChange}>
+                        <option value="">만족도를 선택하세요</option>
+                        <option value="very-satisfied">매우 만족</option>
+                        <option value="satisfied">만족</option>
+                        <option value="neutral">보통</option>
+                        <option value="unsatisfied">불만족</option>
+                        <option value="very-unsatisfied">매우 불만족</option>
+                    </select>
+                    <Button size="sm" onClick={submitReview}>리뷰작성</Button>
                 </div>
-               
                 <div className="reviewList">
                     {reviews.map((review, index) => (
                         <div key={index} className="reviewItem">
-                            <strong>{review.username}:</strong> {review.reviewText}
+                            <strong>{review.username}:</strong> {review.reviewText} (만족도: {review.satisfaction})
                         </div>
                     ))}
                 </div>
-            </div> */}
+            </div>
         </div>
     );
 }

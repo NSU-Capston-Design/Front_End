@@ -3,10 +3,40 @@ import { useEffect, useState } from 'react';
 import Header from "../component/Header";
 import "../css/Rank.css"
 import {Element} from "../component/Rank";
+import axios from "axios";
 
 export default function Rank() {
 
+  useEffect(()=>{ //기부순위 함수 호출
+    fetchDonaRanks();
+  },[]);
+  const fetchDonaRanks = async () => {
+    try {//사용자 순위정보
+      const response = await axios.get('url'); // 기부 데이터 백엔드에 요청
+      setUserRank(response.data.rank); //순위 변수저장
+    } catch (error) {
+      console.error('기부 fetching 오류', error);
+    }
+  };
 
+
+  const [donations, setUserRank]=useState([
+
+    //임의
+    { id: 1, user_id: 'User1', donation_amount: 100 },
+    { id: 2, user_id: 'User2', donation_amount: 200 },
+    { id: 3, user_id: 'User3', donation_amount: 150 },
+    { id: 4, user_id: 'User4', donation_amount: 120 },
+    { id: 5, user_id: 'User5', donation_amount: 170 },
+    { id: 6, user_id: 'User6', donation_amount: 90 },
+    { id: 7, user_id: 'User7', donation_amount: 220 },
+    { id: 8, user_id: 'User8', donation_amount: 140 },
+    { id: 9, user_id: 'User9', donation_amount: 180 },
+    { id: 10, user_id: 'User10', donation_amount: 110 },
+  ]);
+
+  //기부금액 내림차순 정렬
+  const sortedDonations = [...donations].sort((a, b) => b.donation_amount - a.donation_amount);
 
   return (
     <div className="rank_all">
@@ -17,7 +47,7 @@ export default function Rank() {
         <div className="rank_info">
           <div className="ran_info">
             <span>{'현재 회원님의 순위는'}</span>
-            <span className="rank_num">?</span>
+            <span className="rank_num">{/*userRank*/}</span> {/*로그인한 회원의 순위 */}
             <span>위 입니다</span>
           </div>
         </div>
@@ -25,7 +55,7 @@ export default function Rank() {
       <div className="rank_title">✨이번달 명예의 전당✨</div>
 
 
-      <div className="rank_list">
+      <div className="rank_list"> {/*전체유저 상위 10위권만 표시 */}
 
         <div className="rank2"> {/*2위 */}
           <div className="avatar-2">
@@ -37,7 +67,7 @@ export default function Rank() {
               </div>
             </div>
           </div>
-          <div className="rank-name-2">닉네임2</div>
+          <div className="rank-name-2">{sortedDonations[1].user_id}</div>
         </div>
 
         <div className="rank1"> {/*1위 */}
@@ -50,7 +80,7 @@ export default function Rank() {
               </div>
             </div>
           </div>
-          <div className="rank-name-1">닉네임1</div>
+          <div className="rank-name-1">{sortedDonations[0].user_id}</div>
         </div>
 
         <div className="rank3"> {/*3위 */}
@@ -63,17 +93,18 @@ export default function Rank() {
               </div>
             </div>
           </div>
-          <div className="rank-name3">닉네임3</div>
+          <div className="rank-name3">{sortedDonations[2].user_id}</div>
         </div>
 
         <div className="other-ranks">
-          <Element className="four" rankNum='4' rankName='닉4'/>
-          <Element className="four" rankNum = '5' rankName='닉5'/>
-          <Element className="four"  rankNum = '6' rankName='닉6'/>
-          <Element className="four" rankNum = '7' rankName='닉7'/>
-          <Element className="four"  rankNum = '8' rankName='닉8'/>
-          <Element className="four" rankNum = '9' rankName='닉9'/>
-          <Element className="four" rankNum = '10' rankName='닉10'/>
+        {sortedDonations.slice(3).map((donation, index) => ( //배열 3번째(4위)부터 시작
+          <Element
+            key={donation.id}
+            className={`rank${index + 4}`}
+            rankNum={index + 4}
+            rankName={donation.user_id}
+          />
+        ))}
         </div>
 
 
