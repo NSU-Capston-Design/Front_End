@@ -6,9 +6,8 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 export default function ProductDetail() {
-    const { productId } = useParams();
-    console.log(productId);
-    const id = parseInt(productId, 10);
+    const { fileId } = useParams();
+    const id = parseInt(fileId, 10);
     const [productData, setProductData] = useState({
         productName: '',
         uploadTime: '',
@@ -22,8 +21,9 @@ export default function ProductDetail() {
 
         const ProductDetail = async () =>{
             try{
-                    axios.get(`/product/detail`, {
-                    params: { productId: productId }
+                console.log(typeof(fileId));
+                    await axios.get(`/product/detail`, {
+                    params: { fileId: fileId }
                     })
                     .then(response => {
                         setProductData(response.data);
@@ -33,7 +33,6 @@ export default function ProductDetail() {
                 console.log("오류발생", error);
             }
         } 
-
      }, [])
 
     return (

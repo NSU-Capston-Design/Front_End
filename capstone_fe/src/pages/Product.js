@@ -44,11 +44,18 @@ const Moveto_ProductUpload = (e) => {
                             <div key={item.productId} className= "product-list-box" >  {/* 리스트 목록 */}
                             
                                 <div className="product-list-image">
-                                <img src={`http://localhost:8080${item.productURL.replace(/\s/g, "_")}`} alt="Product" style={{width: 250, height: 200}}/>    
+                                    <img src={`http://localhost:8080${item.productURL.replace(/\s/g, "_")}`} alt="Product" style={{width: 250, height: 200}}/>    
                                 </div>    {/* 상품 이미지 */}
-                                <div key={item.productId} className="product-list-title" title={item.productName}><Link to ={`/product/detail/${item.productId}`}>{item.productName}</Link></div> {/* 상품 타이틀 */} 
-                                <div className="product-list-price" title={item.uploadTime}>{item.uploadTime}</div>     {/* 상품 가격 */}
-                                <div className="product-list-review" title={item.productPrice}>{item.productPrice}</div>  {/* 상품 리뷰 */}
+                                <div key={item.productId} className="product-list-title" title={item.productName}><Link to ={`/product/detail/${item.fileId}`}>상품명: {item.productName}</Link></div> {/* 상품 타이틀 */} 
+                                <div className="product-list-price" title={item.uploadTime}>업로드: {item.uploadTime}</div>     {/* 업로드 시간 */}
+                                <div className="product-list-footer">
+                                    <div className="product-list-fbox" title={item.productPrice}>가격: {item.productPrice}원</div>  {/* 상품 가격 */}
+                                    <div className="product-list-fbox" title={item.productInven}>재고수량: {item.productInven}</div>
+                                </div>
+                                <div className="product-list-footer">
+                                    <div className="product-list-fbox" title={item.userName}>판매자: {item.userName}</div>
+                                    <div className="product-list-fbox" title={item.productView}>조회수: {item.productView}</div>
+                                </div>
                             </ div >
                      ))
 

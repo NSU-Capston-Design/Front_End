@@ -30,11 +30,11 @@ export default function FindId(){
         })
         .then(res => {  // 가져온 데이터 셋업
             window.localStorage.setItem('token', res.data.token)
-            window.localStorage.setItem('userId', res.data.userId)
+            window.localStorage.setItem('memberId', res.data.memberId)
             // window.localStorage.setItem('token', res.data.token)
             // window.localStorage.setItem('token', res.data.token)
             console.log(0)
-            alert(`고객님의 아이디는 ${res.data.userId}입니다.` )
+            alert(`고객님의 아이디는 ${res.data.memberId}입니다.` )
         })
         .catch(err => {
             console.log(err)

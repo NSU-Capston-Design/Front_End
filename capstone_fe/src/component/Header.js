@@ -12,17 +12,17 @@ import axios from "axios";
 
 export default function Header(){
     const [sessionId, setSessionId] = useState("");
-    const [userName, setUserName] = useState("");
+    const [memberId, setMemberId] = useState(0);
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
     
     useEffect(() => {
-        const stroageUserName = window.localStorage.getItem('username');
-        setUserName(stroageUserName || "");
+        const stroageMemberId = window.localStorage.getItem('memberId');
+        setMemberId(stroageMemberId || 0);
         const stroageSessionId = window.localStorage.getItem('sessionId');
         setSessionId(stroageSessionId || "");
         
-        console.log(userName);
+        console.log(memberId);
         console.log(sessionId);
         if(sessionId){
             setIsLogined(true);
@@ -64,8 +64,6 @@ export default function Header(){
         window.localStorage.clear();
 
         axios.post('localhost:8080/user/logout');
-        
-        
     }
 
     return(
