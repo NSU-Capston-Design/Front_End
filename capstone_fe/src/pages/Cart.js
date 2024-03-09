@@ -5,6 +5,7 @@ import "../css/Cart.css"
 import item_img from '../img/item.png';
 import successful_paymentImage from '../img/successful_payment.png';
 import warningImage from '../img/warning.png';
+import axios from 'axios';
 
 
 export default function Cart(){
@@ -45,6 +46,71 @@ export default function Cart(){
       setShowModal(false);
       setShowSuccessModal(false);
       setShowNewModal(true);
+    };
+
+    const submitOrder = async () => {
+      try {
+        const userName = "khk"; // 실제 사용자 정보로 교체하기
+  
+        const productInfo = {
+          productName: "추억의 도시락A",
+          productPrice: 5000,
+          productInven: cart,
+        };
+  
+        // 선택한 파일을 시뮬레이션
+        const selectedFile = new File(['더미 컨텐츠'], '더미.jpg', {
+          type: 'image/jpeg',
+        });
+  
+        const data = {
+          productName: productInfo.productName,     // 제품 이름
+          productPrice: productInfo.productPrice,   // 제품 가격
+          userName: userName,                       // 구매자 이름
+          productInven: productInfo.productInven,   // 제품 정보
+        };
+  
+        const formData = new FormData();
+        formData.append('file', selectedFile);
+        formData.append(
+          'data',
+          new Blob([JSON.stringify(data)], {
+            type: 'application/json',
+          })
+        );
+  
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            // 여쪽에다 세션 ID받고 가져오는 로직을 추가
+          },
+        };
+  
+        const response = await axios.post(
+          'http://localhost:8080/upload', // 실제 백엔드 API URL로 교체
+          formData,
+          config
+        );
+  
+    //submitOrder 함수는 주문 정보를 포함한 데이터를 서버로 전송하는 역할
+    //axios.post 함수를 통해 실제로 서버로 데이터를 보내고, 응답을 받아옴
+    //응답이 성공하면 setShowSuccessModal(true)를 호출하여 결제 성공 모달을 표시
+    //응답이 실패하면 setShowNewModal(true)를 호출하여 결제 실패 모달을 표시
+    //현재 submitOrder 함수는 더미 데이터를 사용중임 실제로는 사용자가 선택한 제품 정보, 로그인한 사용자의 정보, 이미지 파일 등을 동적으로 가져와서 사용해야 함,
+    //또한 실제 백엔드 API 주소로 교체해야 함
+
+
+
+        console.log('파일 업로드 성공!', response);
+  
+        // 응답이 성공을 나타내면 성공 모달을 표시함
+        setShowSuccessModal(true);
+      } catch (error) {
+        console.error('파일 업로드 실패!', error);
+  
+        // 응답이 실패를 나타내면 실패 모달을 표시함
+        setShowNewModal(true);
+      }
     };
 
     return(

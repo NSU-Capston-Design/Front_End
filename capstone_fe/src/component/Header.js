@@ -15,7 +15,7 @@ export default function Header(){
     const [memberId, setMemberId] = useState(0);
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
-    
+
     useEffect(() => {
         const stroageMemberId = window.localStorage.getItem('memberId');
         setMemberId(stroageMemberId || 0);
@@ -26,7 +26,7 @@ export default function Header(){
         console.log(sessionId);
         if(sessionId){
             setIsLogined(true);
-            
+
         } else{
             setIsLogined(false);
         }
@@ -53,6 +53,10 @@ export default function Header(){
 
     const MovetoCart = e => {   // 장바구니로 이동
         navigate('/cart')       // 페이지 내부 주소
+    }
+
+    const MovetoInquiry = e => {   // 문의하기로 이동
+        navigate('/inquiry')       // 페이지 내부 주소
     }
     
     const MovetoProduct = e => {
@@ -109,6 +113,10 @@ export default function Header(){
                         <div className="donate">    
                             <button className="donate_btn" onClick={MovetoDonation}>기부하기</button>
                         </div>
+
+                        <div className="inquiry">    
+                            <button className="inquiry_btn" onClick={MovetoInquiry}>문의하기</button>
+                            </div>
                     </ul>
                     
                 </div>

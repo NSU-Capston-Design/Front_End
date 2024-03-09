@@ -1,30 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import '../css/Posting.css';
+import Button from '../component/Button';
 
 const Posting = ({ onClose }) => {
+
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+
+    const handlePosting = async () => {
+        try {
+            const response = await axios.post("url", { //보내기
+                title: title,
+                content: content,
+                
+            });
+            console.log("게시글 작성 완료", response.data);
+        } catch (error) {
+            console.error(" 업로드 오류: ", error);
+        }
+    };
     return (
-        <form>
-            <div className="Posting">
-                <div className="Posting_header">
-                    <div className="Posting_title">
-                        <textarea className="Posting_titleInput">
-                            글 제목
-                        </textarea>
-                        <button type="button" className="Posting_closeBtn" onClick={onClose}>
-                            닫기
-                        </button>
-                    </div>
+
+        <div className="Posting">
+            <div className="Posting_header">
+                <div className="Posting_title">
+                    <input className="Posting_titleInput"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="게시글 제목을 입력하세요"
+                    />
+
+                    <button type="button" className="Posting_closeBtn" onClick={() => onClose()}>
+                        닫기
+                    </button>
                 </div>
-                <textarea name="Posting_content">
-                    {/* 게시글 내용 작성 칸 */}
-                </textarea>
-                <button className="posting_btn">
-                    {/* 게시 버튼 */}
-                    게시
-                </button>
             </div>
-        </form>
+
+            <div className="content">
+                <textarea className="Posting_content"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    placeholder="게시글 내용을 입력하세요"
+                />
+            </div>
+
+            <Button size="sm" onClick={handlePosting}>게시</Button>
+        </div>
+
     );
 };
-
+ 
 export default Posting;
