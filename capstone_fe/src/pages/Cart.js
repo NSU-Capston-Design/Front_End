@@ -1,236 +1,181 @@
-import React from "react";
-import { useEffect, useState } from 'react';
+//상품 페이지(Product Page):
+
+//사용자가 상품을 선택하고 장바구니에 추가함
+//사용자가 상품을 선택하면, 프론트엔드는 해당 상품에 대한 정보(예: 상품 ID, 상품명, 가격 등)를 서버로 보냄
+//이 정보는 보통 POST 요청 또는 GraphQL 쿼리로 전송됨
+//백엔드는 상품 정보를 받아서 처리하고, 장바구니에 해당 상품을 추가함
+//하지만 내가 만든건 로컬스토리지를 이용하여 바로 장바구니에 담게하는 방법 (해결)
+
+
+//장바구니 페이지(Cart Page):
+
+//사용자가 장바구니 페이지로 이동하면, 프론트엔드는 장바구니에 담긴 상품 정보를 서버로부터 요청함
+//백엔드는 장바구니에 담긴 상품 정보를 데이터베이스에서 가져와 프론트엔드에 응답함
+//프론트엔드는 받은 상품 정보를 사용자에게 보여줌
+//사용자가 장바구니에서 상품의 수량을 변경하거나 삭제할 경우, 이 정보를 프론트엔드가 서버로 전송함
+//프론트엔드는 이 정보를 백엔드로 보내어 장바구니 정보를 업데이트함
+//로컬스토리지에서 바로 불러오고 수정함 (해결)
+
+
+//결제 페이지(Checkout Page):
+
+//사용자가 결제 페이지로 이동하면, 프론트엔드는 결제를 위한 정보를 서버로 요청함
+//이 정보에는 사용자의 제품명, 상품가격, 수량, 제품 등이 포함될 예정 
+//백엔드는 사용자의 요청을 처리하고, 결제를 위한 정보를 프론트엔드에 응답함
+//프론트엔드는 받은 정보를 사용자에게 보여주고, 사용자가 결제를 완료할 수 있도록 구현함
+//사용자가 결제를 완료하면, 프론트엔드는 해당 정보를 백엔드로 전송하여 결제를 처리함
+
+
+import React, { useState, useEffect } from "react";
 import Header from "../component/Header";
-import "../css/Cart.css"
-import item_img from '../img/item.png';
-import successful_paymentImage from '../img/successful_payment.png';
-import warningImage from '../img/warning.png';
+import "../css/Cart.css";
 import axios from 'axios';
 
-
-export default function Cart(){
-
-
-    const [cart, setCart] = useState(1);
+export default function Cart() {
+    const [cartItems, setCartItems] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
     const [showModal, setShowModal] = useState(false);
-    const [showSuccessModal, setShowSuccessModal] = useState(false);
-    const [showNewModal, setShowNewModal] = useState(false);
-  
-    const decreaseCart = () => {
-      if (cart > 1) {
-        setCart(cart - 1);
-      }
-    };
-  
-    const increaseCart = () => {
-      setCart(cart + 1);
-    }
 
-    const handleCart = () => {
-      setShowModal(true); // 구매하기 버튼을 누르면 모달을 나타나도록 설정
+    // 장바구니 아이템의 총 가격을 계산합니다.
+    const calculateTotalPrice = (items) => {
+        return items.reduce((total, item) => total + (item.totalPrice || (item.productPrice * item.quantity)), 0);
     };
 
-    const closeModal = () => {
-      setShowModal(false); // 모달을 감추는 함수
-      setShowSuccessModal(false); // 결제 완료 모달도 감추는 함수
-      setShowNewModal(false);
+    useEffect(() => {
+        // 로컬 스토리지에서 저장된 장바구니 아이템을 불러옵니다.
+        const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        setCartItems(storedCartItems);
+        setTotalPrice(calculateTotalPrice(storedCartItems));
+    }, []);
+
+    // 장바구니 아이템을 업데이트하고, 로컬 스토리지와 총 가격을 갱신합니다.
+    const updateCartItems = (updatedCartItems) => {
+        setCartItems(updatedCartItems);
+        localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+        setTotalPrice(calculateTotalPrice(updatedCartItems));
     };
 
-    const yesCart = () => {
-      // 결제 확인 처리 로직을 추가하세요.
-      console.log('결제 확인 로직을 실행합니다.');
-      setShowSuccessModal(true); // 결제 확인 후 결제 완료 모달을 나타나도록 설정
+    // 장바구니에 아이템을 추가합니다. (장바구니 담기 버튼을 클릭할때 활성화 됨)
+    const addToCart = (product) => {
+        const updatedCartItems = [...cartItems];
+        const existingCartItemIndex = updatedCartItems.findIndex(item => item.productId === product.productId);
+    
+        if (existingCartItemIndex !== -1) {
+            // 이미 장바구니에 있는 상품일 경우 수량을 증가시킵니다.
+            updatedCartItems[existingCartItemIndex].quantity++;
+            updatedCartItems[existingCartItemIndex].totalPrice += product.productPrice;
+        } else {
+            // 장바구니에 새로운 상품으로 추가합니다.
+            updatedCartItems.push({ ...product, quantity: 1, totalPrice: product.productPrice }); // 여기서 totalPrice를 productPrice로 설정합니다.
+        }
+        updateCartItems(updatedCartItems);
     };
 
-    const noCart = () => {
-      setShowModal(false);
-      setShowSuccessModal(false);
-      setShowNewModal(true);
+    // 장바구니에서 특정 아이템을 삭제합니다.
+    const removeItem = (index) => {
+        const updatedCartItems = [...cartItems];
+        updatedCartItems.splice(index, 1);
+        updateCartItems(updatedCartItems);
     };
 
-    const submitOrder = async () => {
-      try {
-        const userName = "khk"; // 실제 사용자 정보로 교체하기
-  
-        const productInfo = {
-          productName: "추억의 도시락A",
-          productPrice: 5000,
-          productInven: cart,
-        };
-  
-        // 선택한 파일을 시뮬레이션
-        const selectedFile = new File(['더미 컨텐츠'], '더미.jpg', {
-          type: 'image/jpeg',
-        });
-  
-        const data = {
-          productName: productInfo.productName,     // 제품 이름
-          productPrice: productInfo.productPrice,   // 제품 가격
-          userName: userName,                       // 구매자 이름
-          productInven: productInfo.productInven,   // 제품 정보
-        };
-  
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        formData.append(
-          'data',
-          new Blob([JSON.stringify(data)], {
-            type: 'application/json',
-          })
-        );
-  
-        const config = {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            // 여쪽에다 세션 ID받고 가져오는 로직을 추가
-          },
-        };
-  
-        const response = await axios.post(
-          'http://localhost:8080/upload', // 실제 백엔드 API URL로 교체
-          formData,
-          config
-        );
-  
-    //submitOrder 함수는 주문 정보를 포함한 데이터를 서버로 전송하는 역할
-    //axios.post 함수를 통해 실제로 서버로 데이터를 보내고, 응답을 받아옴
-    //응답이 성공하면 setShowSuccessModal(true)를 호출하여 결제 성공 모달을 표시
-    //응답이 실패하면 setShowNewModal(true)를 호출하여 결제 실패 모달을 표시
-    //현재 submitOrder 함수는 더미 데이터를 사용중임 실제로는 사용자가 선택한 제품 정보, 로그인한 사용자의 정보, 이미지 파일 등을 동적으로 가져와서 사용해야 함,
-    //또한 실제 백엔드 API 주소로 교체해야 함
-
-
-
-        console.log('파일 업로드 성공!', response);
-  
-        // 응답이 성공을 나타내면 성공 모달을 표시함
-        setShowSuccessModal(true);
-      } catch (error) {
-        console.error('파일 업로드 실패!', error);
-  
-        // 응답이 실패를 나타내면 실패 모달을 표시함
-        setShowNewModal(true);
-      }
+    // 장바구니 아이템의 수량을 변경합니다.
+    const changeQuantity = (index, newQuantity) => {
+        const updatedCartItems = [...cartItems];
+        if (newQuantity < 1) {
+            newQuantity = 1; // 최소값이 1이 되도록 설정
+        }
+        updatedCartItems[index].quantity = newQuantity;
+        updatedCartItems[index].totalPrice = updatedCartItems[index].productPrice * newQuantity;
+        updateCartItems(updatedCartItems);
     };
 
-    return(
-        <div className="cart_all">
-        <div className="don_all">
-           <Header/>
+    // 주문을 제출합니다.
+    const submitOrder = () => {
+        setShowModal(true);
+    };
 
-           <div className="cart" >
-            <div className="cart_txt">장바구니</div>
+    // 주문을 확인하고 백엔드로 데이터를 전송합니다. (결제쪽)
+    const confirmOrder = async () => {
+        try {
+            const backendURL = 'http://localhost:8080/upload'; // 실제 백엔드 API URL을 여기에 입력
             
-           </div>
+            const orderData = cartItems.map(item => ({
+                productId: item.productId,
+                productName: item.productName,
+                productPrice: item.productPrice,
+                quantity: item.quantity,
+                productURL: item.productURL
+            }));
 
-           <div className="cart_list">
+            const response = await axios.post(
+                backendURL,
+                orderData
+            );
+            console.log('주문 성공:', response);
+            // 주문이 성공적으로 처리된 후에는 장바구니를 비웁니다.
+            setCartItems([]);
+            localStorage.removeItem('cart');
+            setTotalPrice(0);
+            setShowModal(false); // 주문 완료 후 모달 닫기
+        } catch (error) {
+            console.error('주문 실패:', error);
+        }
+    };
 
-            <div className="cart_list1" >
-            <img src={item_img} alt="Item" className="item_image" />
-            <div className="cart_name1">
-             <div className="cart_name1_d1">추억의 도시락A</div>
+    // 모달을 닫습니다.
+    const closeModal = () => {
+        setShowModal(false);
+    };
 
-             <div className="cart_controls">
-                <button onClick={decreaseCart}>-</button>
-                <input type="text" value={cart} readOnly />
-                <button onClick={increaseCart}>+</button>
+    return (
+        <div className="cart_all">
+            <Header />
+            <div className="don_all">
+                <div className="cart">
+                    <div className="cart_txt">장바구니</div>
                 </div>
-                
-             <div className="cart_name1_d2">5,000<br/></div>
-           
-            </div>
-             
 
-            </div> 
-
-            <div className="cart_list2" >
-            <img src={item_img} alt="Item" className="item_image" />
-            <div className="cart_name2">
-             <div className="cart_name2_d1">추억의 도시락B</div>
-
-             <div className="cart_controls">
-                <button onClick={decreaseCart}>-</button>
-                <input type="text" value={cart} readOnly />
-                <button onClick={increaseCart}>+</button>
+                <div className="cart_list">
+                    {cartItems.map((product, index) => (
+                        <div className="cart_item" key={index}>
+                            <div className="cart_item_image">
+                                <img src={product.productURL} alt={product.productName} />
+                            </div>
+                            <div className="cart_item_name">{product.productName}</div>
+                            <div className="cart_item_price">{product.productPrice ? product.productPrice.toLocaleString() : '0'}원</div>
+                            <div className="cart_item_quantity">
+                                <button onClick={() => changeQuantity(index, product.quantity - 1)}>-</button>
+                                {product.quantity}
+                                <button onClick={() => changeQuantity(index, product.quantity + 1)}>+</button>
+                            </div>
+                            <div className="cart_item_total_price">{product.totalPrice ? product.totalPrice.toLocaleString() : '0'}원</div>
+                            <button onClick={() => removeItem(index)}>삭제하기</button>
+                        </div>
+                    ))}
                 </div>
-                
-             <div className="cart_name2_d2">10,000<br/></div>
-           
             </div>
-             
+            <div className="total_price">총 가격: {totalPrice.toLocaleString()}원</div>
+            <button onClick={submitOrder}>주문하기</button>
 
-            </div> 
-
-            <div className="cart_list3" >
-            <img src={item_img} alt="Item" className="item_image" />
-            <div className="cart_name3">
-             <div className="cart_name3_d1">추억의 도시락C</div>
-
-             <div className="cart_controls">
-                <button onClick={decreaseCart}>-</button>
-                <input type="text" value={cart} readOnly />
-                <button onClick={increaseCart}>+</button>
+            {/* 모달 */}
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <span className="close" onClick={closeModal}>&times;</span>
+                        <h2>주문 확인</h2>
+                        <ul>
+                            {cartItems.map((product, index) => (
+                                <li key={index}>{product.productName}: {product.quantity}개</li>
+                            ))}
+                        </ul>
+                        <p>총 가격: {totalPrice.toLocaleString()}원</p>
+                        <div className="modal-buttons">
+                            <button className="confirm-button" onClick={confirmOrder}>결제 하기</button>
+                            <button className="cancel-button" onClick={closeModal}>결제 취소</button>
+                        </div>
+                    </div>
                 </div>
-                
-             <div className="cart_name3_d2">100,000<br/></div>
-           
-            </div>
-             
-
-            </div> 
-
-            <div className="cart_list4"> 
-             <div className="cart_name4">
-             <div className="cart_name4_dl">총액</div>
-             <div className="cart_name4_d2"> 결제 할 금액<br/>115,000<br/></div>
-             <button className="cart_name4_d3" onClick={handleCart}>구매하기</button> 
-             </div>
-             
-
-             </div>
-
-           </div>
-
-           </div>
-
-           {/* 모달 컴포넌트 */}
-      {showModal && (
-        <div className="modal">
-          <div className="modal_content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <p>결제 확인</p>
-            <div className="modal_buttons">
-        <button onClick={yesCart}>확인</button>
-        <button onClick={noCart}>취소</button>
-      </div>
-          </div>
+            )}
         </div>
-      )}
-
-{/* 결제 완료 모달 컴포넌트 */}
-{showSuccessModal && (
-          <div className="modal">
-            <div className="modal_content">
-              <span className="close" onClick={closeModal}>&times;</span>
-              <p>결제 성공</p>
-              <img src={successful_paymentImage} alt="Successful_Payment" className="successful_payment_image" /> 
-              {/* 여기에 추가적인 결제 완료 내용을 넣어도 됩니다. */}
-            </div>
-          </div>
-        )}
-
-{showNewModal && (
-  <div className="modal">
-    <div className="modal_content">
-      <span className="close" onClick={() => setShowNewModal(false)}>&times;</span>
-      <p>결제 취소</p>
-      <img src={warningImage} alt="warning" className="warning_image" /> 
-      {/* 여기에 취소에 대한 내용을 넣어도 됩니다. */}
-      
-    </div>
-  </div>
-)}
-
-        </div>
-    )
+    );
 }
