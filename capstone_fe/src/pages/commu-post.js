@@ -1,96 +1,133 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import Header from '../component/Header';
-import '../css/Don_commu.css';
-import Posting from '../component/Posting';
-import PostDetails from './commu-post';
+import React, { useEffect, useState } from 'react';
+import '../css/Commu-post.css';
 import axios from 'axios';
 
-const postsArray = [
-  { id: 1, userId: 'user1', title: '제목 1', content: '내용 1', uploadTime: '2024-02-14', comments: [
-    { userId: 'commenter1', content: '댓글 1-1', uploadTime: '2024-02-14 12:00:00' },
-    { userId: 'commenter2', content: '댓글 1-2', uploadTime: '2024-02-14 12:30:00' }
-  ] },
-  { id: 2, userId: 'user2', title: '제목 2', content: '내용 2', uploadTime: '2024-02-14', comments: [ { userId: 'commenter3', content: '댓글 2-1', uploadTime: '2024-02-14 13:00:00' },
-  { userId: 'commenter4', content: '댓글 2-2', uploadTime: '2024-02-14 13:30:00' }] },
-  // ... 더 많은 게시글 데이터
-];
-const pageSize = 5; // 페이지당 보여질 게시글 수
-export default function Don_commu() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedPost, setSelectedPost] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    setCurrentUser('user1'); // 작성자로 설정
-    setIsAdmin(true); // 관리자 설정
-  }, []);
-
-  const openModal = useCallback(() => {
-    setIsModalOpen(true);
-  }, []);
-  const closeModal = useCallback(() => {
-    setIsModalOpen(false);
-  }, []);
+//헷갈려서 comments: 댓글 배열, comment: 댓글 하나 개별 객체
 
 
-  //현재 페이지 포스트 가져오기
-  const indexOfLastPost = currentPage * pageSize;
-  const indexOfFirstPost = indexOfLastPost - pageSize;
-  const currentPosts = postsArray.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);//페이지 변경
-  const handlePostClick = (post) => {
-    setSelectedPost(post);
-    openModal();
-  };
-  const handleOpenPostingModal = () => {
-    setSelectedPost(null); // 글쓰기 모달을 열 때는 선택된 게시물을 초기화
-    openModal();
-  };
+const PostDetails = ({ post, onClose, updatePostComments, isAdmin}) => {
+  const [newComment, setNewComment] = useState('');
+  const [selectedComment, setSelectedComment] = useState(-1);
+  const [editPostContent, setEditPostContent] = useState(post.content); // 수정 중인 게시글
+  const [isEditPost, setIsEditPost] = useState(false); //게시글 수정모드
+  const [currentUser, setCurrentUser] = useState(null); // 현재 사용자 
+
+
   
-  console.log("isModalOpen:", isModalOpen);
-  console.log("selectedPost:", selectedPost);
+  useEffect(() => {
+    //현재 사용자가 작성자인지
+    const user = { id: 'user1' }; // 임시 사용자 정보
+    setCurrentUser(user);
+  }, []); 
+
+  const addComment = async () => {
+    try {
+      const response = await axios.post('api', { postId: post.id, content: newComment });
+      const updatedComments = [...post.comments, response.data]; //새로운댓글추가
+      updatePostComments(post.id, updatePostComments);
+      setNewComment('');
+    } catch (error) {
+      console.error('댓글 작성 실패 : ', error);
+    }
+  };
+
+  const deleteComment = async (index) => {
+    try {
+      await axios.delete('api${post.id}/${index}');
+      const updatedComments = post.comments.filter((_, i) => i !== index);
+      updatePostComments(post.id, updatePostComments);
+    } catch (error) {
+      console.error('댓글 삭제 오류 : ', error);
+    }
+  };
+
+  const editComment = async (index, updatedContent) => { //수정완료 시 호출
+    try {
+      await axios.put('url${post.id}${index}', { content: updatedContent });
+      const updatedComments = [...post.comments];
+      updatedComments[index].content = updatedContent;
+      updatePostComments(post.id, updatedComments);
+      setSelectedComment(-1); //선택 댓글 초기화
+    } catch (error) {
+      console.error('댓글 수정 오류: ', error);
+    }
+  };
+
+  const editPost = async () => {
+    try {
+      await axios.put('url{&post.id)', { content: editPostContent });
+      setIsEditPost(false)//수정 모드 종료
+    } catch (error) {
+      console.error('게시글 수정 오류: ', error);
+    }
+  };
+
+  const deletePost = async()=>{
+    try{
+      await axios.delete('psotId');
+      onClose();
+    }catch(error){
+      console.error('게시글 삭제 오류: ',error);
+    }
+ };
+
   return (
-    <div className="don_commu_all">
-      <Header />
-      <div className="don_commu">
-        <div className="commu_title">게시판</div>
-      </div>
-      <div className="posting">
-      <button className="posting_btn" onClick={handleOpenPostingModal}>
-          글쓰기
-        </button>
-      </div>
-      <div className="msg_board">
-        <table className="post-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Content</th> 
-              <th>작성자</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentPosts.map((post) => (
-              <tr key={post.id} onClick={() => handlePostClick(post)}>
-                <td>{post.title}</td>
-                <td>{post.content}</td>
-                <td>{post.userId}</td>
-              </tr>
+    <form>
+      <div className="post-details-modal">
+        <div className="post-details-header">
+        {!isEditPost ? (
+            <>
+              <h2>{post.title}</h2>
+              <p>{post.uploadTime}</p>
+              <p>{post.userId ? post.userIdId : '알 수 없음'}</p>
+              {(currentUser && currentUser.id===post.userId)&&<button onClick={() => setIsEditPost(true)}>게시글 수정</button>}
+            </>
+          ) : (
+         
+              <button onClick={editPost}>수정 완료</button>
+          )}
+       {(isAdmin ||currentUser===post.userId)&&<button onClick={deletePost}>삭제</button>}
+          <button onClick={() => onClose()}>닫기</button>
+        </div>
+        <div className="post-details-content">
+        {!isEditPost ? (
+            <p>{post.content}</p>
+          ) : (
+            <div>
+              <textarea
+                value={editPostContent}
+                onChange={(e) => setEditPostContent(e.target.value)}
+              />
+            </div>
+          )}
+
+          <h3>댓글</h3>
+          <ul>
+            {post.comments.map((comment, index) => (
+              <li key={index}>
+                <p>{comment.userId}: {comment.content} {comment.uploadTime}</p> {/*댓글 유저,내용,시간 */}
+                {isAdmin &&currentUser===comment.userId ?( //관리자/댓글작성자 본인 댓글 삭제
+                  <button onClick={() => deleteComment(index)}>삭제</button>
+                ):null}
+                {currentUser===comment.userId && (//댓글 작성자만 수정가능
+                  <button onClick={() => setSelectedComment(index)}>수정</button>
+                )}
+              </li>
             ))}
-          </tbody>
-        </table>
+          </ul>
+          <div>
+            <input
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="댓글을 입력하세요"
+            />
+            <button onClick={addComment}>댓글 작성</button>
+          </div>
+        </div>
       </div>
-      <div className="pagination">
-        {Array.from({ length: Math.ceil(postsArray.length / pageSize) }, (_, index) => (
-          <button key={index + 1} onClick={() => paginate(index + 1)}>
-            {index + 1}
-          </button>
-        ))}
-      </div>
-      {isModalOpen && selectedPost === null && <Posting onClose={closeModal} />} {/* 글쓰기 모달 */}
-      {isModalOpen && selectedPost !== null && (<PostDetails post={selectedPost} onClose={closeModal} isAdmin={true} setCurrentUser={true}  />)} {/* 게시글 상세 모달 */}
-    </div>
+    </form >
   );
-}
+};
+
+export default PostDetails;

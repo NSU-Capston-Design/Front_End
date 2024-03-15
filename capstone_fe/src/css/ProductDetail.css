@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
+
 .product {
     padding: 59px;
     align-items: center;
@@ -12,7 +14,9 @@
     justify-content: center;
     width: 100vw;
 }
+
 .productImg {
+
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -20,9 +24,12 @@
     display: inline-flex;
     position: relative;
 }
+
 .description {
     position: center;
+
 }
+
 .descripText {
     color: #272727;
     font-weight: 500;
@@ -30,12 +37,15 @@
     line-height: 25.6px;
     position: absolute;
     font-size: 12px;
+
 }
+
 .image {
     background-color: #f7f8fa;
     height: 433px;
     width: 506px;
 }
+
 .productInfo {
     align-items: flex-start;
     display: inline-flex;
@@ -43,6 +53,7 @@
     gap: 32px;
     position: relative;
 }
+
 .productInfo1 {
     align-items: flex-start;
     display: inline-flex;
@@ -51,12 +62,16 @@
     gap: 24px;
     position: relative;
 }
+
 .productInfo2 {
+
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+
     display: inline-flex;
 }
+
 .productName {
     color: #000000;
     font-family: var(--web-h5-font-family);
@@ -69,6 +84,7 @@
     position: relative;
     width: 343px;
 }
+
 .rate {
     align-items: center;
     display: inline-flex;
@@ -76,6 +92,7 @@
     gap: 16px;
     position: relative;
 }
+
 .rate_start {
     width: 43px;
     height: 24px;
@@ -90,6 +107,7 @@
     align-items: center;
     display: inline-flex;
 }
+
 .rate_num {
     color: white;
     font-size: 12px;
@@ -97,12 +115,15 @@
     font-weight: 500;
     word-wrap: break-word;
 }
+
 .stock_deliver {
+
     align-items: flex-start;
     gap: 600px;
     display: inline-flex;
     position: relative;
 }
+
 .stock,
 .delivery {
     align-items: center;
@@ -111,6 +132,7 @@
     gap: 4px;
     position: relative;
 }
+
 .stock_txt,
 .delivery_txt {
     color: #717171;
@@ -119,13 +141,16 @@
     font-weight: 500;
     word-wrap: break-word;
 }
+
+
+
 .infoDetails {
     align-items: flex-start;
     display: inline-flex;
     flex-direction: column;
     gap: 32px;
     position: relative;
-
+    
 }
 
 .info {
@@ -136,13 +161,16 @@
     gap: 24px;
     position: relative;
 }
+
 .infoGN {
     width: 288px;
     height: 32px;
     justify-content: flex-start;
     align-items: center;
     display: inline-flex;
+
 }
+
 .infoGroup {
     width: 184px;
     height: 32px;
@@ -152,6 +180,7 @@
     gap: 10px;
     display: inline-flex;
 }
+
 .groupName {
     color: #717171;
     font-size: 14px;
@@ -159,6 +188,7 @@
     font-weight: 500;
     word-wrap: break-word;
 }
+
 .infoName {
     height: 32px;
     justify-content: flex-start;
@@ -166,6 +196,7 @@
     gap: 10px;
     display: inline-flex;
 }
+
 .infoTxt {
     color: #0C0C0C;
     font-size: 14px;
@@ -173,6 +204,7 @@
     font-weight: 500;
     word-wrap: break-word;
 }
+
 .buy {
     align-items: center;
     display: inline-flex;
@@ -181,6 +213,7 @@
     padding: 28px 17px;
     position: relative;
 }
+
 .priceSection {
     align-items: center;
     display: flex;
@@ -191,12 +224,14 @@
     width: 264px;
     
 }
+
 .price {
     align-items: center;
     display: flex;
     gap: 40px;
     position: relative;
 }
+
 .currentPrice {
     color: #0C0C0C;
     font-size: 20px;
@@ -204,12 +239,14 @@
     font-weight: 500;
     word-wrap: break-word;
 }
+
 .discount {
     align-items: center;
     display: inline-flex;
     gap: 2px;
     position: relative;
 }
+
 .discountAmount {
     color: #f45e0c;
     font-size: 16px;
@@ -217,12 +254,16 @@
     font-weight: 500;
     word-wrap: break-word;
 }
+
 .lastPrice {
+
     align-items: center;
     gap: 8px;
     display: flex;
     position: relative;
+
 }
+
 .lastPriceTxt {
     color: #717171;
     font-size: 14px;
@@ -230,6 +271,7 @@
     font-weight: 300;
     word-wrap: break-word;
 }
+
 .productBtn {
     align-items: center;
     display: flex;
@@ -238,4 +280,19 @@
     justify-content: center;
     position: relative;
     width: 264px;
+}
+.modalCloseBtn {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #333333;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.modalCloseBtn:hover {
+    background-color: #cccccc;
+    color: #ffffff;
 }

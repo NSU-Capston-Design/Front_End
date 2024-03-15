@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
 export default function ProductDetail(props) {
 
     const [isAdmin, setIsAdmin] = useState(false); //관리자 여부
@@ -91,14 +92,17 @@ export default function ProductDetail(props) {
                 const response = await axios.get('/product/detail', {
                     params: { productId: productId }
                 });
+
                 const data = response.data;
                 setProductData(data);
             } catch (error) {
                 console.log("오류발생", error);
             }
         };
+
         fetchProductDetail();
     }, [productId]);
+
     const updateProductViews = async () => {
         try {
             await axios.get(`/product/views`, {
@@ -108,25 +112,31 @@ export default function ProductDetail(props) {
             console.log("오류발생", error);
         }
     };
+
     useEffect(() => {
         updateProductViews();
     }, [productId]);
+
     const handleReviewChange = (event) => {
         setReviewText(event.target.value);
     };
+
     const handleSatisfactionChange = (event) => { // 만족도 변경 처리
         setSatisfaction(event.target.value);
     };
+
     const submitReview = () => {
         const newReview = {
             username: "사용자", // 리뷰 작성자
             reviewText: reviewText,
             satisfaction: satisfaction // 만족도 추가
         };
+
         setReviews([...reviews, newReview]);
         setReviewText(""); // 리뷰 작성 후 폼 초기화
         setSatisfaction(""); // 만족도 초기화
     };
+
 
     const Purchase = () => {
         // 구매 로직
@@ -203,6 +213,7 @@ export default function ProductDetail(props) {
                     </p>
 
                 </div>
+
                 <div className='productInfo'>
                     <div className='productInfo1'>
                         <div className='productInfo2'>
@@ -225,14 +236,17 @@ export default function ProductDetail(props) {
                             <div className='stock'>
                                 {/*<Shop className="icon-instance-node" />*/}
                                 <div className="stock_txt">재고있음</div>
+
                                 <div className='delivery'>
                                     {/* <Truck className="icon-instance-node" />*/}
                                     <div className="delivery_txt">무료배송</div>
                                 </div>
                             </div>
                         </div>
+
                         <div className='infoDetails'>
                             <div className='info'>
+
                                 <div className='infoGN'>
                                     <div className='infoGroup'>
                                         <div className='groupName'>가격</div>
@@ -241,6 +255,7 @@ export default function ProductDetail(props) {
                                         <div className='infoTxt'>{productData.productPrice}원</div>
                                     </div>
                                 </div>
+
                                 <div className='infoGN'>
                                     <div className='infoGroup'>
                                         <div className='groupName'>재고수량</div>
@@ -249,6 +264,7 @@ export default function ProductDetail(props) {
                                         <div className='infoTxt'>{productData.productInven}개</div>
                                     </div>
                                 </div>
+
                                 <div className='infoGN'>
                                     <div className='infoGroup'>
                                         <div className='groupName'>상품 조회수</div>
@@ -257,6 +273,7 @@ export default function ProductDetail(props) {
                                         <div className='infoTxt'>{productData.productView}회</div>
                                     </div>
                                 </div>
+
                                 <div className='infoGN'>
                                     <div className='infoGroup'>
                                         <div className='groupName'>업로드 시간</div>
@@ -285,8 +302,11 @@ export default function ProductDetail(props) {
                             <div className='lastPriceTxt'>$456</div>
                         </div>
                     </div>
+
                     <div className='productBtn'> {/*구매/장바구니 버튼 */}
                         <Button size="sm" onClick={Purchase}>구매</Button>
+
+
                         <Button size="sm" onClick={addToCart}>장바구니</Button>
                     </div>
                 </div>
@@ -317,11 +337,12 @@ export default function ProductDetail(props) {
                         </div>
                     ))}
                 </div>
-
+               
             </div>
         </div>
     );
 }
+
 //     return(
 //         <>
 //             <Header/>

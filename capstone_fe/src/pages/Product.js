@@ -20,13 +20,18 @@
 //이때 주문 데이터 생성, 결제 처리, 재고 관리 등의 백엔드 작업이 진행됨
 //결제 확인 단계 : 결제가 성공적으로 처리되었다는 정보를 사용자에게 알려주고, 백엔드 시스템은 결제 내역을 최종적으로 데이터베이스에 기록함
 
-import React, { useState } from "react";
 import Header from "../component/Header";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import "../css/Product.css";
+import ProductDetail from "../pages/ProductDetail"; 
 
 export default function Product() {
+
+    
+    const [selectedProduct, setSelectedProduct] = useState(null); 
+    const [isModalOpen, setIsModalOpen] = useState(false); 
+
     const [list, setList] = useState([
         {
             productId: 1,
@@ -67,15 +72,49 @@ export default function Product() {
         }
         
         localStorage.setItem('cart', JSON.stringify(existingCartItems));
+    }
+    
+
+//     useEffect(() => { 제품가져오기
+//     const productList = async () => {
+//     try {
+//         const response = await axios.get(`//localhost:8080/product/list`);
+//         const data = response.data;
+//         console.log(data);
+
+//         if (Array.isArray(data)) {
+//             setList(data);
+//         } else {
+//             console.error('배열이 아닌 데이터입니다:', data);
+//         }
+//     } catch (error) {
+//         console.error('데이터를 불러오는 중 오류가 발생했습니다:', error);
+//     }
+// };
+//         productList();  // 초기 데이터 가져오기
+//     }, []);
+
+    //     setList(temporaryData);
+    // }, []); // 빈 배열을 넣어 한 번만 실행되도록 설정
+
+    const openProductDetailModal = (productId) => {
+        const product = list.find(item => item.productId === productId);
+        setSelectedProduct(product); // 선택된 상품 설정
+        setIsModalOpen(true); // 모달 오픈
+    };
+
+    const closeProductDetailModal = () => {
+        setSelectedProduct(null);
+        setIsModalOpen(false);
     };
 
     const handleAddProduct = () => {
         navigate('/product/upload');
     };
 
-    const handleProductClick = (productId) => {
-        navigate(`/product/detail/${productId}`); // 상품 클릭 시 해당 상품의 상세 페이지로 이동
-    };
+    // const handleProductClick = (productId) => { 모달페이지로 열리는 걸로 했습니다.
+    //     navigate(`/product/detail/${productId}`); // 상품 클릭 시 해당 상품의 상세 페이지로 이동
+    // };
 
     const handleAddToCart = (event, item) => {
         event.stopPropagation(); // 상세 페이지 이동 방지
@@ -88,7 +127,7 @@ export default function Product() {
             <div className="product-all">
                 <div className="product-list">
                     {list.map((item) => (
-                        <div key={item.productId} className="product-list-item" onClick={() => handleProductClick(item.productId)}>
+                        <div key={item.productId} className="product-list-item" onClick={() => openProductDetailModal(item.productId)}>
                             <div className="product-list-box">
                                 <div className="product-list-image">
                                     <img src={`${item.productURL}`} alt="Product" style={{ width: 150, height: 150 }} />
@@ -102,6 +141,7 @@ export default function Product() {
                                 <div className="product-list-review" title={item.productReview}>
                                     평점: {item.productReview}
                                 </div>
+                                
                                 <button onClick={(event) => handleAddToCart(event, item)} className="add-to-cart-button">
                                     장바구니에 담기
                                 </button>
@@ -113,6 +153,15 @@ export default function Product() {
                     <input type="button" className="movetoupload" onClick={handleAddProduct} value="상품 등록" />
                 </span>
             </div>
+            {isModalOpen && (
+                // 모달 오픈 상태일 때 ProductDetail 모달로 렌더링
+                <div className="product-overlay">
+                    <div className="product-modal">
+                        {/* ProductDetail 모달 */}
+                        <ProductDetail product={selectedProduct} closeModal={closeProductDetailModal} list={list} />
+                    </div>
+                </div>
+            )}
         </>
     );
 }
