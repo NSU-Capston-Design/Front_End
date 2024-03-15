@@ -7,10 +7,21 @@ import axios from 'axios';
 
 export default function ProductDetail(props) {
 
-    useEffect(()=>{ //관리자/사용자 권한 로컬 설정
+    const [isAdmin, setIsAdmin] = useState(false); //관리자 여부
+    const [reviewText, setReviewText] = useState("");
+    const [satisfaction, setSatisfaction] = useState(""); // 만족도 
+    const [reviews, setReviews] = useState([]);
+    const [isEditMode, setIsEditMode] = useState(false); // 수정 모드 여부
+    const [editedProductData, setEditedProductData] = useState({
+        productName: '',
+        productPrice: 0,
+        productDescription: ''
+    });
+
+    useEffect(() => { //관리자/사용자 권한 로컬 설정
         const isAdmin = localStorage.getItem('isAdmin') === 'true';
         setIsAdmin(true);
-      },[]);
+    }, []);
 
     const navigate = useNavigate();
     const { productId } = useParams();
@@ -33,26 +44,47 @@ export default function ProductDetail(props) {
         productCategory: "테스트 카테고리",
         productBrand: "테스트 브랜드",
         productDescription: "테스트 상품 설명입니다."
-    })
-
-    const [isAdmin, setIsAdmin]=useState(false); //관리자 여부
-    const [reviewText, setReviewText] = useState("");
-    const [satisfaction, setSatisfaction] = useState(""); // 만족도 
-    const [reviews, setReviews] = useState([]);
+    });
 
 
-    const delteProduct = async()=>{//상품삭제
-        try{
+
+
+    const deleteProduct = async () => {//상품삭제
+        try {
             await axios.delete('${productId}');
             navigate('/');
-        }catch(error){
+        } catch (error) {
             console.log("상품 삭제 오류", error);
         }
     }
 
-    const editProduct=()=>{//상품상세 수정
+    const editProduct = () => { // 수정 모드로 전환
+        setIsEditMode(true);
+        setEditedProductData({
+            productName: productData.productName,
+            productPrice: productData.productPrice,
+            productDescription: productData.productDescription
+        });
+    };
 
-    }
+    const editChanges = () => { // 수정 저장
+
+        setProductData({
+            ...productData,
+            productName: editedProductData.productName,
+            productPrice: editedProductData.productPrice,
+            productDescription: editedProductData.productDescription
+        });
+        setIsEditMode(false); // 수정 모드 종료
+    };
+
+
+
+    const closeEdit = () => {
+        setIsEditMode(false);
+    };
+
+
 
     useEffect(() => {
         const fetchProductDetail = async () => {
@@ -108,31 +140,31 @@ export default function ProductDetail(props) {
 
     const Purchase = () => {
         // 구매 로직
-        const isConfirmed=window.confirm(`상품(${productId})을 구매하시겠습니까?.`);
+        const isConfirmed = window.confirm(`상품(${productId})을 구매하시겠습니까?.`);
 
-        if(isConfirmed){
+        if (isConfirmed) {
             console.log(`상품(${productId}) 결제페이지로 이동합니다.`);
             navigate('/')//결제모달로 수정예정
-           
-        }else{
+
+        } else {
             console.log(`상품(${productId}) 구매가 취소되었습니다.`);
         }
     };
 
-    const addToCart = async() => {
-       
+    const addToCart = async () => {
+
         // 장바구니 추가 로직
         const cartItem = {
             productId: productData.productId,
             productName: productData.productName,
             productPrice: productData.productPrice
         };
-    
+
         try {
             // const response = await axios.post('url', cartItem);
             // console.log('장바구니 추가됨:', response.data);
             const isConfirmed = window.confirm(`상품(${productId})을 장바구니에 추가했습니다. 장바구니로 이동하시겠습니까?`);
-    
+
             if (isConfirmed) {
                 navigate('/cart');
             }
@@ -140,27 +172,43 @@ export default function ProductDetail(props) {
             console.error('장바구니로 이동 중 오류:', error);
         }
     };
-    
+
 
     return (
         <div className='all'>
             <div className="modalCloseBtn" onClick={props.closeModal}>
                 닫기
-            </div>  
+            </div>
             {isAdmin && (
-                    <div>
-                        <button onClick={editProduct}>제품정보 수정</button>
-                        <button  onClick={delteProduct}>삭제</button>
-                        </div>
+                <div>
+                    {isEditMode ? (
+                        <>
+                            <button onClick={editChanges}>저장</button>
+                            <button onClick={closeEdit}>취소</button>
+                        </>
+                    ) : (
+                        <>
+                            <button onClick={editProduct}>제품 수정</button>
+                            <button onClick={deleteProduct}>삭제</button>
+                        </>
+                    )}
+                </div>
 
-                )}
+            )}
             <div className='product'>
 
                 <div className='productImg'>
                     <img src={productData.productURL} alt={productData.productName} />
                     <p className='description'>{/* 상품 이미지 밑 설명글 */}
                         <span className='descripText'>
-                            상품 설명글입니다.
+                            {isEditMode ? (
+                                <textarea
+                                    value={editedProductData.productDescription}
+                                    onChange={(e) => setEditedProductData({ ...editedProductData, productDescription: e.target.value })}
+                                />
+                            ) : (
+                                productData.productDescription
+                            )}
                         </span>
                     </p>
 
@@ -169,7 +217,15 @@ export default function ProductDetail(props) {
                 <div className='productInfo'>
                     <div className='productInfo1'>
                         <div className='productInfo2'>
-                            <div className='productName'>{productData.productName}</div>
+                            <div className='productName'>   {isEditMode ? (
+                                <input
+                                    value={editedProductData.productName}
+                                    onChange={(e) => setEditedProductData({ ...editedProductData, productName: e.target.value })}
+                                />
+                            ) : (
+                                productData.productName
+                            )}
+                            </div>
                             <div className='rate'>
                                 <div className='rate_start' >
                                     <div className='rate_num'>4.9</div>
@@ -230,7 +286,7 @@ export default function ProductDetail(props) {
                         </div>
                     </div>
                 </div>
-              
+
 
                 <div className='buy'>
 
@@ -257,14 +313,14 @@ export default function ProductDetail(props) {
             </div>
             <div className="reviewArea">
                 <h2>상품 리뷰</h2>
-                
+
                 <div className="reviewForm">
                     <input
                         value={reviewText}
                         onChange={handleReviewChange}
                         placeholder="리뷰를 작성해주세요."
                     />
-         <select value={satisfaction} onChange={handleSatisfactionChange}>
+                    <select value={satisfaction} onChange={handleSatisfactionChange}>
                         <option value="">만족도를 선택하세요</option>
                         <option value="very-satisfied">매우 만족</option>
                         <option value="satisfied">만족</option>
@@ -281,6 +337,7 @@ export default function ProductDetail(props) {
                         </div>
                     ))}
                 </div>
+               
             </div>
         </div>
     );

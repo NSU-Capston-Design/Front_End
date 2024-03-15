@@ -5,20 +5,20 @@ import axios from 'axios';
 //헷갈려서 comments: 댓글 배열, comment: 댓글 하나 개별 객체
 
 
-const PostDetails = ({ post, onClose, updatePostComments, isAdmin,currentUser}) => {
+const PostDetails = ({ post, onClose, updatePostComments, isAdmin}) => {
   const [newComment, setNewComment] = useState('');
   const [selectedComment, setSelectedComment] = useState(-1);
   const [editPostContent, setEditPostContent] = useState(post.content); // 수정 중인 게시글
   const [isEditPost, setIsEditPost] = useState(false); //게시글 수정모드
-
+  const [currentUser, setCurrentUser] = useState(null); // 현재 사용자 
 
 
   
   useEffect(() => {
     //현재 사용자가 작성자인지
- 
-
-  }, [currentUser,post.userId]); 
+    const user = { id: 'user1' }; // 임시 사용자 정보
+    setCurrentUser(user);
+  }, []); 
 
   const addComment = async () => {
     try {
@@ -80,7 +80,7 @@ const PostDetails = ({ post, onClose, updatePostComments, isAdmin,currentUser}) 
               <h2>{post.title}</h2>
               <p>{post.uploadTime}</p>
               <p>{post.userId ? post.userIdId : '알 수 없음'}</p>
-              {(currentUser===post.userId)&&<button onClick={() => setIsEditPost(true)}>게시글 수정</button>}
+              {(currentUser && currentUser.id===post.userId)&&<button onClick={() => setIsEditPost(true)}>게시글 수정</button>}
             </>
           ) : (
          
@@ -105,7 +105,7 @@ const PostDetails = ({ post, onClose, updatePostComments, isAdmin,currentUser}) 
           <ul>
             {post.comments.map((comment, index) => (
               <li key={index}>
-                <p>{comment.userId}: {comment.content} {comment.uploadTime}</p> {/*흠...댓글 유저,내용,시간 */}
+                <p>{comment.userId}: {comment.content} {comment.uploadTime}</p> {/*댓글 유저,내용,시간 */}
                 {isAdmin &&currentUser===comment.userId ?( //관리자/댓글작성자 본인 댓글 삭제
                   <button onClick={() => deleteComment(index)}>삭제</button>
                 ):null}

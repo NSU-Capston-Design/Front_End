@@ -28,8 +28,7 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest",
-      "plugin:storybook/recommended"
+      "react-app/jest"
     ]
   },
   "browserslist": {
@@ -43,20 +42,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@storybook/addon-essentials": "^7.6.10",
-    "@storybook/addon-interactions": "^7.6.10",
-    "@storybook/addon-links": "^7.6.10",
-    "@storybook/addon-onboarding": "^1.0.10",
-    "@storybook/blocks": "^7.6.10",
-    "@storybook/preset-create-react-app": "^7.6.10",
-    "@storybook/react": "^7.6.10",
-    "@storybook/react-webpack5": "^7.6.10",
-    "@storybook/test": "^7.6.10",
-    "eslint-plugin-storybook": "^0.6.15",
-    "prop-types": "^15.8.1",
-    "storybook": "^7.6.10",
-    "webpack": "^5.89.0"
   }
 }

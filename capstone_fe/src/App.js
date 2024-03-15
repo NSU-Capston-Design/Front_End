@@ -43,7 +43,7 @@ export default function App() {
         <Route path='/donation_details' element={<Donation_details/>}/>
         <Route path='/product' element={<Product/>}/>
         <Route path='/product/upload' element={<ProductUpload/>}/>
-        <Route path='/product/detail/:fileId' element={<ProductDetail/>}/>
+        <Route path='/product/detail/:productId' element={<ProductDetail/>}/>
       </Routes>
     </BrowserRouter>
   );

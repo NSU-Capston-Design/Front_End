@@ -5,7 +5,6 @@ import Posting from '../component/Posting';
 import PostDetails from './commu-post';
 import axios from 'axios';
 
-
 const postsArray = [
   { id: 1, userId: 'user1', title: '제목 1', content: '내용 1', uploadTime: '2024-02-14', comments: [
     { userId: 'commenter1', content: '댓글 1-1', uploadTime: '2024-02-14 12:00:00' },
@@ -23,24 +22,12 @@ export default function Don_commu() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  const[currentUser,setCurrentUser] = useState(null); //현재 사용자 (게시글작성자 or 댓작성자 본인인지 확인)
+  const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(()=>{ //관리자/사용자 권한 로컬 설정
-   
-    setIsAdmin(true);
-    
-    fetchCurrentUser();// 현재 사용자 정보
-
-  },[]);
-
-  const fetchCurrentUser = async()=>{//사용자 정보
-    try{
-      const user = await axios.get('userId');
-      setCurrentUser(user);
-    }catch(error){
-      console.error('사용자 정보 로딩 실패',error);
-    }
-  }
+  useEffect(() => {
+    setCurrentUser('user1'); // 작성자로 설정
+    setIsAdmin(true); // 관리자 설정
+  }, []);
 
   const openModal = useCallback(() => {
     setIsModalOpen(true);
@@ -49,6 +36,7 @@ export default function Don_commu() {
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
   }, []);
+
 
   //현재 페이지 포스트 가져오기
   const indexOfLastPost = currentPage * pageSize;
@@ -85,7 +73,7 @@ export default function Don_commu() {
             <tr>
               <th>Title</th>
               <th>Content</th> 
-              <th>Id</th>
+              <th>작성자</th>
             </tr>
           </thead>
           <tbody>
@@ -107,7 +95,7 @@ export default function Don_commu() {
         ))}
       </div>
       {isModalOpen && selectedPost === null && <Posting onClose={closeModal} />} {/* 글쓰기 모달 */}
-      {isModalOpen && selectedPost !== null && (<PostDetails post={selectedPost} onClose={closeModal} isAdmin={true}  />)} {/* 게시글 상세 모달 */}
+      {isModalOpen && selectedPost !== null && (<PostDetails post={selectedPost} onClose={closeModal} isAdmin={true} setCurrentUser={true}  />)} {/* 게시글 상세 모달 */}
     </div>
   );
 }
