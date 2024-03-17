@@ -41,8 +41,6 @@ export default function Rank() {
   return (
     <div className="rank_all">
       <Header />
-
-
       <div className="container">
         <div className="rank_info">
           <div className="ran_info">
@@ -106,8 +104,6 @@ export default function Rank() {
           />
         ))}
         </div>
-
-
 
 
       </div>

@@ -13,7 +13,7 @@ const Posting = ({ onClose }) => {
             const response = await axios.post("url", { //보내기
                 title: title,
                 content: content,
-                
+
             });
             console.log("게시글 작성 완료", response.data);
         } catch (error) {

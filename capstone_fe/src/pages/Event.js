@@ -9,22 +9,16 @@ export default function Event() {
         { id: 2, title: "기부이벤트", content: "기부하면 장성군에서 감사해드립니다" }
     ]);
     const [isModalOpen,setIsModalOpen]=useState(false);
-    const [selectedEvent, setSelectedEvent] = useState(null);
-    const isAdmin = true; //관리자 여부
+    // const isAdmin = true; //관리자 여부
 
 
-    const openModal=()=>{ 
+    const openModal=()=>{ //이벤트 등록 클릭 시
         setIsModalOpen(true);
     };
 
     const closeModal =()=>{
         setIsModalOpen(false);
     };
-
-    const openEventModal=(event)=>{
-        setSelectedEvent(event);
-        setIsModalOpen(true);
-    }
 
     // const eventPost=(eventData)=>{//서버로그 작성
     //     console.log('이벤트 등록',eventData);
@@ -37,26 +31,18 @@ export default function Event() {
         <div className="event_all">
             <Header/>
             <div className="event_title">이벤트</div>
-            {isAdmin &&(<button className="event-post" onClick={openModal}>이벤트 등록하기</button>) }
+            {/* {isAdmin &&(<button className="event-post" onClick={openModal}>이벤트 등록하기</button>) } */}
             {isModalOpen && <EventPost onClose={closeModal} />}
-            
+
             <div className="event_list">{/*이벤트목록 */}
             {events.map(event => (
-                    <div key={event.id} className="event_item" onClick={() => openEventModal(event)}>
+                    <div key={event.id} className="event_item" onClick={() => openModal(event)}>
                         <div className="event_txt">{event.title}</div>
                     </div>
                 ))}
                     <div className="page_btn"></div> {/*페이지 넘기는거 컴포넌트만들 예정 */}
                 </div>
-                {selectedEvent && (
-                <div className="event-modal">
-                    <div className="event-content">
-                        <button onClick={closeModal}>&times;</button>
-                        <h2>{selectedEvent.title}</h2>
-                        <p>{selectedEvent.content}</p>
-                    </div>
-                </div>
-            )}
-        </div>
-    );
+            </div>
+
+    )
 }
