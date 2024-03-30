@@ -13,9 +13,18 @@ export default function Mypage() {
   const [isWithdrawSuccessMessageOpen, setIsWithdrawSuccessMessageOpen] = useState(false);
   const [isEditSuccessMessageOpen, setIsEditSuccessMessageOpen] = useState(false);
   const navigate = useNavigate();
+  
+  const handleMoveToOrderInquiry = () => {
+    navigate('/Order_inquiry'); // Order_inquiry 페이지로 이동
+  };
 
   const handleCloseWithdrawSuccessMessage = () => {
     setIsWithdrawSuccessMessageOpen(false);
+  };
+
+  
+  const handleMoveToDonationDetails = () => {
+    navigate('/donation_details'); // Donation_details 페이지로 이동
   };
 
   const MovetoInquiry = () => {
@@ -70,13 +79,24 @@ export default function Mypage() {
     setWithdrawModalOpen(false);
   };
 
-  const handleWithdrawConfirm = () => {
-    // 실제 탈퇴 처리 로직을 여기에 추가해야 합니다.
-    // 탈퇴가 성공하면 모달을 닫거나 다른 처리를 수행할 수 있습니다.
-    // 이 부분에서는 탈퇴 완료 메시지 모달을 열도록 변경합니다.
-    // 여기서는 단순히 메시지를 출력하도록 했습니다.
-    setWithdrawModalOpen(false);
-    alert("회원 탈퇴가 완료되었습니다.");
+  const handleWithdrawConfirm = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/user/delete', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        setWithdrawModalOpen(false);
+        setIsWithdrawSuccessMessageOpen(true); // 회원 탈퇴 완료 메시지 모달 열기
+      } else {
+        throw new Error('회원 탈퇴 실패');
+      }
+    } catch (error) {
+      console.error('회원 탈퇴 오류:', error);
+    }
   };
 
 
@@ -247,25 +267,27 @@ export default function Mypage() {
   </div>
 )}
 
-        <div className="mypage_list2">
-          <div className="mypage_name2">주문조회</div>
-          <div className="mypage_name2_dl">0건<br /></div>
-          <div className="mypage_name2_d2">
-          </div>
-        </div>
+<div className="mypage_list2">
+  <div className="mypage_name2">주문조회</div>
+  <div className="mypage_name2_d2">
+    <button onClick={handleMoveToOrderInquiry}>주문조회</button>
+  </div>
+</div>
 
         <div className="mypage_list3">
           <div className="mypage_name3">포인트</div>
-          <div className="mypage_name3_dl">0p<br /></div>
           <div className="mypage_name3_d2">
           </div>
         </div>
 
         <div className="mypage_list4">
           <div className="mypage_name4"><strong>기부내역</strong></div>
-          <div className="mypage_name4_dl">0원</div>
-          <div className="mypage_image4"><img src={direction_SwitchImage} alt="버튼" /></div>
-        </div>
+          <div className="mypage_image4">
+          <div className="button-container" onClick={handleMoveToDonationDetails}>
+  <img src={direction_SwitchImage} alt="버튼" />
+</div>
+          </div>
+          </div>
 
         <div className="mypage_list5">
         <div className="mypage_image5"></div>

@@ -97,7 +97,7 @@ export default function Cart() {
     // 주문을 확인하고 백엔드로 데이터를 전송합니다. (결제쪽)
     const confirmOrder = async () => {
         try {
-            const backendURL = 'http://localhost:8080/upload'; // 실제 백엔드 API URL을 여기에 입력
+            const backendURL = 'http://localhost:8080/product/buyList'; // 백엔드 상품 장바구니 리스트 -넣-
             
             const orderData = cartItems.map(item => ({
                 productId: item.productId,
