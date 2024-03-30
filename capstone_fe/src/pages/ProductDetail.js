@@ -19,39 +19,41 @@ export default function ProductDetail(props) {
     });
 
     useEffect(() => { //관리자/사용자 권한 로컬 설정
-        const isAdmin = localStorage.getItem('isAdmin') === 'true';
-        setIsAdmin(true);
+        const isAdmin =  async () => {
+            try {
+                // 사용자 인증 토큰을 localStorage에서 가져온다고 가정
+                const authToken = localStorage.getItem('authToken');
+    
+                // 백엔드에 사용자 인증 토큰을 포함하여 요청을 보냄
+                const response = await axios.get('http://localhost:8080/users', {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`
+                    }
+                });
+    
+                // 사용자 정보를 확인하여 관리자 여부를 결정
+                const userData = response.data.memberDTO;
+                setIsAdmin(userData.isAdmin);
+            } catch (error) {
+                console.error('사용자 정보를 가져오는 도중 오류가 발생했습니다:', error);
+            }
+        };
+    
+        isAdmin(); // useEffect 내에서 isAdmin 함수를 호출
     }, []);
 
     const navigate = useNavigate();
     const { productId } = useParams();
     console.log(productId);
     const id = parseInt(productId, 10);
-    const [productData, setProductData] = useState({
-        // productName: '',
-        // uploadTime: '',
-        // productPrice: 0,
-        // productURL: '',
-        // productInven: 0,
-        // productView: 0
-        productId: 1,
-        productName: "테스트 상품",
-        uploadTime: "2022-01-20",
-        productPrice: 10000,
-        productURL: "https://i.pinimg.com/564x/ce/50/6f/ce506fa7dfd2e9900643f588ee4f2cad.jpg",
-        productInven: 10,
-        productView: 50,
-        productCategory: "테스트 카테고리",
-        productBrand: "테스트 브랜드",
-        productDescription: "테스트 상품 설명입니다."
-    });
+    const [productData, setProductData] = useState(null);
 
 
 
 
     const deleteProduct = async () => {//상품삭제
         try {
-            await axios.delete('${productId}');
+            await axios.delete('${fileId}');
             navigate('/');
         } catch (error) {
             console.log("상품 삭제 오류", error);
@@ -89,7 +91,7 @@ export default function ProductDetail(props) {
     useEffect(() => {
         const fetchProductDetail = async () => {
             try {
-                const response = await axios.get('/product/detail', {
+                const response = await axios.get('http://localhost:8080/product/${fileId}', {
                     params: { productId: productId }
                 });
 
@@ -101,25 +103,25 @@ export default function ProductDetail(props) {
         };
 
         fetchProductDetail();
-    }, [productId]);
+    }, [fileId]);
 
-    const updateProductViews = async () => {
-        try {
-            await axios.get(`/product/views`, {
-                params: { productId: productId }
-            });
-        } catch (error) {
-            console.log("오류발생", error);
-        }
-    };
+    // const updateProductViews = async () => {
+    //     try {
+    //         await axios.get(`/product/views`, {
+    //             params: { productId: productId }
+    //         });
+    //     } catch (error) {
+    //         console.log("오류발생", error);
+    //     }
+    // };
 
-    useEffect(() => {
-        updateProductViews();
-    }, [productId]);
+    // useEffect(() => {
+    //     updateProductViews();
+    // }, [productId]);
 
-    const handleReviewChange = (event) => {
-        setReviewText(event.target.value);
-    };
+    // const handleReviewChange = (event) => {
+    //     setReviewText(event.target.value);
+    // };
 
     const handleSatisfactionChange = (event) => { // 만족도 변경 처리
         setSatisfaction(event.target.value);
@@ -153,24 +155,35 @@ export default function ProductDetail(props) {
 
     const addToCart = async () => {
 
-        // 장바구니 추가 로직
-        const cartItem = {
-            productId: productData.productId,
-            productName: productData.productName,
-            productPrice: productData.productPrice
-        };
-
-        try {
-            // const response = await axios.post('url', cartItem);
-            // console.log('장바구니 추가됨:', response.data);
-            const isConfirmed = window.confirm(`상품(${productId})을 장바구니에 추가했습니다. 장바구니로 이동하시겠습니까?`);
-
-            if (isConfirmed) {
-                navigate('/cart');
-            }
-        } catch (error) {
-            console.error('장바구니로 이동 중 오류:', error);
+        const existingCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingCartItem = existingCartItems.find(item => item.productId === productData.productId);
+        
+        if (existingCartItem) {
+            existingCartItem.quantity++; // 이미 장바구니에 있는 상품이라면 수량을 증가시킴
+        } else {
+            existingCartItems.push({ ...productData, quantity: 1 }); // 새로운 상품이라면 수량을 1로 설정하여 추가
         }
+        
+        localStorage.setItem('cart', JSON.stringify(existingCartItems));
+
+        // // 장바구니 추가 로직
+        // const cartItem = {
+        //     productId: productData.productId,
+        //     productName: productData.productName,
+        //     productPrice: productData.productPrice
+        // };
+
+        // try {
+        //     // const response = await axios.post('url', cartItem);
+        //     // console.log('장바구니 추가됨:', response.data);
+        //     const isConfirmed = window.confirm(`상품(${productId})을 장바구니에 추가했습니다. 장바구니로 이동하시겠습니까?`);
+
+        //     if (isConfirmed) {
+        //         navigate('/cart');
+        //     }
+        // } catch (error) {
+        //     console.error('장바구니로 이동 중 오류:', error);
+        // }
     };
 
 
@@ -343,22 +356,3 @@ export default function ProductDetail(props) {
     );
 }
 
-//     return(
-//         <>
-//             <Header/>
-//             <h1>상품 상세 페이지</h1>
-//             <div className='detail-all' key={id}><p>상품id: {id}</p>
-//                 <div className='productName_box'>
-//                     <p>{productData.productName}</p>
-//                 </div>
-//                 <div className='productImg_box'>
-//                     <img src={`${productData.productURL.replace(/\s/g, "_")}`} alt='상품 이미지'/>
-//                 </div>
-//                 <div className='productPrice_box'>가격: {productData.productPrice}원</div>
-//                 <div className='productInven_box'>재고수량: {productData.productInven}개</div>
-//                 <div className='productView_box'>상품 조회수: {productData.productView}회</div>
-//                 <div className='product_uploadtime_box'>업로드 시간: {productData.uploadTime}</div>
-//             </div>
-//         </>
-//     )
-// }

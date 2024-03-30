@@ -1,37 +1,86 @@
-.event_all{
+.event_all {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.event_title{
+.event_title {
     width: 533px;
     height: 264px;
     color: black;
     font-size: 40px;
     font-weight: 400;
     line-height: 20px;
-    word-wrap: break-word
+    word-wrap: break-word;
+    margin-bottom: 20px; /* 추가된 부분 */
 }
-.event_list{
+
+.event_list {
     width: 946px;
     flex: 1 1 0;
     padding: 7px 30px;
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 49px;
-    display: fl
-}
-.event_1{
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 49px;
-    display: inline-flex
 }
 
-.event_txt{
-        width: 442px;
-        height: 219px;
+.event_item {
+    width: 442px;
+    height: 219px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
 }
 
+.event_item:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event_txt {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.event-content{
+    flex: 1;
+    padding: 10px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px #D1D1D1 solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 600px;
+    background: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px rgba(96.70, 96.70, 96.70, 0.30) solid;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.close-button span {
+    font-size: 24px;
+    line-height: 1;
+}

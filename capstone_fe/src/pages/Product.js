@@ -158,7 +158,7 @@ export default function Product() {
                 <div className="product-overlay">
                     <div className="product-modal">
                         {/* ProductDetail 모달 */}
-                        <ProductDetail product={selectedProduct} closeModal={closeProductDetailModal} list={list} />
+                        <ProductDetail product={selectedProduct} closeModal={closeProductDetailModal} />
                     </div>
                 </div>
             )}
