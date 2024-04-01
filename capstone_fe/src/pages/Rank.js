@@ -7,12 +7,13 @@ import axios from "axios";
 
 export default function Rank() {
 
+  const [topDonators, setTopDonators] = useState();
   useEffect(() => { //기부순위 함수 호출
     fetchDonaRanks();
   }, []);
   const fetchDonaRanks = async () => {
     try {
-      const response = await axios.get('/donations/top');
+      const response = await axios.get("http://localhost:8080/donations/top");
       setUserRank(response.data.userRank);
       setTopDonators(response.data.topDonators);
     } catch (error) {

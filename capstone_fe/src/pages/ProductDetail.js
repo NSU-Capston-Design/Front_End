@@ -103,7 +103,7 @@ export default function ProductDetail(props) {
         };
 
         fetchProductDetail();
-    }, [fileId]);
+    }, []);
 
     // const updateProductViews = async () => {
     //     try {
@@ -330,7 +330,7 @@ export default function ProductDetail(props) {
                 <div className="reviewForm">
                     <input
                         value={reviewText}
-                        onChange={handleReviewChange}
+                        onChange={submitReview}
                         placeholder="리뷰를 작성해주세요."
                     />
                     <select value={satisfaction} onChange={handleSatisfactionChange}>

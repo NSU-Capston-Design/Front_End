@@ -24,7 +24,7 @@ export default function Event() {
     };
     const eventDetail = async (eventId) => {
         try {
-            const response = await axios.get(`http://localhost:8080/event/detail/${eventId}`);
+            const response = await axios.get(`http://localhost:8080/event/detail/{eventId}`);
             return response.data; // 백엔드에서 받아온 이벤트 상세 정보를 반환
         } catch (error) {
             console.error('이벤트 상세 정보를 가져오는 중에 오류가 발생했습니다:', error);

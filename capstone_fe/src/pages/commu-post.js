@@ -18,7 +18,7 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
     // 현재 사용자 정보 가져오기
     const fetchCurrentUser = async () => {
       try {
-        const response = await axios.get('/user/current');
+        const response = await axios.get('http://localhost:8080/user');
         setCurrentUser(response.data); // 현재 사용자 설정
       } catch (error) {
         console.error('사용자 정보 가져오기 실패:', error);
@@ -30,7 +30,7 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
 
   const addComment = async () => {
     try {
-      const response = await axios.post('/comment/save', {
+      const response = await axios.post('http://localhost:8080/comment/save', {
         comment: newComment,
         userId: currentUser.id,
         postId: post.id
@@ -39,7 +39,7 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
       // 현재 게시물에 새로운 댓글 추가
       const updatedComments = [...post.comments, newCommentData];
       // 게시물의 댓글 목록을 업데이트
-      updatePostComments(updatedComments);
+      // updatePostComments(updatedComments);
       setNewComment('');
     } catch (error) {
       console.error('댓글 추가 실패:', error);
@@ -48,11 +48,11 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
 
   const deleteComment = async (commentId) => {
     try {
-      await axios.delete(`/comment/${commentId}`);
+      await axios.delete(`http://localhost:8080/comment/${commentId}`);
       // 삭제된 댓글을 제외한 나머지 댓글들로 갱신
       const updatedComments = post.comments.filter(comment => comment.id !== commentId);
       // 갱신된 댓글 목록을 업데이트
-      updatePostComments(updatedComments);
+      // updatePostComments(updatedComments);
     } catch (error) {
       console.error('댓글 삭제 실패:', error);
     }
@@ -60,7 +60,7 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
 
   const editComment = async (commentId, updatedContent) => {
     try {
-      await axios.put(`/comment/${commentId}`, { content: updatedContent });
+      await axios.put(`http://localhost:8080/comment/{commentId}`, { content: updatedContent });
       // 댓글 내용 수정
       const updatedComments = post.comments.map(comment => {
         if (comment.id === commentId) {
@@ -69,7 +69,7 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
         return comment;
       });
       // 수정된 댓글 목록을 업데이트
-      updatePostComments(updatedComments);
+      // updatePostComments(updatedComments);
       setSelectedComment(null); // 수정 중인 댓글 초기화
     } catch (error) {
       console.error('댓글 수정 실패:', error);
@@ -78,7 +78,7 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
 
   const editPost = async () => {
     try {
-      await axios.put(`/post/${post.id}`, { content: editPostContent });
+      await axios.put(`http://localhost:8080/post/{post.id}`, { content: editPostContent });
       setIsEditPost(false);
     } catch (error) {
       console.error('게시물 수정 실패:', error);
@@ -87,7 +87,7 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
 
   const deletePost = async () => {
     try {
-      await axios.delete(`/post/${post.id}`);
+      await axios.delete(`http://localhost:8080/post/delete`);
       onClose();
     } catch (error) {
       console.error('게시물 삭제 실패:', error);
@@ -100,9 +100,9 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
         <div className="post-details-header">
           {!isEditPost ? (
             <>
-              <h2>{post.title}</h2>
+              <h2>{post.postTitle}</h2>
               <p>{post.uploadTime}</p>
-              <p>{post.userId ? post.userIdId : '알 수 없음'}</p>
+              <p>{post.userId ? post.userId : '알 수 없음'}</p>
               {(currentUser && currentUser.id === post.userId) && <button onClick={() => setIsEditPost(true)}>게시글 수정</button>}
             </>
           ) : (

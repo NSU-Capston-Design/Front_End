@@ -10,7 +10,7 @@ const Posting = ({ onClose }) => {
 
     const handlePosting = async () => {
         try {
-            const response = await axios.post("url", { //보내기
+            const response = await axios.post("http://localhost:8080/post/save", { //보내기
                 title: title,
                 content: content,
 
