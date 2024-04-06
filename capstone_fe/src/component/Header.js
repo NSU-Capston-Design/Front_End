@@ -15,7 +15,6 @@ export default function Header(){
     const [memberId, setMemberId] = useState(0);
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
-
     useEffect(() => {
         const stroageMemberId = window.localStorage.getItem('memberId');
         setMemberId(stroageMemberId || 0);

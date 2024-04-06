@@ -25,38 +25,39 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/Product.css";
 import ProductDetail from "../pages/ProductDetail"; 
+import axios from "axios";
 
 export default function Product() {
 
     
     const [selectedProduct, setSelectedProduct] = useState(null); 
     const [isModalOpen, setIsModalOpen] = useState(false); 
-
+    const [sortBy, setSortBy] = useState(""); // 정렬 방식을 저장하는 상태
     const [list, setList] = useState([
-        {
-            productId: 1,
-            productName: "아메리카노",
-            uploadTime: "2022-02-16",
-            productPrice: 3000,
-            productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiPtZk7sCgOahkySHKQfL4Ph2lEntdgXuFbA&usqp=CAU",
-            productReview: 4.5
-        },
-        {
-            productId: 2,
-            productName: "카페라떼",
-            uploadTime: "2022-02-16",
-            productPrice: 4000,
-            productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJbdu-6rHcYPPs9BY8al_cqGM2i1uopu3imw&usqp=CAU",
-            productReview: 4.8
-        },
-        {
-            productId: 3,
-            productName: "카페모카",
-            uploadTime: "2022-02-16",
-            productPrice: 4500,
-            productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQomqwULqpSqoaFnUc-03xkKgxYsESKcN66Q&usqp=CAU",
-            productReview: 4.7
-        }
+        // {
+        //     productId: 1,
+        //     productName: "아메리카노",
+        //     uploadTime: "2022-02-16",
+        //     productPrice: 3000,
+        //     productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiPtZk7sCgOahkySHKQfL4Ph2lEntdgXuFbA&usqp=CAU",
+        //     productReview: 4.5
+        // },
+        // {
+        //     productId: 2,
+        //     productName: "카페라떼",
+        //     uploadTime: "2022-02-16",
+        //     productPrice: 4000,
+        //     productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJbdu-6rHcYPPs9BY8al_cqGM2i1uopu3imw&usqp=CAU",
+        //     productReview: 4.8
+        // },
+        // {
+        //     productId: 3,
+        //     productName: "카페모카",
+        //     uploadTime: "2022-02-16",
+        //     productPrice: 4500,
+        //     productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQomqwULqpSqoaFnUc-03xkKgxYsESKcN66Q&usqp=CAU",
+        //     productReview: 4.7
+        // }
     ]);
 
     const navigate = useNavigate();
@@ -75,27 +76,27 @@ export default function Product() {
     }
     
 
-//     useEffect(() => { 제품가져오기
-//     const productList = async () => {
-//     try {
-//         const response = await axios.get(`//localhost:8080/product/list`);
-//         const data = response.data;
-//         console.log(data);
+    useEffect(() => { //제품가져오기
+    const productList = async () => {
+    try {
+        const response = await axios.get('https//localhost:8080/product/list');
+        const data = response.data;
+        console.log(data);
 
-//         if (Array.isArray(data)) {
-//             setList(data);
-//         } else {
-//             console.error('배열이 아닌 데이터입니다:', data);
-//         }
-//     } catch (error) {
-//         console.error('데이터를 불러오는 중 오류가 발생했습니다:', error);
-//     }
-// };
-//         productList();  // 초기 데이터 가져오기
-//     }, []);
+        if (Array.isArray(data)) {
+            setList(data);
+        } else {
+            console.error('배열이 아닌 데이터입니다:', data);
+        }
+    } catch (error) {
+        console.error('데이터를 불러오는 중 오류가 발생했습니다:', error);
+    }
+};
+        productList();  // 초기 데이터 가져오기
+    }, []);
 
     //     setList(temporaryData);
-    // }, []); // 빈 배열을 넣어 한 번만 실행되도록 설정
+    // // }, []); // 빈 배열을 넣어 한 번만 실행되도록 설정
 
     const openProductDetailModal = (productId) => {
         const product = list.find(item => item.productId === productId);
@@ -121,10 +122,37 @@ export default function Product() {
         addToCart(item);
     };
 
+    const sortChange = (event) => {
+        const value = event.target.value;
+        setSortBy(value);
+        if (value === "latest") {
+            sortLatest();
+        } else if (value === "popularity") {
+            sortPopularity();
+        }
+    };
+
+    const sortLatest = () => {
+        const sortedList = [...list].sort((a, b) => new Date(b.uploadTime) - new Date(a.uploadTime));
+        setList(sortedList);
+    };
+
+    const sortPopularity = () => {
+        const sortedList = [...list].sort((a, b) => b.sales - a.sales);
+        setList(sortedList);
+    };
+
     return (
         <>
             <Header />
             <div className="product-all">
+            <div className="product-controls">
+                    <select value={sortBy} onChange={sortChange}>
+                        <option value="">정렬</option>
+                        <option value="latest">최신순</option>
+                        <option value="popularity">인기순</option>
+                    </select>
+                </div>
                 <div className="product-list">
                     {list.map((item) => (
                         <div key={item.productId} className="product-list-item" onClick={() => openProductDetailModal(item.productId)}>
@@ -138,8 +166,8 @@ export default function Product() {
                                 <div className="product-list-price" title={item.productPrice}>
                                     {item.productPrice}원
                                 </div>
-                                <div className="product-list-review" title={item.productReview}>
-                                    평점: {item.productReview}
+                                <div className="product-list-review" title={item.productInven}>
+                                    재고 : {item.productInven}
                                 </div>
                                 
                                 <button onClick={(event) => handleAddToCart(event, item)} className="add-to-cart-button">
