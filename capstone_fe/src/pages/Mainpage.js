@@ -50,7 +50,7 @@ export default function Mainpage(){
                                 <div className="best_image"><img src={`http://localhost:8080${item.productURL}`} alt="item" style={{width: 330, height: 440}}/></div>
                                 <div className="best_product_text">장성군 베스트 특산품</div><br/>
                                 <div className="best_title">{item.productName}</div>
-                                <div className="best_detail"><Link to ={`/product/detail/${item.productId}`}>구매하기</Link></div>
+                                <div className="best_detail"><Link to ={`/product/detail/${item.fileId}`}>구매하기</Link></div>
                                 <div className="best_uploadTime">{item.uploadTime}</div>
                             </div>
                             ))

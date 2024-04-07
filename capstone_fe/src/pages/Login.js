@@ -30,12 +30,14 @@ export default function Login() {
         axios({
             method : 'post',    // post방식으로 통신
             url : '//localhost:8080/user/login',    
-            data : UserInfo 
+            data : UserInfo,
+            withCredentials: true
         })
         .then(res => {  // 가져온 데이터들 셋업
             console.log(res.data);
             window.localStorage.setItem('sessionId', true);
             window.localStorage.setItem('memberId', res.data);
+
             console.log(res.data);
             navigate('/');
         })

@@ -11,10 +11,10 @@ import menu_black from '../img/menu_black.png';
 import axios from "axios";
 
 export default function Header(){
-    const [sessionId, setSessionId] = useState("");
+    const [sessionId, setSessionId] = useState(false);
     const [memberId, setMemberId] = useState("");
     const navigate = useNavigate()  // 이동 라이브러리 저장
-    const [isLogined, setIsLogined] = useState(true);
+    const [isLogined, setIsLogined] = useState(false);
     useEffect(() => {
         const stroageMemberId = window.localStorage.getItem('memberId');
         setMemberId(stroageMemberId || 0);
@@ -65,7 +65,9 @@ export default function Header(){
     const MovetoLogout = e => {
         setIsLogined(false);
 
-        axios.post('//localhost:8080/user/logout')
+        axios.post('//localhost:8080/user/logout', {}, {
+            withCredentials: true   // 쿠키전송옵션
+        })
         .then(response => {
             alert('로그아웃 성공');
             window.localStorage.clear();

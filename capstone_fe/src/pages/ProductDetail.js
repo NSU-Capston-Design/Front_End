@@ -12,11 +12,34 @@ export default function ProductDetail(props) {
     const [satisfaction, setSatisfaction] = useState(""); // 만족도 
     const [reviews, setReviews] = useState([]);
     const [isEditMode, setIsEditMode] = useState(false); // 수정 모드 여부
+    const [productData, setProductData] = useState([]);
+    const navigate = useNavigate();
+    const { fileId } = useParams();
+    console.log(fileId);
+    const id = parseInt(fileId, 10);
+
     const [editedProductData, setEditedProductData] = useState({
         productName: '',
         productPrice: 0,
         productDescription: ''
     });
+
+    useEffect(() => {
+        
+        const fetchProductDetail = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/product/${id}`);
+                console.log(response.data);
+                const data = response.data;
+                console.log(data);
+                setProductData(data);
+            } catch (error) {
+                console.log("오류발생", error);
+            }
+        };
+    
+        fetchProductDetail();
+    }, []);
 
     useEffect(() => { //관리자/사용자 권한 로컬 설정
         const isAdmin =  async () => {
@@ -42,18 +65,14 @@ export default function ProductDetail(props) {
         isAdmin(); // useEffect 내에서 isAdmin 함수를 호출
     }, []);
 
-    const navigate = useNavigate();
-    const { productId } = useParams();
-    console.log(productId);
-    const id = parseInt(productId, 10);
-    const [productData, setProductData] = useState(null);
+    
 
 
 
 
     const deleteProduct = async () => {//상품삭제
         try {
-            await axios.delete('${fileId}');
+            await axios.delete(`${fileId}`);
             navigate('/');
         } catch (error) {
             console.log("상품 삭제 오류", error);
@@ -88,20 +107,7 @@ export default function ProductDetail(props) {
 
 
 
-    useEffect(() => {
-        const fetchProductDetail = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/product/${fileId}');
     
-                const data = response.data;
-                setProductData(data);
-            } catch (error) {
-                console.log("오류발생", error);
-            }
-        };
-    
-        fetchProductDetail();
-    }, []);
     // const updateProductViews = async () => {
     //     try {
     //         await axios.get('/product/views', {
@@ -139,14 +145,14 @@ export default function ProductDetail(props) {
 
     const Purchase = () => {
         // 구매 로직
-        const isConfirmed = window.confirm(`상품(${productId})을 구매하시겠습니까?.`);
+        const isConfirmed = window.confirm(`상품(${fileId})을 구매하시겠습니까?.`);
 
         if (isConfirmed) {
-            console.log(`상품(${productId}) 결제페이지로 이동합니다.`);
+            console.log(`상품(${fileId}) 결제페이지로 이동합니다.`);
             navigate('/')//결제모달로 수정예정
 
         } else {
-            console.log(`상품(${productId}) 구매가 취소되었습니다.`);
+            console.log(`상품(${fileId}) 구매가 취소되었습니다.`);
         }
     };
 
@@ -208,7 +214,7 @@ export default function ProductDetail(props) {
             <div className='product'>
 
                 <div className='productImg'>
-                    <img src={productData.productURL} alt={productData.productName} />
+                    <img src={`http://localhost:8080${productData.productURL}`} alt={productData.productName} style={{width: 330, height: 440}}/>
                     <p className='description'>{/* 상품 이미지 밑 설명글 */}
                         <span className='descripText'>
                             {isEditMode ? (
