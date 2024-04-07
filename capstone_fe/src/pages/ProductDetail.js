@@ -91,23 +91,20 @@ export default function ProductDetail(props) {
     useEffect(() => {
         const fetchProductDetail = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/product/${fileId}', {
-                    params: { productId: productId }
-                });
-
+                const response = await axios.get('http://localhost:8080/product/${fileId}');
+    
                 const data = response.data;
                 setProductData(data);
             } catch (error) {
                 console.log("오류발생", error);
             }
         };
-
+    
         fetchProductDetail();
     }, []);
-
     // const updateProductViews = async () => {
     //     try {
-    //         await axios.get(`/product/views`, {
+    //         await axios.get('/product/views', {
     //             params: { productId: productId }
     //         });
     //     } catch (error) {
@@ -230,7 +227,8 @@ export default function ProductDetail(props) {
                 <div className='productInfo'>
                     <div className='productInfo1'>
                         <div className='productInfo2'>
-                            <div className='productName'>   {isEditMode ? (
+                            <div className='productName'>   
+                            {isEditMode ? (
                                 <input
                                     value={editedProductData.productName}
                                     onChange={(e) => setEditedProductData({ ...editedProductData, productName: e.target.value })}
@@ -262,10 +260,10 @@ export default function ProductDetail(props) {
 
                                 <div className='infoGN'>
                                     <div className='infoGroup'>
-                                        <div className='groupName'>가격</div>
+                                        <div className='groupName'>분류</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>{productData.productPrice}원</div>
+                                        <div className='infoTxt'>{productData.category}</div>
                                     </div>
                                 </div>
 
