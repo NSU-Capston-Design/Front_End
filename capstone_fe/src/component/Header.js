@@ -12,7 +12,7 @@ import axios from "axios";
 
 export default function Header(){
     const [sessionId, setSessionId] = useState("");
-    const [memberId, setMemberId] = useState(0);
+    const [memberId, setMemberId] = useState("");
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(true);
 
@@ -65,9 +65,17 @@ export default function Header(){
 
     const MovetoLogout = e => {
         setIsLogined(false);
-        window.localStorage.clear();
 
-        axios.post('localhost:8080/user/logout');
+        axios.post('//localhost:8080/user/logout')
+        .then(response => {
+            alert('로그아웃 성공');
+            window.localStorage.clear();
+            navigate('/');
+        })
+        .catch(error => {
+            console.error('에러 발생: ', error);
+        });
+        
     }
 
     return(

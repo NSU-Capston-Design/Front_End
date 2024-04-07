@@ -15,7 +15,6 @@ export default function Mainpage(){
     const [eventList, setEventList] = useState([]);
 
     useEffect(() => {   //상품 인기순 정렬
-        console.log("useEffect 실행");
         const main = async () =>{ 
             try{
             const response = await axios.get(`http://localhost:8080/`);    // get 내부에 url 넣기 
@@ -32,26 +31,6 @@ export default function Mainpage(){
     console.log(list);
     }, [])
     
-    // useEffect(() => {
-    //     const event = async () =>{ 
-    //         try{
-    //         const response = await axios.get(`//localhost:8080`);    // get 내부에 url 넣기 
-    //         const data = response.data;                 // 받아온 데이터 data에 저장    
-    //         console.log(data);                  // 데이터 확인
-    //         setEventList(data);              // list에 데이터 저장
-
-    //         const extractedData = data.map((item) => ({ // 받아온 데이터들을 map을 사용해 관여
-    //             // 받아온 데이터들 넣기
-    //             // 이벤트 가져오기
-    //         }));
-    //         console.log(extractedData); // 추출 데이터 확인
-            
-    //     } catch(error){
-    //         console.error("에러", error);
-    //     }
-    // };
-    // setEventList(); 
-    // }, [])
     return(
 
         <div className="mainpage-all">
@@ -88,13 +67,13 @@ export default function Mainpage(){
                             <img src={left_arrow} alt="left_arrow"></img>
                         </div>
                                 {/* 이벤트 목록 */}
-                        {/* {eventList.map((item) => (
+                        {eventList.map((item) => (
                         <div key={item.eventId} className="events">    
                             <div className="event">{item.event}</div>
                             <div className="event">{item.event}</div>
                             <div className="event">{item.event}</div>
                         </div>
-                        ))} */}
+                        ))}
                         <div className="right_arrow">
                             <img src={right_arrow} alt="right arrow"></img>
                         </div>
