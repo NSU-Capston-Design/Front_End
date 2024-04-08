@@ -13,7 +13,7 @@ export default function Rank() {
   }, []);
   const fetchDonaRanks = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/donations/top");
+      const response = await axios.get(`http://localhost:8080/donations/top`);
       setUserRank(response.data.userRank);
       setTopDonators(response.data.topDonators);
     } catch (error) {
@@ -104,3 +104,5 @@ export default function Rank() {
     </div>
   );
 }
+
+

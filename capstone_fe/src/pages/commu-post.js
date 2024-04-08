@@ -58,23 +58,23 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
     }
   };
 
-  const editComment = async (commentId, updatedContent) => {
-    try {
-      await axios.put(`http://localhost:8080/comment/{commentId}`, { content: updatedContent });
-      // 댓글 내용 수정
-      const updatedComments = post.comments.map(comment => {
-        if (comment.id === commentId) {
-          return { ...comment, content: updatedContent };
-        }
-        return comment;
-      });
-      // 수정된 댓글 목록을 업데이트
-      // updatePostComments(updatedComments);
-      setSelectedComment(null); // 수정 중인 댓글 초기화
-    } catch (error) {
-      console.error('댓글 수정 실패:', error);
-    }
-  };
+  // const editComment = async (commentId, updatedContent) => {
+  //   try {
+  //     await axios.put(`http://localhost:8080/comment/{commentId}`, { content: updatedContent });
+  //     // 댓글 내용 수정
+  //     const updatedComments = post.comments.map(comment => {
+  //       if (comment.id === commentId) {
+  //         return { ...comment, content: updatedContent };
+  //       }
+  //       return comment;
+  //     });
+  //     // 수정된 댓글 목록을 업데이트
+  //     // updatePostComments(updatedComments);
+  //     setSelectedComment(null); // 수정 중인 댓글 초기화
+  //   } catch (error) {
+  //     console.error('댓글 수정 실패:', error);
+  //   }
+  // };
 
   const editPost = async () => {
     try {
@@ -132,9 +132,9 @@ const PostDetails = ({ post, onClose, isAdmin }) => {
                 {isAdmin && currentUser === comment.userId && (
                   <button onClick={() => deleteComment(comment.id)}>삭제</button>
                 )}
-                {currentUser === comment.userId && (
+                {/* {currentUser === comment.userId && (
                   <button onClick={() => setSelectedComment(comment.id)}>수정</button>
-                )}
+                )} */}
               </li>
             ))}
           </ul>
