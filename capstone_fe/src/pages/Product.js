@@ -79,7 +79,7 @@ export default function Product() {
     useEffect(() => { //제품가져오기
     const productList = async () => {
     try {
-        const response = await axios.get('https//localhost:8080/product/list');
+        const response = await axios.get('//localhost:8080/product/list');
         const data = response.data;
         console.log(data);
 
@@ -167,9 +167,11 @@ export default function Product() {
                                     {item.productPrice}원
                                 </div>
                                 <div className="product-list-review" title={item.productInven}>
-                                    재고 : {item.productInven}
+                                    재고 : {item.productInven} &nbsp; 조회수 : {item.productView}
                                 </div>
-                                
+                                <div className="product-list-time" title={item.uploadTime}>
+                                    업로드 : {item.uploadTime}
+                                </div>
                                 <button onClick={(event) => handleAddToCart(event, item)} className="add-to-cart-button">
                                     장바구니에 담기
                                 </button>

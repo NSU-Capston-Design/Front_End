@@ -96,30 +96,32 @@ export default function Cart() {
 
     // 주문을 확인하고 백엔드로 데이터를 전송합니다. (결제쪽)
     const confirmOrder = async () => {
-        try {
-            const backendURL = 'http://localhost:8080/product/buyList'; // 백엔드 상품 장바구니 리스트 -넣-
+        alert('결제가 완료되었습니다.');
+        
+        // try {
+        //     const backendURL = '//localhost:8080/product/buyList'; // 백엔드 상품 장바구니 리스트 -넣-
             
-            const orderData = cartItems.map(item => ({
-                productId: item.productId,
-                productName: item.productName,
-                productPrice: item.productPrice,
-                quantity: item.quantity,
-                productURL: item.productURL
-            }));
+        //     const orderData = cartItems.map(item => ({
+        //         productId: item.productId,
+        //         productName: item.productName,
+        //         productPrice: item.productPrice,
+        //         quantity: item.quantity,
+        //         productURL: item.productURL
+        //     }));
 
-            const response = await axios.post(
-                backendURL,
-                orderData
-            );
-            console.log('주문 성공:', response);
-            // 주문이 성공적으로 처리된 후에는 장바구니를 비웁니다.
+        //     const response = await axios.post(
+        //         backendURL,
+        //         orderData
+        //     );
+        //     console.log('주문 성공:', response);
+        //     // 주문이 성공적으로 처리된 후에는 장바구니를 비웁니다.
             setCartItems([]);
             localStorage.removeItem('cart');
             setTotalPrice(0);
             setShowModal(false); // 주문 완료 후 모달 닫기
-        } catch (error) {
-            console.error('주문 실패:', error);
-        }
+        // } catch (error) {
+        //     console.error('주문 실패:', error);
+        // }
     };
 
     // 모달을 닫습니다.
