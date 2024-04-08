@@ -79,7 +79,7 @@ export default function Product() {
     useEffect(() => { //제품가져오기
     const productList = async () => {
     try {
-        const response = await axios.get('https//localhost:8080/product/list');
+        const response = await axios.get(`http://localhost:8080/product/list`);
         const data = response.data;
         console.log(data);
 
