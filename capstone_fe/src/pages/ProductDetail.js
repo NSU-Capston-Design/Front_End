@@ -13,29 +13,9 @@ export default function ProductDetail(props) {
     const [reviews, setReviews] = useState([]);
     const [isEditMode, setIsEditMode] = useState(false); // 수정 모드 여부
     const [productData, setProductData] = useState([]);
-    
-    // const [productData, setProductData] = useState({
-    //     // productName: '',
-    //     // uploadTime: '',
-    //     // productPrice: 0,
-    //     // productURL: '',
-    //     // productInven: 0,
-    //     // productView: 0
-    //     productId: 1,
-    //     productName: "테스트 상품",
-    //     uploadTime: "2022-01-20",
-    //     productPrice: 10000,
-    //     productURL: "https://i.pinimg.com/564x/ce/50/6f/ce506fa7dfd2e9900643f588ee4f2cad.jpg",
-    //     productInven: 10,
-    //     productView: 50,
-    //     productCategory: "테스트 카테고리",
-    //     productBrand: "테스트 브랜드",
-    //     productDescription: "테스트 상품 설명입니다."
-    // });
     const navigate = useNavigate();
     const { fileId } = useParams();
-    console.log(fileId);
-    const id = parseInt(fileId, 10);
+    const id = parseInt(fileId, 10); 
 
     const [editedProductData, setEditedProductData] = useState({
         productName: '',
@@ -48,10 +28,8 @@ export default function ProductDetail(props) {
         const fetchProductDetail = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/product/${fileId}`);
-                console.log(response.data);
-                const data = response.data;
-                console.log(data);
-                setProductData(data);
+                setProductData(response.data);
+               
             } catch (error) {
                 console.log("오류발생", error);
             }
@@ -91,7 +69,7 @@ export default function ProductDetail(props) {
 
     const deleteProduct = async () => {//상품삭제
         try {
-            await axios.delete(`http://localhost:8080/delete/${id}`);
+            await axios.delete(`http://localhost:8080/product/delete/${id}`);
             navigate('/');
         } catch (error) {
             console.log("상품 삭제 오류", error);
@@ -188,24 +166,7 @@ export default function ProductDetail(props) {
         
         localStorage.setItem('cart', JSON.stringify(existingCartItems));
 
-        // // 장바구니 추가 로직
-        // const cartItem = {
-        //     productId: productData.productId,
-        //     productName: productData.productName,
-        //     productPrice: productData.productPrice
-        // };
-
-        // try {
-        //     // const response = await axios.post('url', cartItem);
-        //     // console.log('장바구니 추가됨:', response.data);
-        //     const isConfirmed = window.confirm(`상품(${productId})을 장바구니에 추가했습니다. 장바구니로 이동하시겠습니까?`);
-
-        //     if (isConfirmed) {
-        //         navigate('/cart');
-        //     }
-        // } catch (error) {
-        //     console.error('장바구니로 이동 중 오류:', error);
-        // }
+   
     };
 
 

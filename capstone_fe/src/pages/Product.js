@@ -33,32 +33,7 @@ export default function Product() {
     const [selectedProduct, setSelectedProduct] = useState(null); 
     const [isModalOpen, setIsModalOpen] = useState(false); 
     const [sortBy, setSortBy] = useState(""); // 정렬 방식을 저장하는 상태
-    const [list, setList] = useState([
-        // {
-        //     productId: 1,
-        //     productName: "아메리카노",
-        //     uploadTime: "2022-02-16",
-        //     productPrice: 3000,
-        //     productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiPtZk7sCgOahkySHKQfL4Ph2lEntdgXuFbA&usqp=CAU",
-        //     productReview: 4.5
-        // },
-        // {
-        //     productId: 2,
-        //     productName: "카페라떼",
-        //     uploadTime: "2022-02-16",
-        //     productPrice: 4000,
-        //     productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJbdu-6rHcYPPs9BY8al_cqGM2i1uopu3imw&usqp=CAU",
-        //     productReview: 4.8
-        // },
-        // {
-        //     productId: 3,
-        //     productName: "카페모카",
-        //     uploadTime: "2022-02-16",
-        //     productPrice: 4500,
-        //     productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQomqwULqpSqoaFnUc-03xkKgxYsESKcN66Q&usqp=CAU",
-        //     productReview: 4.7
-        // }
-    ]);
+    const [list, setList] = useState([]);
 
     const navigate = useNavigate();
 

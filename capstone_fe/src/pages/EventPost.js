@@ -63,10 +63,11 @@ const EventPost = ({ onClose }) => {
                     onChange={handleFileChange}
                 />
             </div>
-
-            <Button size="sm" onClick={handlePosting}>이벤트 게시</Button>
+            <div className="eventpost-btn">
+                <Button size="sm" onClick={handlePosting}>이벤트 게시</Button>
+            </div>
         </div>
     );
 };
- 
+
 export default EventPost;

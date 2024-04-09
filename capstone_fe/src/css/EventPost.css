@@ -13,39 +13,47 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-}
-
-.EventPostheader {
-  width: 100%;
-  padding: 12px 24px 16px;
-  background: #78ABF9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.EventPosting_title {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
-.EventPosting_titleInput {
-  width: 40%;
-  height: 44px;
-  padding: 6px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  margin-right: 16px;
-}
-
-.Posting_closeBtn {
+  }
+  
+  .EventPostheader {
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    padding-right: 12px;
+    background: #78ABF9;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  
+  .EventPosting_title {
+    flex: 1 1 0;
+    height: 44px;
+    padding-top: 12px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+  }
+  
+  .EventPosting_titleInput {
+    width: 40%;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex;
+    margin-right: 50%;
+  }
+  
+  .Posting_closeBtn {
   background: transparent;
   border: none;
   color: white;
   font-size: 16px;
+  
   cursor: pointer;
-}
+  }
 
 .content {
   width: 100%;
@@ -59,8 +67,17 @@
 .Event_content {
   width: 90%;
   height: 90%;
-  padding: 12px;
+  background: white;
   border-radius: 4px;
-  border: 1px solid #ccc;
-  resize: none;
+  overflow: hidden;
+  border: 1px #D1D1D1 solid;
+}
+
+.eventpost-btn{
+    align-items: center;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 31px;
+    padding: 28px 17px;
+    position: relative;
 }

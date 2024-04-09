@@ -10,7 +10,7 @@ import menu from '../img/menu_bar.png';
 import menu_black from '../img/menu_black.png';
 import axios from "axios";
 
-export default function Header(){
+export default function Header() {
     const [sessionId, setSessionId] = useState(false);
     const [memberId, setMemberId] = useState("");
     const navigate = useNavigate()  // 이동 라이브러리 저장
@@ -20,13 +20,13 @@ export default function Header(){
         setMemberId(stroageMemberId || 0);
         const stroageSessionId = window.localStorage.getItem('sessionId');
         setSessionId(stroageSessionId || "");
-        
+
         console.log(memberId);
         console.log(sessionId);
-        if(sessionId){
+        if (sessionId) {
             setIsLogined(true);
 
-        } else{
+        } else {
             setIsLogined(false);
         }
 
@@ -41,7 +41,7 @@ export default function Header(){
     const MovetoRegister = e => {   // 회원가입 페이지로 이동
         navigate('/agreepage')       // 페이지 내부 주소
     }
-    
+
     const MovetoDonation = e => {   // 기부 페이지로 이동
         navigate('/donation')       // 페이지 내부 주소
     }
@@ -57,7 +57,7 @@ export default function Header(){
     const MovetoInquiry = e => {   // 문의하기로 이동
         navigate('/inquiry')       // 페이지 내부 주소
     }
-    
+
     const MovetoProduct = e => {
         navigate('/product')
     }
@@ -68,36 +68,42 @@ export default function Header(){
         axios.post('//localhost:8080/user/logout', {}, {
             withCredentials: true   // 쿠키전송옵션
         })
-        .then(response => {
-            alert('로그아웃 성공');
-            window.localStorage.clear();
-            navigate('/');
-        })
-        .catch(error => {
-            console.error('에러 발생: ', error);
-        });
-        
+            .then(response => {
+                alert('로그아웃 성공');
+                window.localStorage.clear();
+                navigate('/');
+            })
+            .catch(error => {
+                console.error('에러 발생: ', error);
+            });
+
     }
 
-    return(
-        <div className="header-all">  
+    const MovetoCommu = e => {
+        navigate('/don_commu');
+    }
+
+    return (
+        <div className="header-all">
             <header> {/* 헤더 */}
                 <div className="logo_box">
-                    <img src={logo} onClick={MovetoMain}></img>    
-                </div>    
+                    <img src={logo} onClick={MovetoMain}></img>
+                </div>
                 <div className="search">
                     <img src={menu_black}></img>
                     <div className="search-box">
                         <input type="search" size={50} placeholder="검색"></input>
                     </div>
                 </div>
-                
-                
-                    {isLogined ? 
-                    <div className="sign"><div className="logout" onClick={MovetoLogout}>로그아웃</div></div> : 
-                    
+
+
+                {isLogined ?
+                    <div className="sign"><div className="logout" onClick={MovetoLogout}>로그아웃</div></div> :
+
                     (<div className="sign"><div className="login" onClick={MovetoLogin}>로그인</div> / <div className="register" onClick={MovetoRegister}>회원가입</div></div>)}
+
                 <div className="icons"> {/* 장바구니, 계정 버튼*/}
+
                     <div className="cart" onClick={MovetoCart}>
                         <img src={cart}></img>
                         <span>장바구니</span>
@@ -105,13 +111,12 @@ export default function Header(){
                     <div className="mypage" onClick={MovetoMypage} >
                         <img src={mypage}></img>
                         <span> &nbsp;마이페이지</span>
-
-                        
                     </div>
+
                 </div>
             </header>
             <div className="categorybar">   {/* 카테고리바 */}
-                <div className="category">  
+                <div className="category">
                     <div className="tab"></div>
                     <ul>
                         <li className="all-menu" onClick={MovetoProduct}><img src={menu} alt="menu"></img><span>전체메뉴</span></li>
@@ -119,15 +124,21 @@ export default function Header(){
                         <li>카테고리2</li>
                         <li>카테고리3</li>
                         <li>카테고리4</li>
-                        <div className="donate">    
+                        <div className="donate">
                             <button className="donate_btn" onClick={MovetoDonation}>기부하기</button>
                         </div>
 
-                        <div className="inquiry">    
+                        <div className="inquiry">
                             <button className="inquiry_btn" onClick={MovetoInquiry}>문의하기</button>
-                            </div>
+                        </div>
+                        <div className="board" onClick={MovetoCommu}>
+
+                            📝
+                            <span>게시판</span>
+                        </div>
+
                     </ul>
-                    
+
                 </div>
             </div>
         </div>
