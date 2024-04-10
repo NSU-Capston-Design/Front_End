@@ -159,3 +159,21 @@ header{ /* 헤더 */
     
 
 }
+ .board {
+    position: relative;
+    top: 18px;
+    left: 50px;
+    display: flex;
+    padding: 5px 15px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .board span {
+    white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+  }
+
+  .board:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+  }
