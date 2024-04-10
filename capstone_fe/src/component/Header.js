@@ -19,7 +19,7 @@ export default function Header(){
         const stroageMemberId = window.localStorage.getItem('memberId');
         setMemberId(stroageMemberId || 0);
         const stroageSessionId = window.localStorage.getItem('sessionId');
-        setSessionId(stroageSessionId || "");
+        setSessionId(stroageSessionId);
         
         console.log(memberId);
         console.log(sessionId);

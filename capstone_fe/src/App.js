@@ -22,6 +22,8 @@ import ProductUpload from './pages/ProductUpload';
 import ProductDetail from './pages/ProductDetail';
 
 export default function App() {  
+  setInterval(window.localStorage.removeItem('sessionId'), 300000);
+
   return (
     <BrowserRouter>
       <Routes>

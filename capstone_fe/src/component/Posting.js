@@ -10,11 +10,11 @@ const Posting = ({ onClose }) => {
 
     const handlePosting = async () => {
         try {
-            const response = await axios.post("http://localhost:8080/post/save", { //보내기
-                title: title,
-                content: content,
-
-            });
+            const postSave = {};
+            postSave['postTitle'] = title;
+            postSave['postDetail'] = content;
+            postSave['userId'] = "111";
+            const response = await axios.post("http://localhost:8080/post/save", postSave);
             console.log("게시글 작성 완료", response.data);
         } catch (error) {
             console.error(" 업로드 오류: ", error);
