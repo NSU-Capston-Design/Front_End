@@ -1,17 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // useEffect 추가
 import Header from "../component/Header";
 import "../css/Mypage.css";
 import direction_SwitchImage from '../img/direction_switch.png';
 import logoImage from '../img/logo.png';
 import warningImage from '../img/warning.png';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
 
 export default function Mypage() {
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSuccessMessageOpen, setIsSuccessMessageOpen] = useState(false);
   const [isWithdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const [isWithdrawSuccessMessageOpen, setIsWithdrawSuccessMessageOpen] = useState(false);
   const [isEditSuccessMessageOpen, setIsEditSuccessMessageOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [userId, setUserId] = useState("");
+  
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 백엔드에서 회원 정보 가져오기
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/user');
+        if (response.status === 200) {
+          setUserData(response.data); // 받아온 회원 정보를 상태에 저장
+        }
+      } catch (error) {
+        console.error('회원 정보를 가져오는 중 오류 발생:', error);
+      }
+    };
+
+    fetchUserData(); // 함수 호출
+  }, []); // 마운트 시 한 번만 호출하도록 빈 배열 전달
+
+
+  
   const navigate = useNavigate();
   
   const handleMoveToOrderInquiry = () => {
@@ -22,7 +46,11 @@ export default function Mypage() {
     setIsWithdrawSuccessMessageOpen(false);
   };
 
-  
+  const handleDirectionSwitchClick = () => {
+    // 이미지를 클릭하여 주문조회 페이지로 이동
+    navigate('/Order_inquiry');
+  };
+
   const handleMoveToDonationDetails = () => {
     navigate('/donation_details'); // Donation_details 페이지로 이동
   };
@@ -31,16 +59,18 @@ export default function Mypage() {
     navigate('/inquiry');
   };
   
-  const initialFormData = {
-    name: "",
-    username: "",
-    password: "",
-    passwordConfirm: "",
-    zipCode: "",
-    refundAccount: "",
+  const memberDTO = {
+    userId: "", // 유저 ID
+    userEmail: "", // 유저 이메일
+    userPassword: "", // 유저 비밀번호
+    userName: "", // 유저 이름
+    userPhone: "", // 유저 전화번호
+    userBirth: "", // 유저 생년월일
   };
 
-  const [formData, setFormData] = useState(initialFormData);
+
+  
+  const [formData, setFormData] = useState(memberDTO);
 
   const handleEditButtonClick = () => {
     setIsModalOpen(!isModalOpen);
@@ -101,7 +131,7 @@ export default function Mypage() {
 
 
   const resetForm = () => {
-    setFormData(initialFormData);
+    setFormData(memberDTO);
   };
 
   return (
@@ -110,17 +140,16 @@ export default function Mypage() {
       <div className="mypage_all">
         
 
-        <div className="mypage_list1">
-          <div className="mypage_image1">
-            <img src={logoImage} alt="버튼" />
-          </div>
-          <div className="mypage_name1">엄 준식</div>
-          <div className="mypage_name1_dl">
-            <button className="mypage_edit_button" onClick={handleEditButtonClick}>
-              회원정보 수정
-            </button>
-          </div>
-        </div>
+      <div className="mypage_list1">
+  <div className="mypage_image1">
+    <img src={logoImage} alt="버튼" />
+  </div>
+  {/* userData가 존재하고 userId가 존재한다면 userId를 표시 */}
+  <div className="mypage_name1">{userData && userData.userId}</div>
+  <button className="mypage_edit_button" onClick={handleEditButtonClick}>
+    회원정보 수정
+  </button>
+</div>
 
         {isModalOpen && (
   <div className="edit-modal" style={{ zIndex: 9999 }}>
@@ -128,85 +157,55 @@ export default function Mypage() {
       <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20 }}>정보 수정</div>
       <form>
         <div>
-          <label>이름</label>
-          <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="이름을 입력하세요." />
+          <label>ID</label>
+          <input type="text" name="userId" value={formData.userId} onChange={handleInputChange} placeholder="아이디를 입력하세요." />
         </div>
 
         <div>
-          <label>아이디</label>
-          <input type="text" name="username" value={formData.username} onChange={handleInputChange} placeholder="아이디를 입력하세요." />
+          <label>이메일</label>
+          <input type="text" name="userEmail" value={formData.userEmail} onChange={handleInputChange} placeholder="이메일을 입력하세요." />
         </div>
 
         <div>
           <label>비밀번호</label>
-          <input type="password" name="password" value={formData.password} onChange={handleInputChange} placeholder="비밀번호를 입력하세요." />
+          <input type="password" name="userPassword" value={formData.userPassword} onChange={handleInputChange} placeholder="비밀번호를 입력하세요." />
         </div>
 
         <div>
           <label>비밀번호 확인</label>
-          <input type="password" name="passwordConfirm" value={formData.passwordConfirm} onChange={handleInputChange} placeholder="비밀번호를 다시 입력하세요."/>
+          <input type="password" name="userPasswordConfirm" value={formData.userPasswordConfirm} onChange={handleInputChange} placeholder="비밀번호를 다시 입력하세요."/>
         </div>
 
-        <div className="postal-code">
-          <label>우편번호</label>
-          <input
-            type="text"
-            name="zipCode"
-            value={formData.zipCode}
-            onChange={handleInputChange}
-            placeholder="우편번호를 입력하세요."
-          />
-          <button type="button">검색</button>
+        <div>
+          <label>이름</label>
+          <input type="text" name="userName" value={formData.userName} onChange={handleInputChange} placeholder="이름을 입력하세요."/>
         </div>
-
-        <div className="address">
-          <label>주소</label>
-          <input
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={handleInputChange}
-            placeholder="주소를 입력하세요."
-          />
-          <label>상세주소</label>
-          <input
-            type="text"
-            name="detailAddress"
-            value={formData.detailAddress}
-            onChange={handleInputChange}
-            placeholder="상세주소를 입력하세요."
-          />
-        </div>
-
-        <div className="contact-info">
-          <label>이메일</label>
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="이메일을 입력하세요."
-          />
+        
+        <div className="contact-info1">
+          
           <label>휴대폰</label>
           <input
             type="text"
-            name="phone"
-            value={formData.phone}
+            name="userPhone"
+            value={formData.userPhone}
             onChange={handleInputChange}
             placeholder="휴대폰 번호를 입력하세요."
           />
         </div>
 
-        <div>
-          <label>환불계좌</label>
+        <div className="contact-info2">
+          
+          <label>생일</label>
           <input
             type="text"
-            name="refundAccount"
-            value={formData.refundAccount}
+            name="userBirth"
+            value={formData.userBirth}
             onChange={handleInputChange}
-            placeholder="환불계좌를 입력하세요."
+            placeholder="생일을 입력하세요."
           />
         </div>
+        
+          
       </form>
       <div style={{ marginTop: 20 }}>
         <button type="button" onClick={handleSaveButtonClick}>
@@ -247,16 +246,30 @@ export default function Mypage() {
       <button type="button" onClick={handleWithdrawCancel}>
         아니오
       </button>
-      <button type="button" onClick={handleWithdrawConfirm}>
+      <button type="button" onClick={() => {
+        handleWithdrawConfirm(); // 탈퇴 확인 함수 호출
+        setWithdrawModalOpen(false); // 탈퇴 모달 닫기
+      }}>
         탈퇴하기
       </button>
     </div>
   </div>
 )}
 
-{isWithdrawSuccessMessageOpen && isWithdrawModalOpen && (
-  <div className="modal" style={{ zIndex: 9999 }}>
-    <div className="modal-content" style={{ width: 500, height: 200, textAlign: 'center' }}>
+<div className="mypage_list2">
+          <div className="mypage_name2">주문조회하기</div>
+          <div className="mypage_image2">
+            <img
+              src={direction_SwitchImage}
+              alt="버튼"
+              onClick={handleDirectionSwitchClick}
+            />
+          </div>
+        </div>
+
+        {isWithdrawSuccessMessageOpen && (
+  <div className="withdraw-success-message">
+    <div className="message-content">
       <div style={{ fontWeight: 'bold', fontSize: 24, marginBottom: 20, color: 'black' }}>
         회원 탈퇴가 완료되었습니다.
       </div>
@@ -266,19 +279,6 @@ export default function Mypage() {
     </div>
   </div>
 )}
-
-<div className="mypage_list2">
-  <div className="mypage_name2">주문조회</div>
-  <div className="mypage_name2_d2">
-    <button onClick={handleMoveToOrderInquiry}>주문조회</button>
-  </div>
-</div>
-
-        <div className="mypage_list3">
-          <div className="mypage_name3">포인트</div>
-          <div className="mypage_name3_d2">
-          </div>
-        </div>
 
         <div className="mypage_list4">
           <div className="mypage_name4"><strong>기부내역</strong></div>
