@@ -10,9 +10,6 @@
     const [selectedComment, setSelectedComment] = useState(-1);
     const [editPostContent, setEditPostContent] = useState(post.content); // 수정 중인 게시글
     const [isEditPost, setIsEditPost] = useState(false); //게시글 수정모드
-
-
-
     
     useEffect(() => {
       //현재 사용자가 작성자인지

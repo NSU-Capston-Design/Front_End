@@ -36,7 +36,8 @@ export default function Login() {
         .then(res => {  // 가져온 데이터들 셋업
             console.log(res.data);
             window.localStorage.setItem('sessionId', true);
-            window.localStorage.setItem('memberId', res.data);
+            window.localStorage.setItem('memberId', res.data.memberId);
+            window.localStorage.setItem('userId', res.data.userId);
 
             console.log(res.data);
             navigate('/');

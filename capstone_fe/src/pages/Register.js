@@ -223,7 +223,7 @@ export default function Register(){
             
             <div className="registeruser">
             <div className="registeruserinfobox-titlebox">
-                    <h1 className="registeruserinfobox-titlebox__title">로고와 회원가입</h1>
+                    <h1 className="registeruserinfobox-titlebox__title">회원가입</h1>
                 </div>
             <div className="registeruserinfobox">
                 
