@@ -289,3 +289,27 @@
     background-color: #cccccc;
     color: #ffffff;
 }
+
+.purchase-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    
+    .purchase-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    }
+    
+    .purchase-modal,
+    .purchase-modal-content {
+    z-index: 10;
+    }

@@ -15,9 +15,15 @@ export default function Mainpage() {
     const [list, setList] = useState([]);
     const [eventList, setEventList] = useState([]);
     const [selectedProductId, setSelectedProductId] = useState(null);  // 선택된 제품의 ID를 추적
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handlePurchaseClick = (productId) => {
-        setSelectedProductId(productId);
+    const handlePurchaseClick = (fileId) => {
+        setSelectedProductId(fileId);
+        setIsModalOpen(true);
+    };
+
+    const closeitemModal = ()=>{
+        setIsModalOpen(false);
     };
 
 
@@ -53,13 +59,13 @@ export default function Mainpage() {
                     <div className="best_product">
                         {list.map((item) => (
 
-                            <div key={item.productId} className="best_product_item">
+                            <div key={item.fileId} className="best_product_item" onClick={() => handlePurchaseClick(item.fileId)}>
                                 <div className="best_image"><img src={`http://localhost:8080${item.productURL}`} alt="item" style={{ width: 330, height: 440 }} /></div>
                                 <div className="best_product_text">장성군 베스트 특산품</div><br />
                                 <div className="best_title">{item.productName}</div>
                                 <div className="best_detail"> <button onClick={handlePurchaseClick}>구매하기</button>
-                                {selectedProductId === item.productId && <ProductDetail closeModal={() => setSelectedProductId(null)}  />}
-                                {/* 선택된 제품ID와 현재 제품의 ID가 일치하면 상세 모달 표시*/}
+                                   
+                                    {/* 선택된 제품ID와 현재 제품의 ID가 일치하면 상세 모달 표시*/}
                                 </div>
 
                                 <div className="best_uploadTime">{item.uploadTime}</div>
@@ -93,6 +99,13 @@ export default function Mainpage() {
             </div>
 
             <div className="footer"></div>
+            {isModalOpen && selectedProductId && (
+                                        <div className="product-overlay">
+                                            <div className="product-modal">
+                                                <ProductDetail fileId={selectedProductId} closeModal={closeitemModal}/>
+                                            </div>
+                                        </div>)}
         </div>
+        
     )
 }

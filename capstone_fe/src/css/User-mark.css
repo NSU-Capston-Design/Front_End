@@ -1,0 +1,8 @@
+.mark {
+    display: inline-block;
+    width: fit-content;
+   
+    text-align: center; 
+    line-height: 1; /* 글꼴 크기와 동일한 높이로 설정 */
+  }
+ 

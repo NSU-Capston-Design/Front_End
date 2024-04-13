@@ -24,63 +24,64 @@ import Header from "../component/Header";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/Product.css";
-import ProductDetail from "../pages/ProductDetail"; 
+import ProductDetail from "../pages/ProductDetail";
 import axios from "axios";
+import Pagination from "../component/Pagination";
 
 export default function Product() {
 
-    
-    const [selectedProduct, setSelectedProduct] = useState(null); 
-    const [isModalOpen, setIsModalOpen] = useState(false); 
+
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [sortBy, setSortBy] = useState(""); // 정렬 방식을 저장하는 상태
     const [list, setList] = useState([]);
+    const [isAdmin, setIsAdmin] = useState(false); //관리자 여부
 
     const navigate = useNavigate();
 
     const addToCart = (product) => {
         const existingCartItems = JSON.parse(localStorage.getItem('cart')) || [];
         const existingCartItem = existingCartItems.find(item => item.productId === product.productId);
-        
+
         if (existingCartItem) {
             existingCartItem.quantity++; // 이미 장바구니에 있는 상품이라면 수량을 증가시킴
         } else {
             existingCartItems.push({ ...product, quantity: 1 }); // 새로운 상품이라면 수량을 1로 설정하여 추가
         }
-        
+
         localStorage.setItem('cart', JSON.stringify(existingCartItems));
     }
-    
 
-    useEffect(() => { //제품가져오기
-    const productList = async () => {
-    try {
-        const response = await axios.get('//localhost:8080/product/list');
-        const data = response.data;
-        console.log(data);
 
-        if (Array.isArray(data)) {
-            setList(data);
-        } else {
-            console.error('배열이 아닌 데이터입니다:', data);
-        }
-    } catch (error) {
-        console.error('데이터를 불러오는 중 오류가 발생했습니다:', error);
-    }
-};
-        productList();  // 초기 데이터 가져오기
+    useEffect(() => {
+        const fetchProductList = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/product/list');
+                const data = response.data;
+                console.log(data);
+
+                if (Array.isArray(data)) {
+                    setList(data);
+                } else {
+                    console.error('배열이 아닌 데이터입니다:', data);
+                }
+            } catch (error) {
+                console.error('데이터를 불러오는 중 오류가 발생했습니다:', error);
+            }
+        };
+
+        fetchProductList();  // 초기 데이터 가져오기
     }, []);
 
     //     setList(temporaryData);
     // // }, []); // 빈 배열을 넣어 한 번만 실행되도록 설정
 
-    const openProductDetailModal = (productId) => {
-        const product = list.find(item => item.productId === productId);
-        setSelectedProduct(product); // 선택된 상품 설정
+    const openProductDetailModal = (fileId) => {
+        console.log("Selected fileId:", fileId); // fileId 값 확인
+        setSelectedProduct(fileId); // 선택된 상품 설정
         setIsModalOpen(true); // 모달 오픈
     };
-
     const closeProductDetailModal = () => {
-        setSelectedProduct(null);
         setIsModalOpen(false);
     };
 
@@ -117,20 +118,50 @@ export default function Product() {
         setList(sortedList);
     };
 
+    useEffect(() => {
+        
+        const fetchUserData = async () => {
+            try {
+                // 백엔드에 사용자 정보를 요청
+                const response = await axios.get('http://localhost:8080/users');
+    
+                // 사용자 정보에서 관리자 여부를 확인
+                const userData = response.data.memberDTO;
+                const isAdmin = userData.isAdmin;
+    
+                // 관리자 여부를 설정
+                setIsAdmin(isAdmin);
+            } catch (error) {
+                console.error('사용자 정보를 가져오는 도중 오류가 발생했습니다:', error);
+            }
+        };
+    
+        // useEffect 내에서 사용자 정보를 가져오는 함수 호출
+        fetchUserData();
+    }, []);
+
+
     return (
         <>
             <Header />
             <div className="product-all">
-            <div className="product-controls">
+                <div className="product-controls">
                     <select value={sortBy} onChange={sortChange}>
                         <option value="">정렬</option>
                         <option value="latest">최신순</option>
                         <option value="popularity">인기순</option>
                     </select>
                 </div>
+                {isAdmin && (
+                    <span className="input-box">
+                        <input type="button" className="movetoupload" onClick={handleAddProduct} value="상품 등록" />
+                    </span>
+                )}
+
+
                 <div className="product-list">
                     {list.map((item) => (
-                        <div key={item.productId} className="product-list-item" onClick={() => openProductDetailModal(item.productId)}>
+                        <div key={item.fileId} className="product-list-item" onClick={() => openProductDetailModal(item.fileId)}>
                             <div className="product-list-box">
                                 <div className="product-list-image">
                                     <img src={`${item.productURL}`} alt="Product" style={{ width: 150, height: 150 }} />
@@ -154,16 +185,15 @@ export default function Product() {
                         </div>
                     ))}
                 </div>
-                <span className="input-box">
-                    <input type="button" className="movetoupload" onClick={handleAddProduct} value="상품 등록" />
-                </span>
+                <Pagination/>
+
             </div>
-            {isModalOpen && (
+            {isModalOpen && selectedProduct && (
                 // 모달 오픈 상태일 때 ProductDetail 모달로 렌더링
                 <div className="product-overlay">
                     <div className="product-modal">
                         {/* ProductDetail 모달 */}
-                        <ProductDetail product={selectedProduct} closeModal={closeProductDetailModal} />
+                        <ProductDetail fileId={selectedProduct} closeModal={closeProductDetailModal} />
                     </div>
                 </div>
             )}
