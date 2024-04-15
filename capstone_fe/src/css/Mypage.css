@@ -32,136 +32,89 @@
 
 /* 첫 번째 마이페이지 리스트 스타일 */
 .mypage_list1 {
-  width: 244px;
-  height: auto;
-  padding: 50px;
+  width: 20%;
+  height: 400px;
   background: rgba(97, 124, 194, 0.6);
-  border-radius: 10px;
+  border-radius: 5%;
   border: 1px #DEDEDE solid;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
-  gap: 35px;
-  margin-right: 20px;
   position: relative;
-  left: -600px;
-  margin-top: 85px;
 }
 
 /* 첫 번째 마이페이지 리스트 이미지 스타일 */
 .mypage_list1 .mypage_image1 {
   position: absolute;
-  top: 100px;
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
 }
 
+
 .mypage_list1 .mypage_image1 img {
-  width: 240px;
+  width: 100%;
   height: auto;
 }
 
 /* 첫 번째 마이페이지 리스트 이름 스타일 */
 .mypage_list1 .mypage_name1 {
   font-weight: bold;
-  margin-top: 150px;
+  margin-top: 10%;
   line-height: 20;
 }
 
 /* 추가: 회원정보 수정 버튼 스타일 */
-.mypage_list1 .mypage_name1_dl button {
+.mypage_edit_button {
+  position: absolute;
+  top: 80%; /* 원하는 위치에 맞게 조정 */
+  left: 50%; /* 가운데 정렬 */
+  transform: translate(-50%, -50%); /* 수평, 수직 가운데 정렬 */
   background-color: #fff;
   color: #617CC2;
   border: 2px solid #808080;
   padding: 10px 20px;
   border-radius: 15px;
   cursor: pointer;
-  margin-top: 20px;
-  font-weight: bold;
 }
 
-/* 두 번째 마이페이지 리스트 스타일 */
-.mypage_list2 {
-  font-weight: bold;
-  font-size: 32px;
-  width: 200px;
-  height: 200px;
-  padding: 50px;
-  background: #ECECEC;
-  border-radius: 10px;
-  border: 1px #DEDEDE solid;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 35px;
-  position: absolute;
-  transform: translate(-50%, -50%) translateX(-10%);
-  margin-top: 750px;
+.message-content{
+  width: 1000%;
 }
 
-/* 세 번째 마이페이지 리스트 스타일 */
-.mypage_list3 {
-  font-weight: bold;
-  font-size: 32px;
-  width: 200px;
-  height: 200px;
-  padding: 50px;
-  background: #ECECEC;
-  border-radius: 10px;
-  border: 1px #DEDEDE solid;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 35px;
-  position: absolute;
-  margin-top: 600px;
-  left: 51%;
-}
-
-/* 세 번째 마이페이지 리스트 스타일 */
-.mypage_list3 span {
-  color: red;
-}
-
-/* 네 번째 마이페이지 리스트 스타일 */
+.mypage_list2,
 .mypage_list4 {
-  width: 424px;
-  height: 300px;
-  padding: 50px;
-  background: #004EA2;
+  width: 10%;
+  background: #ECECEC;
   border-radius: 10px;
-  border: 1px #DEDEDE solid;
+  border: 1px solid #DEDEDE;
+  margin-top: 1%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
-  margin-top: -680px;
+  position: relative; /* 추가: 상대적 위치 설정 */
+}
+
+.mypage_name2 {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 /* 네 번째 마이페이지 리스트 이름 스타일 */
 .mypage_name4 {
   font-weight: bold;
-  font-size: 35px;
-  margin-bottom: 10px;
-  margin-top: -10px;
-}
-
-/* 네 번째 마이페이지 리스트 이름 스타일 */
-.mypage_name4_dl {
-  font-weight: bold;
-  font-size: 60px;
-  text-align: center;
+  font-size: 20px;
+  margin-bottom: 5px;
   margin-top: 20px;
 }
 
-/* 네 번째 마이페이지 리스트 강조 스타일 */
-.mypage_name4_dl strong {
-  font-weight: bold;
-  color: white;
+.mypage_image2 img {
+  width: 100px;
+  height: auto;
+  margin-top: 10px;
 }
 
 /* 네 번째 마이페이지 리스트 이미지 스타일 */
@@ -171,16 +124,37 @@
   margin-top: 10px;
 }
 
+/* 두 번째 및 네 번째 마이페이지 리스트 내부 버튼 스타일 */
+.mypage_list2 button,
+.mypage_list4 button {
+  background-color: #617CC2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 80%;
+  box-sizing: border-box;
+}
+
+
+
+/* 두 번째 및 네 번째 마이페이지 리스트 내부 버튼 호버 스타일 */
+.mypage_list2 button:hover,
+.mypage_list4 button:hover {
+  background-color: #415D87;
+}
+
 /* 마이페이지 문의 버튼 스타일 */
 .mypage_inquiry_button {
   background-color: #fff;
   color: #617CC2;
   border: 2px solid #808080;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 1%;
+  border-radius: 5%;
   cursor: pointer;
-  margin-top: 500px;
-  margin-left: 600px;
+  margin-left: 20%;
   position: fixed;
   font-weight: bold;
 }
@@ -190,11 +164,10 @@
   background-color: #fff;
   color: #FF0000;
   border: 2px solid #808080;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 1%;
+  border-radius: 5%;
   cursor: pointer;
-  margin-top: 500px;
-  margin-left: -900px;
+  margin-left: 12%;
   position: fixed;
   font-weight: bold;
 }
@@ -209,7 +182,7 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  margin-top: -700px;
+  margin-top: -60%;
   align-items: flex-start; /* 변경: 왼쪽 정렬로 수정 */
   padding-left: 20px; /* 변경: 왼쪽 여백 추가 */
   border: 2px solid #808080; /* 회색 테두리 추가 */
@@ -217,6 +190,8 @@
   padding: 15px; /* 테두리 내부 여백 추가 */
   background-color: #fff;
 }
+
+
 
 /* 모달 내용의 입력 요소 스타일 */
 .modal-content input {
@@ -237,7 +212,15 @@
   cursor: pointer;
   margin-top: 20px;
   width: 100%;
-  box-sizing: border-box;
+}
+
+.your-updated-class-name {
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 20%;
 }
 
 /* 우편번호 입력 영역 스타일 */
@@ -286,11 +269,20 @@
   transform: translate(-50%, -50%);
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
 }
 
 /* 커스텀 모달 스타일 */
 .custom-modal {
   background-color: #fff;
+}
+
+.button-container {
+  display: inline-block;
+}
+
+
+/* 두 번째 및 네 번째 마이페이지 리스트 호버 시 이미지 스타일 */
+.mypage_image2:hover img,
+.mypage_image4:hover img {
+  transform: scale(1.1); /* 마우스 호버 시 이미지 크기를 약간 키웁니다 */
 }

@@ -119,7 +119,7 @@ export default function Mypage() {
           <div className="mypage_image1">
             <img src={logoImage} alt="버튼" />
           </div>
-          <div className="mypage_name1">|{userId}|</div>
+          <div className="mypage_name1">{userId}</div>
           <div className="mypage_name1_dl">
             <button className="mypage_edit_button" onClick={handleEditButtonClick}>
               회원정보 수정
