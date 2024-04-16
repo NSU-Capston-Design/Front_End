@@ -7,7 +7,7 @@
   
   .pagination-button {
   background-color: white;
-  border: 1px solid #1d2c90;
+  border: 1.6px solid #1d50a2;
   border-radius: 5px;
   padding: 10px 20px;
   text-align: center;
@@ -20,11 +20,11 @@
   }
   
   .pagination-button:hover {
-  background-color: #1d2c90;
+  background-color: #2d49a2;
   color: white;
   }
   
   .pagination-button.active {
-  background-color: #1d2c90;
+  background-color: #2d49a2;
   color: white;
   }

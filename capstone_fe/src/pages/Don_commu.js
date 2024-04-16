@@ -56,6 +56,11 @@ const DonCommu = () => {
     openModal();
   };
 
+    // 페이지 변경 시 해당 페이지의 게시글을 가져오는 함수
+    const handlePageChange = useCallback((pageNumber) => {
+      setCurrentPage(pageNumber);
+    }, []);
+
   console.log("isModalOpen:", isModalOpen);
   console.log("selectedPost:", selectedPost);
 
@@ -92,7 +97,12 @@ const DonCommu = () => {
         </table>
       </div>
       <div className="pagination">
-        <Pagination/>
+      <Pagination
+          totalCount={posts.length} // 전체 게시글 수
+          pageSize={pageSize} // 페이지당 게시글 수
+          currentPage={currentPage} // 현재 페이지
+          setCurrentPage={handlePageChange} // 페이지 변경 함수
+        />
           
       
       </div>

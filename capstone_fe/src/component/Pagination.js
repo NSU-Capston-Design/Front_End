@@ -1,13 +1,14 @@
 import React from "react";
 import "../css/Pagination.css";
 
-
 const Pagination = ({ totalCount, pageSize, currentPage, setCurrentPage }) => {
   const pages = Math.ceil(totalCount / pageSize);
 
   const goToNextPage = () => {
     if (currentPage < pages) {
       setCurrentPage(currentPage + 1);
+    } else {
+      alert("마지막 페이지입니다.");
     }
   };
 
@@ -44,12 +45,13 @@ const Pagination = ({ totalCount, pageSize, currentPage, setCurrentPage }) => {
           {i + 1}
         </button>
       ))}
-      <button onClick={goToNextPage} className="pagination-button">
+      <button onClick={goToNextPage} className="pagination-button" disabled={currentPage === pages}>
         {">"}
       </button>
       <button onClick={goToLastPage} className="pagination-button">
         {">>"}
       </button>
+    
     </div>
   );
 };

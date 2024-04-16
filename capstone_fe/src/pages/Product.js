@@ -24,39 +24,46 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../css/Product.css";
 import ProductDetail from "../pages/ProductDetail"; 
+import Pagination from "../component/Pagination";
 
 export default function Product() {
 
 
     const [selectedProduct, setSelectedProduct] = useState(null); 
     const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [sortBy, setSortBy] = useState(""); // 정렬 방식을 저장하는 상태
+    const [list, setList] = useState([]);
+    const [isAdmin, setIsAdmin] = useState(false); //관리자 여부
+    const [pageSize, setPageSize] = useState(10); // 페이지당 아이템 수
+    const [totalCount, setTotalCount] = useState(0); // 페이지초기
+    const [currentPage, setCurrentPage] = useState(1);
 
-    const [list, setList] = useState([
-        // {
-        //     productId: 1,
-        //     productName: "아메리카노",
-        //     uploadTime: "2022-02-16",
-        //     productPrice: 3000,
-        //     productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiPtZk7sCgOahkySHKQfL4Ph2lEntdgXuFbA&usqp=CAU",
-        //     productReview: 4.5
-        // },
-        // {
-        //     productId: 2,
-        //     productName: "카페라떼",
-        //     uploadTime: "2022-02-16",
-        //     productPrice: 4000,
-        //     productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJbdu-6rHcYPPs9BY8al_cqGM2i1uopu3imw&usqp=CAU",
-        //     productReview: 4.8
-        // },
-        // {
-        //     productId: 3,
-        //     productName: "카페모카",
-        //     uploadTime: "2022-02-16",
-        //     productPrice: 4500,
-        //     productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQomqwULqpSqoaFnUc-03xkKgxYsESKcN66Q&usqp=CAU",
-        //     productReview: 4.7
-        // }
-    ]);
+    // const [list, setList] = useState([
+    //     {
+    //         productId: 1,
+    //         productName: "아메리카노",
+    //         uploadTime: "2022-02-16",
+    //         productPrice: 3000,
+    //         productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiPtZk7sCgOahkySHKQfL4Ph2lEntdgXuFbA&usqp=CAU",
+    //         productReview: 4.5
+    //     },
+    //     {
+    //         productId: 2,
+    //         productName: "카페라떼",
+    //         uploadTime: "2022-02-16",
+    //         productPrice: 4000,
+    //         productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJbdu-6rHcYPPs9BY8al_cqGM2i1uopu3imw&usqp=CAU",
+    //         productReview: 4.8
+    //     },
+    //     {
+    //         productId: 3,
+    //         productName: "카페모카",
+    //         uploadTime: "2022-02-16",
+    //         productPrice: 4500,
+    //         productURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQomqwULqpSqoaFnUc-03xkKgxYsESKcN66Q&usqp=CAU",
+    //         productReview: 4.7
+    //     }
+    // ]);
     const navigate = useNavigate();
     const addToCart = (product) => {
         const existingCartItems = JSON.parse(localStorage.getItem('cart')) || [];
@@ -77,7 +84,6 @@ export default function Product() {
             localStorage.setItem('cart', JSON.stringify(updatedCartItems));
         }
     };
-
 
     useEffect(() => { 
     const productList = async () => {
@@ -108,7 +114,6 @@ export default function Product() {
     };
 
     const closeProductDetailModal = () => {
-        setSelectedProduct(null);
         setIsModalOpen(false);
     };
 
@@ -124,10 +129,68 @@ export default function Product() {
         event.stopPropagation(); // 상세 페이지 이동 방지
         addToCart(item);
     };
+    
+    const sortChange = (event) => {
+        const value = event.target.value;
+        setSortBy(value);
+        if (value === "latest") {
+            sortLatest();
+        } else if (value === "popularity") {
+            sortPopularity();
+        }
+    };
+
+     const sortLatest = () => {
+        const sortedList = [...list].sort((a, b) => new Date(b.uploadTime) - new Date(a.uploadTime));
+        setList(sortedList);
+    };
+
+    const sortPopularity = () => {
+        const sortedList = [...list].sort((a, b) => b.productView - a.productView);
+        setList(sortedList);
+    };
+
+    useEffect(() => {
+
+        const fetchUserData = async () => {
+            try {
+                // 백엔드에 사용자 정보를 요청
+                const response = await axios.get('http://localhost:8080/users');
+
+                // 사용자 정보에서 관리자 여부를 확인
+                const userData = response.data.memberDTO;
+                const isAdmin = userData.isAdmin;
+
+                // 관리자 여부를 설정
+                setIsAdmin(isAdmin);
+            } catch (error) {
+                console.error('사용자 정보를 가져오는 도중 오류가 발생했습니다:', error);
+            }
+        };
+
+        // useEffect 내에서 사용자 정보를 가져오는 함수 호출
+        fetchUserData();
+    }, []);
+
+
     return (
         <>
             <Header />
             <div className="product-all">
+                <div className="product-controls">
+                    <select value={sortBy} onChange={sortChange}>
+                        <option value="">정렬</option>
+                        <option value="latest">최신순</option>
+                        <option value="popularity">인기순</option>
+                    </select>
+                </div>
+                {isAdmin && (
+                    <span className="input-box">
+                        <input type="button" className="movetoupload" onClick={handleAddProduct} value="상품 등록" />
+                    </span>
+                )}
+
+
                 <div className="product-list">
                     {list.map((item) => (
                         <div key={item.fileId} className="product-list-item" onClick={() => openProductDetailModal(item.fileId)}>
@@ -141,10 +204,12 @@ export default function Product() {
                                 <div className="product-list-price" title={item.productPrice}>
                                     {item.productPrice}원
                                 </div>
-                                <div className="product-list-review" title={item.productView}>
-                                    조회수: {item.productView}
+                                <div className="product-list-review" title={item.productInven}>
+                                    재고 : {item.productInven} &nbsp; 조회수 : {item.productView}
                                 </div>
-
+                                <div className="product-list-time" title={item.uploadTime}>
+                                    업로드 : {item.uploadTime}
+                                </div>
                                 <button onClick={(event) => handleAddToCart(event, item)} className="add-to-cart-button">
                                     장바구니에 담기
                                 </button>
@@ -152,16 +217,14 @@ export default function Product() {
                         </div>
                     ))}
                 </div>
-                <span className="input-box">
-                    <input type="button" className="movetoupload" onClick={handleAddProduct} value="상품 등록" />
-                </span>
+                <Pagination totalCount={totalCount} pageSize={pageSize} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </div>
-            {isModalOpen && (
+            {isModalOpen && selectedProduct && (
                 // 모달 오픈 상태일 때 ProductDetail 모달로 렌더링
                 <div className="product-overlay">
                     <div className="product-modal">
                         {/* ProductDetail 모달 */}
-                        <ProductDetail product={selectedProduct} closeModal={closeProductDetailModal} list={list} />
+                        <ProductDetail fileId={selectedProduct} closeModal={closeProductDetailModal} />
                     </div>
                 </div>
             )}
