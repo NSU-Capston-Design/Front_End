@@ -3,9 +3,9 @@ import Button from '../component/Button';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Purchase from "./Purchase";
 
-
-export default function ProductDetail(props) {
+export default function ProductDetail({ fileId, closeModal }) {
 
     const [isAdmin, setIsAdmin] = useState(false); //관리자 여부
     const [reviewText, setReviewText] = useState("");
@@ -14,55 +14,51 @@ export default function ProductDetail(props) {
     const [isEditMode, setIsEditMode] = useState(false); // 수정 모드 여부
     const [productData, setProductData] = useState([]);
     const navigate = useNavigate();
-    const { fileId } = useParams();
-    const id = parseInt(fileId, 10); 
-
+    const [purchaseModalOpen, setPurchaseModalOpen] = useState(false);
+    const { id } = useParams();
+    console.log('detail File ID:', fileId);
     const [editedProductData, setEditedProductData] = useState({
         productName: '',
         productPrice: 0,
         productDescription: ''
     });
-
     useEffect(() => {
-        
         const fetchProductDetail = async () => {
             try {
                 const response = await axios.get(`http://localhost:8080/product/${fileId}`);
-                setProductData(response.data);
-               
+                const data = response.data;
+                setProductData(data);
             } catch (error) {
                 console.log("오류발생", error);
             }
         };
-    
         fetchProductDetail();
-    }, []);
+    }, [fileId]);
 
-    useEffect(() => { //관리자/사용자 권한 로컬 설정
-        const isAdmin =  async () => {
-            try {
-                // 사용자 인증 토큰을 localStorage에서 가져온다고 가정
-                const authToken = localStorage.getItem('authToken');
-    
-                // 백엔드에 사용자 인증 토큰을 포함하여 요청을 보냄
-                const response = await axios.get('http://localhost:8080/users', {
-                    headers: {
-                        Authorization: `Bearer ${authToken}`
-                    }
-                });
-    
-                // 사용자 정보를 확인하여 관리자 여부를 결정
-                const userData = response.data.memberDTO;
-                setIsAdmin(userData.isAdmin);
-            } catch (error) {
-                console.error('사용자 정보를 가져오는 도중 오류가 발생했습니다:', error);
-            }
-        };
-    
-        isAdmin(); // useEffect 내에서 isAdmin 함수를 호출
-    }, []);
 
-    
+    // useEffect(() => {
+
+    //     const admin = async () => {//관리자
+    //         try {
+
+    //             const response = await axios.get('http://localhost:8080/users');
+
+    //             // 사용자 정보에서 관리자 여부를 확인
+    //             const userData = response.data.memberDTO;
+    //             const isAdmin = userData.isAdmin;
+
+    //             // 관리자 여부를 설정
+    //             setIsAdmin(isAdmin);
+    //         } catch (error) {
+    //             console.error('사용자 정보를 가져오는 도중 오류가 발생했습니다:', error);
+    //         }
+    //     };
+
+    //     // useEffect 내에서 사용자 정보를 가져오는 함수 호출
+    //     admin();
+    // }, []);
+
+
 
 
 
@@ -103,8 +99,13 @@ export default function ProductDetail(props) {
     };
 
 
+    const handleCloseModal = () => {
+        closeModal(); // 부모 컴포넌트에서 전달된 closeModal 함수 호출
 
-    
+    };
+
+
+
     // const updateProductViews = async () => {
     //     try {
     //         await axios.get('/product/views', {
@@ -139,43 +140,43 @@ export default function ProductDetail(props) {
         setSatisfaction(""); // 만족도 초기화
     };
 
-
-    const Purchase = () => {
-        // 구매 로직
-        const isConfirmed = window.confirm(`상품(${fileId})을 구매하시겠습니까?.`);
-
+    const handlePurchase = () => {
+        const isConfirmed = window.confirm(`"${productData.productName}" 상품을 구매하시겠습니까?.`);
         if (isConfirmed) {
             console.log(`상품(${fileId}) 결제페이지로 이동합니다.`);
-            navigate('/')//결제모달로 수정예정
-
+            setPurchaseModalOpen(true); // 모달을 열도록 상태 업데이트
         } else {
             console.log(`상품(${fileId}) 구매가 취소되었습니다.`);
         }
     };
 
+    const handleClosePurchaseModal = () => {
+        setPurchaseModalOpen(false); // 모달을 닫도록 상태 업데이트
+    };
+
     const addToCart = async () => {
 
         const existingCartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingCartItem = existingCartItems.find(item => item.productId === productData.productId);
-        
+        const existingCartItem = existingCartItems.find(item => item.productId === productData.fileId);
+
         if (existingCartItem) {
             existingCartItem.quantity++; // 이미 장바구니에 있는 상품이라면 수량을 증가시킴
         } else {
             existingCartItems.push({ ...productData, quantity: 1 }); // 새로운 상품이라면 수량을 1로 설정하여 추가
         }
-        
-        localStorage.setItem('cart', JSON.stringify(existingCartItems));
 
-   
+        localStorage.setItem('cart', JSON.stringify(existingCartItems));
+        window.alert(`${productData.productName} 상품이 장바구니에 추가되었습니다.`);
+
     };
 
 
     return (
         <div className='all'>
-            <div className="modalCloseBtn" onClick={props.closeModal}>
+            <div className="modalCloseBtn" onClick={handleCloseModal}>
                 닫기
             </div>
-            {isAdmin && (
+            {/* {isAdmin && (
                 <div>
                     {isEditMode ? (
                         <>
@@ -190,17 +191,18 @@ export default function ProductDetail(props) {
                     )}
                 </div>
 
-            )}
+            )} */}
             <div className='product'>
 
                 <div className='productImg'>
-                    <img src={`${productData.productURL}`} alt={productData.productName} style={{width: 330, height: 440}}/>
+                    <img src={`${productData.productURL}`} alt={productData.productName} style={{ width: 330, height: 440 }} />
                     <p className='description'>{/* 상품 이미지 밑 설명글 */}
                         <span className='descripText'>
                             {isEditMode ? (
                                 <textarea
                                     value={editedProductData.productDescription}
                                     onChange={(e) => setEditedProductData({ ...editedProductData, productDescription: e.target.value })}
+                                    placeholder={productData.productName}
                                 />
                             ) : (
                                 productData.productDescription
@@ -213,15 +215,16 @@ export default function ProductDetail(props) {
                 <div className='productInfo'>
                     <div className='productInfo1'>
                         <div className='productInfo2'>
-                            <div className='productName'>   
-                            {isEditMode ? (
-                                <input
-                                    value={editedProductData.productName}
-                                    onChange={(e) => setEditedProductData({ ...editedProductData, productName: e.target.value })}
-                                />
-                            ) : (
-                                productData.productName
-                            )}
+                            <div className='productName'>
+                                {isEditMode ? (
+                                    <input
+                                        value={editedProductData.productName}
+                                        onChange={(e) => setEditedProductData({ ...editedProductData, productName: e.target.value })}
+                                        placeholder={productData.productName}
+                                    />
+                                ) : (
+                                    productData.productName
+                                )}
                             </div>
                             <div className='rate'>
                                 <div className='rate_start' >
@@ -249,7 +252,15 @@ export default function ProductDetail(props) {
                                         <div className='groupName'>분류</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>{productData.category}</div>
+                                        <div className='infoTxt'>{isEditMode ? (
+                                            <textarea
+                                                value={editedProductData.category}
+                                                onChange={(e) => setEditedProductData({ ...editedProductData, category: e.target.value })}
+                                                placeholder={productData.category}
+                                            />
+                                        ) : (
+                                            productData.category)}
+                                        </div>
                                     </div>
                                 </div>
 
@@ -258,7 +269,15 @@ export default function ProductDetail(props) {
                                         <div className='groupName'>재고수량</div>
                                     </div>
                                     <div className='infoName'>
-                                        <div className='infoTxt'>{productData.productInven}개</div>
+                                        <div className='infoTxt'>{isEditMode ? (
+                                            <textarea
+                                                value={editedProductData.productInven}
+                                                onChange={(e) => setEditedProductData({ ...editedProductData, productInven: e.target.value })}
+                                                placeholder={productData.productInven}
+                                            />
+                                        ) : (
+                                            productData.productInven)}개
+                                        </div>
                                     </div>
                                 </div>
 
@@ -289,21 +308,28 @@ export default function ProductDetail(props) {
 
                     <div className='priceSection'>
                         <div className='price'>
-                            <div className='currentPrice'> {productData.productPrice} </div>
+                            <div className='currentPrice'> {productData.productPrice} 원</div>
                             <div className='discount'>
-                                <div className='discountAmount'>-12%</div>{/* 할인율 */}
+                                {/* <div className='discountAmount'>-12%</div>할인율 */}
                             </div>
                         </div>
                         <div className='lastPrice'>
-                            <div className='lastPriceTxt'>할인 전 가격</div>
-                            <div className='lastPriceTxt'>$456</div>
+                            {/* <div className='lastPriceTxt'>할인 전 가격</div>
+                            <div className='lastPriceTxt'>$456</div> */}
                         </div>
                     </div>
 
-                    <div className='productBtn'> {/*구매/장바구니 버튼 */}
-                        <Button size="sm" onClick={Purchase}>구매</Button>
-
-
+                    {/* 구매 버튼과 모달 컴포넌트 */}
+                    <div className='productBtn'>
+                        <Button size="sm" className="handlePurchase" onClick={handlePurchase}>구매</Button>
+                        {purchaseModalOpen && (
+                            <Purchase
+                                productName={productData.productName}
+                                fileId={fileId}
+                                productPrice={productData.productPrice}
+                                onClose={handleClosePurchaseModal}
+                            />
+                        )}
                         <Button size="sm" onClick={addToCart}>장바구니</Button>
                     </div>
                 </div>
@@ -334,8 +360,9 @@ export default function ProductDetail(props) {
                         </div>
                     ))}
                 </div>
-               
+
             </div>
+
         </div>
     );
 }

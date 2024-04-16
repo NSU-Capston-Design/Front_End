@@ -8,6 +8,10 @@ const EventPost = ({ onClose }) => {
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [file, setFile] = useState(null);
+    const [requiredDonorLevel, setRequiredDonorLevel] = useState(1); // 등급 설정
+    const [startDate, setStartDate] = useState(""); // 시작일 설정
+    const [endDate, setEndDate] = useState(""); // 종료일 설정
+
 
 
     const handlePosting = async () => {
@@ -44,6 +48,33 @@ const EventPost = ({ onClose }) => {
                         닫기
                     </button>
                 </div>
+            </div>
+            <div className="required-donor-level">
+                <label htmlFor="donor-level">이벤트 참여 등급 설정:</label>
+                <input
+                    type="number"
+                    id="donor-level"
+                    value={requiredDonorLevel}
+                    onChange={(e) => setRequiredDonorLevel(parseInt(e.target.value))}
+                    min="0"
+                />
+            </div>
+
+            <div className="date-range">
+                <label htmlFor="start-date">게시 시작일:</label>
+                <input
+                    type="date"
+                    id="start-date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                />
+                <label htmlFor="end-date">게시 종료일:</label>
+                <input
+                    type="date"
+                    id="end-date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                />
             </div>
 
             <div className="content">

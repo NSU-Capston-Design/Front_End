@@ -16,22 +16,28 @@
     text-align: center; /* 가운데 정렬 */
   }
   
-  /* 이벤트 리스트 */
-  .event_list {
-    width: 946px;
-    flex: 1 1 0;
-    padding: 0.4375rem 1.875rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 3.0625rem;
-  }
+ .event_list {
+  width: fit-content;
+  display :grid;
+  justify-content: center; /* 가로 중앙 정렬 */
+  flex-direction: row; /* 가로 정렬을 위해 행 방향으로 설정 */
+  grid-template-columns: repeat(3, minmax(200px, 1fr)); /* 3열로 설정 */
+  flex-wrap: wrap; /* 아래 줄로 넘어갈 수 있도록 wrap 설정 */
+  align-items: center;
+  gap: 3.0625rem;
+  margin-bottom: 20px; /* 아래쪽에 간격 추가 */
+  align-items: center;
+}
+.event_list span{
+  font-size: 14px;
+  font-weight: bold;
+
+}
   
   /* 이벤트 아이템 */
   .event_item {
     width: 27.625rem;
-    height: 13.6875rem;
+    height: 27.6875rem;
     border: 1px solid #ddd;
     border-radius: 0.3125rem;
     padding: 1.25rem;
@@ -40,6 +46,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden; /* 이미지를 넘치지 않도록  */
+    
   }
   
   .event_item:hover {
@@ -64,45 +72,80 @@
   font-size: 1rem;
 }
 .event-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 670px;
+  background: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px rgba(96.70, 96.70, 96.70, 0.30) solid;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;;
 }
 
-.event-content {
-    text-align: center;
-}
+
 
 .event-content button {
-    margin: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  margin: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .event-content button:hover {
     background-color: #0056b3;
 }
 
+.event-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  overflow-y: auto;
+}
+
 .event-content h2 {
-    margin-bottom: 10px;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .event-content p {
-    margin-bottom: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .event-content img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 5px;
+  
+}
+.event-img {
+  width: 100%; /* 이미지를 부모 요소에 맞게 조정 */
+  height: 90%; /* 비율에 맞게 조정되도록 설정 */
+  position: relative;
+  overflow: hidden;
+  
+}
+
+.event-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}
+.page_btn{
+  margin-bottom: 20px;
 }

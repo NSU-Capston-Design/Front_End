@@ -26,8 +26,8 @@
 }
 
 .posting {
-    width: 1440px;
-    height: 58px;
+    width: 90%;
+    height: 30px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -67,4 +67,11 @@
 
 .post-table th {
     background-color: #f2f2f2;
+}
+.username{
+    display: inline-block;
+    width: fit-content;
+    height: 20px; /* 원하는 높이로 설정 */
+    text-align: center; 
+    line-height: 1; /* 글꼴 크기와 동일한 높이로 설정 */
 }

@@ -4,25 +4,30 @@ import "../css/Donation_details.css";
 import axios from "axios";
 
 export default function Donation_details() {
+  const [total, setTotal] = useState(0);
   const [donationData, setDonationData] = useState({
     totalAmount: 0,
-    donationList: [],
+    donationList: []
   });
 
   useEffect(() => {
     // 로그인한 사용자의 정보를 가져온다고 가정
-    const userToken = localStorage.getItem("userToken"); // 로컬 스토리지에서 사용자 토큰을 가져옴
+    // const userToken = localStorage.getItem("userToken"); // 로컬 스토리지에서 사용자 토큰을 가져옴
 
     // 사용자 정보를 가져오는 API 호출
-    axios.get("http://localhost:8080/userinfo", {
-      headers: {
-        Authorization: `Bearer ${userToken}`, // 사용자 토큰을 Authorization 헤더에 포함하여 전송
-      },
+    axios.get("http://localhost:8080/donations/total", {
+      params: {
+        userId: window.localStorage.getItem('userId')
+      }
     })
     .then(response => {
-      const userId = response.data.userId; // API 응답에서 사용자 ID 추출
+      console.log(response.data)
 
-      fetchDonationData(userId); // 추출한 사용자 ID로 기부 내역을 가져오는 함수 호출
+      setTotal(response.data);
+      
+      // const userId = response.data.userId; // API 응답에서 사용자 ID 추출
+
+      // fetchDonationData(userId); // 추출한 사용자 ID로 기부 내역을 가져오는 함수 호출
     })
     .catch(error => {
       console.error("Error fetching user info: ", error);
@@ -31,7 +36,7 @@ export default function Donation_details() {
 
   const fetchDonationData = async (userId) => {
     try {
-      const response = await axios.get(`http://localhost:8080/donations/by-user/${userId}`);
+      const response = await axios.get(`http://localhost:8080/donations/total`);
 
       const donationList = response.data;
       const totalAmount = donationList.reduce((total, donation) => total + donation.amount, 0);
@@ -56,7 +61,7 @@ export default function Donation_details() {
               <font color="#617CC2">기부내역</font>
             </strong>
           </p>
-          <p>총 기부 금액: {donationData.totalAmount}원</p>
+          <p>총 기부 금액: {total}원</p>
         </div>
       </div>
 

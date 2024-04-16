@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import axios from "axios";
 import '../css/Posting.css';
 import Button from '../component/Button';
+import {useNavigate} from 'react-router-dom'
 
 const Posting = ({ onClose }) => {
 
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const navigate = useNavigate();
 
     const handlePosting = async () => {
         try {
             const postSave = {};
             postSave['postTitle'] = title;
             postSave['postDetail'] = content;
-            postSave['userId'] = "111";
+            postSave['userId'] = window.localStorage.getItem('userId');
             const response = await axios.post("http://localhost:8080/post/save", postSave);
-            console.log("게시글 작성 완료", response.data);
+            alert("게시글 작성 완료");
+            navigate('/don_commu');
         } catch (error) {
             console.error(" 업로드 오류: ", error);
         }

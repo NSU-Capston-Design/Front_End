@@ -19,11 +19,10 @@ import Order_inquiry from './pages/Order_inquiry';
 import Donation_details from './pages/Donation_details';
 import Product from './pages/Product';
 import ProductUpload from './pages/ProductUpload';
-import ProductDetail from './pages/ProductDetail';
 
-export default function App() {  
+export default function App() {
   setInterval(window.localStorage.removeItem('sessionId'), 300000);
-
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -45,7 +44,6 @@ export default function App() {
         <Route path='/donation_details' element={<Donation_details/>}/>
         <Route path='/product' element={<Product/>}/>
         <Route path='/product/upload' element={<ProductUpload/>}/>
-        <Route path='/product/detail/:fileId' element={<ProductDetail/>}/>
       </Routes>
     </BrowserRouter>
   );
