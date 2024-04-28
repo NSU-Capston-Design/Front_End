@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'
-
 import "../css/Login.css";
+
+import { setItemWithTime } from "../component/SetStorage";  // 스토리지 등록
+import { getItemWithTime } from "../component/GetStorage";  // 스토리지 아이템 가져오기
+
 import Header from "../component/Header";
 
 export default function Login() {
@@ -35,9 +38,10 @@ export default function Login() {
         })
         .then(res => {  // 가져온 데이터들 셋업
             console.log(res.data);
-            window.localStorage.setItem('sessionId', true);
-            window.localStorage.setItem('memberId', res.data.memberId);
-            window.localStorage.setItem('userId', res.data.userId);
+            setItemWithTime('memberId', res.data.memberId, 600000)          // 만료시간 10분
+            setItemWithTime('userId', res.data.userId, 600000)
+            // window.localStorage.setItem('memberId', res.data.memberId);     // PK값
+            // window.localStorage.setItem('userId', res.data.userId);         // 사용자 Id
 
             console.log(res.data);
             navigate('/');

@@ -3,7 +3,7 @@ import axios from "axios";
 import '../css/Posting.css';
 import Button from '../component/Button';
 import {useNavigate} from 'react-router-dom'
-
+import { getItemWithTime } from "./GetStorage";
 const Posting = ({ onClose }) => {
 
     const [title, setTitle] = useState("");
@@ -15,7 +15,9 @@ const Posting = ({ onClose }) => {
             const postSave = {};
             postSave['postTitle'] = title;
             postSave['postDetail'] = content;
-            postSave['userId'] = window.localStorage.getItem('userId');
+            postSave['userId'] = getItemWithTime('userId');
+            // postSave['userId'] = window.localStorage.getItem('userId');
+            
             const response = await axios.post("http://localhost:8080/post/save", postSave);
             alert("게시글 작성 완료");
             navigate('/don_commu');

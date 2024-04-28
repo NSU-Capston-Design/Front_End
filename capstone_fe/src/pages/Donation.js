@@ -3,6 +3,7 @@ import Header from "../component/Header";
 import "../css/Donation.css";
 import Button from "../component/Button";
 import axios from 'axios';
+import { getItemWithTime } from "../component/GetStorage";
 
 export default function Donation() {
     const [donationAmount, setDonationAmount] = useState(0); // 기부 금액 상태
@@ -43,7 +44,8 @@ export default function Donation() {
         try {
             // 백엔드에 기부 정보를 전달하고 결제 처리
             const response = await axios.post('http://localhost:8080/donate', {
-                userId: window.localStorage.getItem('userId'),
+                userId: getItemWithTime('userId'),
+                // userId: window.localStorage.getItem('userId'),
                 amount: donationAmount
             });
         

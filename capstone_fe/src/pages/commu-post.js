@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../css/Commu-post.css';
 import axios from 'axios';
 import UserMark from './User-mark';
+import { getItemWithTime } from '../component/GetStorage';
 //헷갈려서 comments: 댓글 배열, comment: 댓글 하나 개별 객체
 
 
@@ -54,13 +55,15 @@ const PostDetails = ({ post, postId, onClose, isAdmin }) => {
     try {
 
       console.log(newComment);
-      console.log(window.localStorage.getItem('userId'));
+      console.log(getItemWithTime('userId'));
+      // console.log(window.localStorage.getItem('userId'));
       console.log(post.postId);
       
       const response = await axios.post('http://localhost:8080/comment/save', {
         
           comment: newComment,
-          userId: window.localStorage.getItem('userId'),
+          userId: getItemWithTime('userId'),
+          // userId: window.localStorage.getItem('userId'),
           postId: post.postId
         
       });
@@ -124,7 +127,6 @@ const PostDetails = ({ post, postId, onClose, isAdmin }) => {
       console.error('게시물 삭제 실패:', error);
     }
   };
-
 
 
   return (

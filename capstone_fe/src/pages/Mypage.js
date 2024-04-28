@@ -5,6 +5,7 @@ import direction_SwitchImage from '../img/direction_switch.png';
 import logoImage from '../img/logo.png';
 import warningImage from '../img/warning.png';
 import { useNavigate } from "react-router-dom";
+import { getItemWithTime } from "../component/GetStorage";
 
 export default function Mypage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +17,8 @@ export default function Mypage() {
   const navigate = useNavigate();
   
   useEffect(() => {
-    setUserId(window.localStorage.getItem('userId'));
+    setUserId(getItemWithTime('userId'));
+    // setUserId(window.localStorage.getItem('userId'));
     
   }, [])
   const handleMoveToOrderInquiry = () => {

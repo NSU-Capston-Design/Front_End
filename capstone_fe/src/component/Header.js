@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
+import { getItemWithTime } from "./GetStorage";
+
 import '../css/Header.css';
 import logo from '../img/logo.png';
 import cart from '../img/cart.png';
@@ -16,21 +18,21 @@ export default function Header() {
     const navigate = useNavigate()  // 이동 라이브러리 저장
     const [isLogined, setIsLogined] = useState(false);
     useEffect(() => {
-        const stroageMemberId = window.localStorage.getItem('memberId');
-        setMemberId(stroageMemberId || 0);
-        const stroageSessionId = window.localStorage.getItem('sessionId');
-        setSessionId(stroageSessionId);
-        
+        const stroageMemberId = getItemWithTime('memberId');            // 스토리지에서 만료시간과 시간을 비교하여 가져오기
+        // const stroageMemberId = window.localStorage.getItem('memberId');
+        setMemberId(stroageMemberId);
+    
         console.log(memberId);
-        console.log(sessionId);
-        if (sessionId) {
+        
+        if (memberId != null) {
             setIsLogined(true);
 
         } else {
             setIsLogined(false);
         }
 
-    }, [sessionId]);
+    }, [memberId]);
+
     const MovetoMain = e => {   // 메인페이지로 이동
         navigate('/')
     }
@@ -132,7 +134,6 @@ export default function Header() {
                             <button className="inquiry_btn" onClick={MovetoInquiry}>문의하기</button>
                         </div>
                         <div className="board" onClick={MovetoCommu}>
-
                             📝
                             <span>게시판</span>
                         </div>

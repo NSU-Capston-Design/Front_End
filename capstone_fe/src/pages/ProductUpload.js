@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../component/Header";
 import Select from 'react-select';
+import { getItemWithTime } from "../component/GetStorage";
 
 import '../css/ProductUpload.css';
 export default function ProductUpload(){
@@ -16,11 +17,9 @@ export default function ProductUpload(){
     
 
     useEffect(() => {       // 컴포넌트가 마운트될 때 (실행될 때)
-        const storageSessionId = window.localStorage.getItem('sessionId');
-        const storageMemberId = window.localStorage.getItem('memberId');
+        const storageMemberId = getItemWithTime('memberId');
         
-        setSessionId(storageSessionId || "");   // 값이 없으면 "" 공백 표기
-        setMemberId(storageMemberId || 0);
+        setMemberId(storageMemberId);
 
         console.log(memberId);
 
@@ -81,8 +80,8 @@ export default function ProductUpload(){
 
         const config = {
             headers: {
-              'Content-Type': 'multipart/form-data',
-              'Authorization': `Bearer ${sessionId}` // 세션 ID를 헤더에 포함하여 전송
+              'Content-Type': 'multipart/form-data'
+               // 세션 ID를 헤더에 포함하여 전송
             }
           };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../component/Header";
 import "../css/Donation_details.css";
 import axios from "axios";
+import { getItemWithTime } from "../component/GetStorage";
 
 export default function Donation_details() {
   const [total, setTotal] = useState(0);
@@ -17,7 +18,8 @@ export default function Donation_details() {
     // 사용자 정보를 가져오는 API 호출
     axios.get("http://localhost:8080/donations/total", {
       params: {
-        userId: window.localStorage.getItem('userId')
+        userId: getItemWithTime('userId')
+        // userId: window.localStorage.getItem('userId')
       }
     })
     .then(response => {
