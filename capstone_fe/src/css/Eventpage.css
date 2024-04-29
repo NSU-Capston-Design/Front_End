@@ -1,0 +1,53 @@
+.Eventpage_all {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Eventpage_title {
+    width: 584px;
+    height: 100px;
+    color: #333;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.5;
+    word-wrap: break-word;
+    margin-bottom: 1.5rem; /* 여백 조정 */
+    text-align: center; /* 가운데 정렬 */
+  }
+  
+ .Eventpage_list {
+  width: fit-content;
+  display :grid;
+  justify-content: center; /* 가로 중앙 정렬 */
+  flex-direction: row; /* 가로 정렬을 위해 행 방향으로 설정 */
+  grid-template-columns: repeat(3, minmax(200px, 1fr)); /* 3열로 설정 */
+  flex-wrap: wrap; /* 아래 줄로 넘어갈 수 있도록 wrap 설정 */
+  align-items: center;
+  gap: 3.0625rem;
+  margin-bottom: 20px; /* 아래쪽에 간격 추가 */
+  align-items: center;
+}
+.Eventpage_list span{
+  font-size: 14px;
+  font-weight: bold;
+
+}
+  
+  /* 이벤트 아이템 */
+  .Eventpage_item {
+    width: 27.625rem;
+    height: 27.6875rem;
+    border: 1px solid #ddd;
+    border-radius: 0.3125rem;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden; /* 이미지를 넘치지 않도록  */
+    
+  }
+  
+  

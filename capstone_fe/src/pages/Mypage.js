@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "../component/Header";
 import "../css/Mypage.css";
 import direction_SwitchImage from '../img/direction_switch.png';
 import logoImage from '../img/logo.png';
 import warningImage from '../img/warning.png';
 import { useNavigate } from "react-router-dom";
-import { getItemWithTime } from "../component/GetStorage";
 
 export default function Mypage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,14 +12,8 @@ export default function Mypage() {
   const [isWithdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const [isWithdrawSuccessMessageOpen, setIsWithdrawSuccessMessageOpen] = useState(false);
   const [isEditSuccessMessageOpen, setIsEditSuccessMessageOpen] = useState(false);
-  const [userId, setUserId] = useState("");
   const navigate = useNavigate();
   
-  useEffect(() => {
-    setUserId(getItemWithTime('userId'));
-    // setUserId(window.localStorage.getItem('userId'));
-    
-  }, [])
   const handleMoveToOrderInquiry = () => {
     navigate('/Order_inquiry'); // Order_inquiry 페이지로 이동
   };
@@ -28,7 +21,7 @@ export default function Mypage() {
   const handleCloseWithdrawSuccessMessage = () => {
     setIsWithdrawSuccessMessageOpen(false);
   };
-  
+
   
   const handleMoveToDonationDetails = () => {
     navigate('/donation_details'); // Donation_details 페이지로 이동
@@ -121,7 +114,7 @@ export default function Mypage() {
           <div className="mypage_image1">
             <img src={logoImage} alt="버튼" />
           </div>
-          <div className="mypage_name1">{userId}</div>
+          <div className="mypage_name1">엄 준식</div>
           <div className="mypage_name1_dl">
             <button className="mypage_edit_button" onClick={handleEditButtonClick}>
               회원정보 수정
@@ -282,7 +275,7 @@ export default function Mypage() {
 </div>
 
         <div className="mypage_list3">
-          <div className="mypage_name3">포인트</div>
+          <div className="mypage_name3"></div>
           <div className="mypage_name3_d2">
           </div>
         </div>

@@ -46,70 +46,67 @@ export default function Mainpage() {
     }, [])
 
     return (
-
         <div className="mainpage-all">
             <Header />
-
-            <div className="content">   {/* 추천상품, 이벤트(컨텐츠칸) */}
+            <div className="content">
                 <div className="best">
                     <div className="best_text">
-                        <span className="big-text">장성군몰</span> 베스트 상품! </div>  {/* 베스트 상품 목록 */}
-
-
-                    {/* 베스트 상품 */}
-                    <div className="best_product">
-                        {list.map((item) => (
-
-                            <div key={item.fileId} className="best_product_item" onClick={() => handlePurchaseClick(item.fileId)}>
-                                <div className="best_image"><img src={`http://localhost:8080${item.productURL}`} alt="item" style={{ width: 330, height: 440 }} /></div>
-                                <div className="best_product_text">장성군 베스트 특산품</div><br />
-                                <div className="best_title">{item.productName}</div>
-                                <div className="best_detail"> <button onClick={handlePurchaseClick}>구매하기</button>
-                                   
-                                    {/* 선택된 제품ID와 현재 제품의 ID가 일치하면 상세 모달 표시*/}
-                                </div>
-
-                                <div className="best_uploadTime">{item.uploadTime}</div>
-                            </div>
-                        )) 
-                        }
+                        <span className="big-text">장성군몰</span> 베스트 상품!
                     </div>
 
+                    <div className="best_product">
+                        {list.map((item) => (
+                            <div key={item.fileId} className="best_product_item" onClick={() => handlePurchaseClick(item.fileId)}>
+                                <div className="best_image">
+                                    <img src={`http://localhost:8080${item.productURL}`} alt="item" style={{ width: 330, height: 440 }} />
+                                </div>
+                                <div className="best_product_text">장성군 베스트 특산품</div>
+                                <div className="best_title">{item.productName}</div>
+                                <div className="best_detail">
+                                    <button onClick={() => handlePurchaseClick(item.fileId)}>구매하기</button>
+                                </div>
+                                <div className="best_uploadTime">{item.uploadTime}</div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
 
-                {/* 이벤트 */}
                 <div className="event_box">
                     <div className="event_text">이달의 이벤트 !</div>
                     <div className="event_contents">
                         <div className="left_arrow">
-                            <img src={left_arrow} alt="left_arrow"></img>
+                            <img src={left_arrow} alt="left arrow" />
                         </div>
-                                <div className="event">
-                                    <img src={event1} alt="event1"></img>
-                                </div>
-                        {/* 이벤트 목록 */}
+
+                        <Link to="/eventpage"> {/* 이벤트 이미지 클릭 시 이벤트 페이지로 이동 */}
+                            <div className="event">
+                                <img src={event1} alt="event1" />
+                            </div>
+                        </Link>
+
                         {eventList.map((item) => (
                             <div key={item.eventId} className="events">
-                                
                                 <div className="event">{item.event}</div>
                                 <div className="event">{item.event}</div>
                             </div>
                         ))}
+
                         <div className="right_arrow">
-                            <img src={right_arrow} alt="right arrow"></img>
+                            <img src={right_arrow} alt="right arrow" />
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="footer"></div>
+
             {isModalOpen && selectedProductId && (
-                                        <div className="product-overlay">
-                                            <div className="product-modal">
-                                                <ProductDetail fileId={selectedProductId} closeModal={closeitemModal}/>
-                                            </div>
-                                        </div>)}
+                <div className="product-overlay">
+                    <div className="product-modal">
+                        <ProductDetail fileId={selectedProductId} closeModal={closeitemModal} />
+                    </div>
+                </div>
+            )}
         </div>
-        
-    )
+    );
 }

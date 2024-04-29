@@ -278,6 +278,8 @@
 
 .button-container {
   display: inline-block;
+  width: 1%;
+  margin-top: 10%;
 }
 
 
@@ -285,4 +287,9 @@
 .mypage_image2:hover img,
 .mypage_image4:hover img {
   transform: scale(1.1); /* 마우스 호버 시 이미지 크기를 약간 키웁니다 */
+}
+
+.direction_SwitchImage {
+  width: 10%; /* 이미지의 너비를 조절합니다. */
+  height: 100%; /* 높이를 자동으로 조절하여 비율 유지합니다. */
 }

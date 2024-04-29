@@ -19,6 +19,7 @@ import Order_inquiry from './pages/Order_inquiry';
 import Donation_details from './pages/Donation_details';
 import Product from './pages/Product';
 import ProductUpload from './pages/ProductUpload';
+import Eventpage from './pages/Eventpage';
 
 export default function App() {
   
@@ -43,6 +44,7 @@ export default function App() {
         <Route path='/donation_details' element={<Donation_details/>}/>
         <Route path='/product' element={<Product/>}/>
         <Route path='/product/upload' element={<ProductUpload/>}/>
+        <Route path='/eventpage' element={<Eventpage/>}/>
       </Routes>
     </BrowserRouter>
   );
