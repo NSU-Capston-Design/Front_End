@@ -23,7 +23,7 @@ export default function ProductUpload(){
 
         console.log(memberId);
 
-    }, []);
+    }, [memberId]);
 
     const categoryData = [  // 카테고리 데이터
         { value: 'electronics', label: '전자기기' },
