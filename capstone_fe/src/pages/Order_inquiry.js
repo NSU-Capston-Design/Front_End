@@ -29,6 +29,17 @@ export default function Order_inquiry() {
 
   }, [userId]);
 
+  const orderCancel = (orderId) => {
+    try{
+      console.log(orderId)
+      const response = axios.delete(`http://localhost:8080/order/delete/${orderId}`)
+      console.log(response.data);
+      alert("주문 취소 완료");
+    } catch (e){
+      console.error(e);
+    }
+  }
+
   return (
     <div className="order_inquiry_all">
       <Header />
@@ -43,6 +54,7 @@ export default function Order_inquiry() {
 
                 {order.map((item) => (
                   <div key={item.orderId} className="order_table">
+                    {item.orderId}
                     <div className="order_inquiry_label">
                       <strong>주문일</strong>
                       <div>{item.orderDate}</div>
@@ -58,7 +70,7 @@ export default function Order_inquiry() {
                     <div className="order_inquiry_label">
                       <strong>상품 명</strong>
                       <div>
-                        { item.orderItems.length > 1 ? (
+                        { item.orderItems.length > 2 ? (
                               <>
                                 <span key={item.orderItems[0].id}>{item.orderItems[0].productName} </span>
                                 <span> 외 {item.orderItems.length - 1}개</span>
@@ -66,12 +78,15 @@ export default function Order_inquiry() {
                             ) :
                               item.orderItems.map((orderItems) => (
                                 <span key={orderItems.id}> {orderItems.productName} </span>
-                              ))
-                        }</div>
+                              )) }
+                      </div>
                     </div>
-                      <div className="order_inquiry_label">
+                    <div className="order_inquiry_label">
                       <strong>총 비용</strong>
-                    <div>{item.orderTotalCost}원</div>               
+                      <div>{item.orderTotalCost}원</div>           
+                    </div>
+                    <div className="order_cancel">
+                      <button onClick={() => orderCancel(item.orderId)}>주문취소</button> 
                     </div>
                   </div>
                   ))
