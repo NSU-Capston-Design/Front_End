@@ -66,6 +66,7 @@ export default function Product() {
     // ]);
     const navigate = useNavigate();
     const addToCart = (product) => {
+        console.log(product.fileId)
         const existingCartItems = JSON.parse(localStorage.getItem('cart')) || [];
         const existingCartItem = existingCartItems.find(item => item.fileId === product.fileId);
     
@@ -192,7 +193,7 @@ export default function Product() {
 
 
                 <div className="product-list">
-                    {list.map((item) => (
+                    {list.map((item) => ( console.log(item.fileId),
                         <div key={item.fileId} className="product-list-item" onClick={() => openProductDetailModal(item.fileId)}>
                             <div className="product-list-box">
                                 <div className="product-list-image">

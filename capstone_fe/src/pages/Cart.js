@@ -30,12 +30,13 @@ import React, { useState, useEffect } from "react";
 import Header from "../component/Header";
 import "../css/Cart.css";
 import axios from 'axios';
+import { getItemWithTime } from "../component/GetStorage";
 
 export default function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [showModal, setShowModal] = useState(false);
-
+    
     // 장바구니 아이템의 총 가격을 계산합니다.
     const calculateTotalPrice = (items) => {
         return items.reduce((total, item) => total + (item.totalPrice || (item.productPrice * item.quantity)), 0);
@@ -99,19 +100,22 @@ export default function Cart() {
         alert('결제가 완료되었습니다.');
         
         try {
-            const backendURL = '//localhost:8080/product/buyList'; // 백엔드 상품 장바구니 리스트 -넣-
+            const backendURL = '//localhost:8080/order'; // 백엔드 상품 장바구니 리스트 -넣-
             
-            const orderData = cartItems.map(item => ({
-                productId: item.productId,
-                productName: item.productName,
-                productPrice: item.productPrice,
-                quantity: item.quantity,
-                productURL: item.productURL
+            const orderRequestDTO = cartItems.map(item => ({
+                count: item.quantity,
+                price: item.productPrice,
+                productId: item.fileId
             }));
+            
+            const orderItemsDTO = {
+                userId : getItemWithTime('userId'),
+                orderRequestDTOS : orderRequestDTO
+            }
 
             const response = await axios.post(
                 backendURL,
-                orderData
+                orderItemsDTO
             );
             console.log('주문 성공:', response);
             // 주문이 성공적으로 처리된 후에는 장바구니를 비웁니다.
@@ -139,6 +143,7 @@ export default function Cart() {
 
                 <div className="cart_list">
                     {cartItems.map((product, index) => (
+                        console.log(product.fileId),
                         <div className="cart_item" key={index}>
                             <div className="cart_item_image">
                                 <img src={product.productURL} alt={product.productName} />
@@ -167,6 +172,7 @@ export default function Cart() {
                         <h2>주문 확인</h2>
                         <ul>
                             {cartItems.map((product, index) => (
+                                console.log(product.fileId),
                                 <li key={index}>{product.productName}: {product.quantity}개</li>
                             ))}
                         </ul>

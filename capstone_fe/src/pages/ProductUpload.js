@@ -58,11 +58,12 @@ export default function ProductUpload(){
     const onSubmit = async (event) => { // 보냈을 때의 이벤트
         event.preventDefault(); // 입력이 빈 칸일 때, 이벤트 막기
         
+        console.log(productName, productPrice, productInven);
         const data = {
             productName: productName,
             productPrice: productPrice,
-            memberId: memberId,
-            productInven: productInven
+            productInven: productInven,
+            memberId: memberId
         };
 
         const formData = new FormData();

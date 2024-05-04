@@ -38,8 +38,8 @@ export default function Login() {
         })
         .then(res => {  // 가져온 데이터들 셋업
             console.log(res.data);
-            setItemWithTime('memberId', res.data.memberId, 600000)          // 만료시간 10분
-            setItemWithTime('userId', res.data.userId, 600000)
+            setItemWithTime('memberId', res.data.memberId, 600000)          // 만료시간 10분, pk값
+            setItemWithTime('userId', res.data.userId, 600000)              // userId
             // window.localStorage.setItem('memberId', res.data.memberId);     // PK값
             // window.localStorage.setItem('userId', res.data.userId);         // 사용자 Id
 

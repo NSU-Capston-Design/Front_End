@@ -60,11 +60,14 @@ export default function Mainpage() {
                                 <div className="best_image">
                                     <img src={`http://localhost:8080${item.productURL}`} alt="item" style={{ width: 330, height: 440 }} />
                                 </div>
+                                <p>
                                 <div className="best_product_text">장성군 베스트 특산품</div>
+                                
                                 <div className="best_title">{item.productName}</div>
                                 <div className="best_detail">
                                     <button onClick={() => handlePurchaseClick(item.fileId)}>구매하기</button>
                                 </div>
+                                </p>
                                 <div className="best_uploadTime">{item.uploadTime}</div>
                             </div>
                         ))}
