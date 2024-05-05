@@ -89,7 +89,7 @@ const DonCommu = () => {
               <tr key={post.id} onClick={() => handlePostClick(post)}>
                 <td>{post.postTitle}</td>
                 <td>{post.postDetail}</td>
-                <td>{post.userId && <UserMark username={post.userId} rank={post.userRank} />} {/* 유저 아이디가 존재하고 등급이 있을 때 마크 표시 */}
+                <td>{post.userId && <UserMark username={post.userId}/>} {/* 유저 아이디가 존재하고 등급이 있을 때 마크 표시 */}
                   {post.userId && !post.userRank && post.userId} {/* 유저 아이디가 존재하고 등급이 없으면 닉네임만 표시 */}</td>
               </tr>
             ))}

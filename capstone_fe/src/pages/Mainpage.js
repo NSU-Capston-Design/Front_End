@@ -43,6 +43,21 @@ export default function Mainpage() {
         };
         main();
         console.log(list);
+          
+ 
+        const top10 = () => {
+        try{
+            const response = axios.get("http://localhost:8080/donations/top");
+            console.log(response);
+            let userTop10 = JSON.parse(response.data);
+            window.localStorage.setItem('top10', userTop10);
+            
+        } catch (e){
+            console.error(e);
+        }
+        }
+
+        top10();
     }, [])
 
     return (
