@@ -2,6 +2,8 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import axios from "axios";
 
+import {Top10} from "../component/Top10.js";
+
 import "../css/Mainpage.css";
 import Header from "../component/Header";
 import left_arrow from '../img/left_arrow.png';
@@ -14,6 +16,7 @@ import event1 from "../img/event1.jpg";
 export default function Mainpage() {
 
     const [list, setList] = useState([]);
+    const [users, setUsers] = useState([]);
     const [eventList, setEventList] = useState([]);
     const [selectedProductId, setSelectedProductId] = useState(null);  // 선택된 제품의 ID를 추적
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,20 +46,21 @@ export default function Mainpage() {
         };
         main();
         console.log(list);
-          
- 
-        const top10 = () => {
-        try{
-            const response = axios.get("http://localhost:8080/donations/top");
-            console.log(response);
-            let userTop10 = JSON.parse(response.data);
-            window.localStorage.setItem('top10', userTop10);
-            
-        } catch (e){
-            console.error(e);
-        }
-        }
-
+        
+        const top10 = async () => {
+            try{
+                const res = await axios.get("http://localhost:8080/donations/top");
+                console.log(res.data);
+                setUsers(JSON.stringify(res.data));
+                console.log(users);
+                window.localStorage.setItem('top10', users);
+                // setUsers(JSON.parse(window.localStorage.getItem('top10')));
+                // console.log(users[0]);
+            } catch (e){
+                console.error(e);
+            }
+        };
+        
         top10();
     }, [])
 
